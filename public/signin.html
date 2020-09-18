@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xml:lang="es">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div id="app" >
+    <v-app style="background-color: #2196F3">
+        <v-container fluid>
+            <v-row>
+                <img src="../logo.png" width="50px" height="50px" class="ml-14" />
+                <v-btn large class="ml-10 mt-1 blue--text darken-1 text-h6 py-6 px-8" rounded >Inicio</v-btn>
+            </v-row>
+        </v-container>
+        <v-card color="white" width="450" class="mx-auto rounded-xl text-center mt-16 pa-10">
+            <v-card-title class="blue--text justify-center text-h3">¡Únete a FITTY!</v-card-title>
+            <v-form v-model="valid">
+                <v-container>
+                    <v-row>
+                        <v-text-field
+                                v-model="name"
+                                :rules="nameRules"
+                                label="Nombre"
+                                required
+                        ></v-text-field>
+                    </v-row>
+                    <v-row>
+                        <v-text-field
+                                v-model="email"
+                                label="Email"
+                                required
+                        ></v-text-field>
+                    </v-row>
+                    <v-row>
+                        <v-text-field
+                                v-model="password"
+                                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                                :type="show1 ? 'text' : 'password'"
+                                name="input-10-1"
+                                label="Contraseña"
+                                hint="Al menos 8 caracteres"
+                                counter
+                                @click:append="show1 = !show1"
+                        ></v-text-field>
+                    </v-row>
+                    <v-row justify="center">
+                        <v-btn class="mt-6 blue white--text text-h5 px-5 py-7" @click="submit">Registrarme</v-btn>
+                    </v-row>
+                </v-container>
+            </v-form>
+            <v-row justify="center" class="my-4">
+                <v-card-text class="align-self-center blue--text text--darken-2 text-subtitle-1">
+                    ¿Ya tienes cuenta?
+                    <v-btn class="blue white--text px-4 py-3 ml-6" @click="submit">Ingresar</v-btn>
+                </v-card-text>
+            </v-row>
+        </v-card>
+    </v-app>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+    })
+</script>
+
+
+
+</body>
+</html>
