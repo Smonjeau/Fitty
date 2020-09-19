@@ -3,122 +3,288 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-
-    <style>
-        .border {
-            border-width: 2px;
-            border-color: black;
-        }
-    </style>
+    <meta charset="UTF-8">
 </head>
 <body>
+
+
 <div id="app">
     <v-app>
-        <v-row class="justify-space-around mt-10">
-            <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl">
-                <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #fa5253;">
-                    <v-img src="../cardio.png" width="60" height="60" class="ma-auto"></v-img>
-                </v-responsive>
-                <v-card-title class="justify-center">Titulo</v-card-title>
-                <v-row class="justify-center">
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star-outline</v-icon>
-                </v-row>
-                <v-row class="justify-center mt-4">
-                    <span class="text-h6 mr-2">45'</span>
-                    <img src="../stopwatch.png" width="28px" height="28px" />
-                </v-row>
-            </v-card>
+        <template>
+                <v-container class="my-5">
 
-            <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl">
-                <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #F952FA;">
-                    <v-img src="../strength.png" width="60" height="60" class="ma-auto"></v-img>
-                </v-responsive>
-                <v-card-title class="justify-center">Titulo</v-card-title>
-                <v-row class="justify-center">
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star-outline</v-icon>
-                </v-row>
-                <v-row class="justify-center mt-4">
-                    <span class="text-h6 mr-2">45'</span>
-                    <img src="../stopwatch.png" width="28px" height="28px" />
-                </v-row>
-            </v-card>
+                                <v-expansion-panels accordion multiple >
+                                    <v-expansion-panel class="mb-7">
+                                        <v-expansion-panel-header disable-icon-rotate color="blue" class="white--text">
+                                            Calentamiento
+                                            <template v-slot:actions>
+                                                <v-icon color="white">expand_more</v-icon>
+                                            </template>
+                                        </v-expansion-panel-header>
+                                        <v-expansion-panel-content>
+                                                        <v-form v-model="valid">
+                                                            <v-container>
+                                                                <v-row class="justify-md-space-around">
+                                                                    <v-col
+                                                                            md="3"
+                                                                    >
+                                                                        <v-text-field
+                                                                                v-model="ejName"
+                                                                                :rules="nameRules"
+                                                                                label="Nombre del ejercicio"
+                                                                                required
+                                                                                dense
+                                                                        ></v-text-field>
+                                                                    </v-col>
+                                                                    <v-col cols="12" md="1">
+                                                                        <v-btn icon color="black">
+                                                                            <v-icon>mdi-plus</v-icon>
+                                                                        </v-btn>
+                                                                    </v-col>
+                                                                    <v-col  md="1">
+                                                                        <v-text-field
+                                                                                placeholder=0
+                                                                                dense
+                                                                        ></v-text-field>
+                                                                    </v-col>
+                                                                    <v-col cols="12" md="1" class="justify-md-end">
+                                                                        <v-btn icon color="black">
+                                                                            <v-icon>mdi-minus</v-icon>
+                                                                        </v-btn>
+                                                                    </v-col>
 
-            <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl">
-                <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #53FA52;">
-                    <v-img src="../religion.png" width="50" height="50" class="ma-auto"></v-img>
-                </v-responsive>
-                <v-card-title class="justify-center">Titulo</v-card-title>
-                <v-row class="justify-center">
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star-outline</v-icon>
-                </v-row>
-                <v-row class="justify-center mt-4">
-                    <span class="text-h6 mr-2">45'</span>
-                    <img src="../stopwatch.png" width="28px" height="28px" />
-                </v-row>
-            </v-card>
+                                                                    <v-col md="2">
+                                                                        <v-select
+                                                                                :items="items"
+                                                                                label=""
+                                                                                dense
 
-            <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl">
-                <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #5253FA;">
-                    <v-img src="../gym.png" width="50" height="50" class="ma-auto"></v-img>
-                </v-responsive>
-                <v-card-title class="justify-center">Titulo</v-card-title>
-                <v-row class="justify-center">
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star-outline</v-icon>
-                </v-row>
-                <v-row class="justify-center mt-4">
-                    <span class="text-h6 mr-2">45'</span>
-                    <img src="../stopwatch.png" width="28px" height="28px" />
-                </v-row>
-            </v-card>
 
-            <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl">
-                <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #FAA552;">
-                    <v-img src="../resistencia.png" width="50" height="50" class="ma-auto"></v-img>
-                </v-responsive>
-                <v-card-title class="justify-center">Titulo</v-card-title>
-                <v-row class="justify-center">
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star</v-icon>
-                    <v-icon color="black">mdi-star-outline</v-icon>
-                </v-row>
-                <v-row class="justify-center mt-4">
-                    <span class="text-h6 mr-2">45'</span>
-                    <img src="../stopwatch.png" width="28px" height="28px" />
-                </v-row>
-            </v-card>
-        </v-row>
+                                                                        ></v-select>
+                                                                    </v-col>
+
+                                                                    <v-col
+                                                                            md="2"                                                                           md="4"
+                                                                    >
+                                                                        <v-text-field
+                                                                                v-model="link"
+
+                                                                                label="Video link"
+                                                                                dense
+                                                                        ></v-text-field>
+                                                                    </v-col>
+                                                                </v-row>
+                                                            </v-container>
+                                                        </v-form>
+                                                <v-btn small class="my-5">
+                                                    <v-icon left>
+                                                        add_circle_outline
+                                                    </v-icon>
+                                                    <span>Agregar ejercicio</span>
+
+                                                </v-btn>
+
+
+                                        </v-expansion-panel-content>
+                                    </v-expansion-panel>
+                                    <v-expansion-panel >
+                                        <v-expansion-panel-header disable-icon-rotate color="blue" class="white--text">
+                                            Gluteos
+                                            <template v-slot:actions>
+                                                <v-icon color="white">expand_more</v-icon>
+                                            </template>
+                                        </v-expansion-panel-header>
+                                        <v-expansion-panel-content>
+                                            <v-form v-model="valid">
+                                                <v-container>
+                                                    <v-row class="justify-md-space-around">
+                                                        <v-col
+                                                                md="3"
+                                                        >
+                                                            <v-text-field
+                                                                    v-model="ejName"
+                                                                    :rules="nameRules"
+                                                                    label="Nombre del ejercicio"
+                                                                    required
+                                                                    dense
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                        <v-col cols="12" md="1">
+                                                            <v-btn icon color="black">
+                                                                <v-icon>mdi-plus</v-icon>
+                                                            </v-btn>
+                                                        </v-col>
+                                                        <v-col  md="1">
+                                                            <v-text-field
+                                                                    placeholder=0
+                                                                    dense
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                        <v-col cols="12" md="1" class="justify-md-end">
+                                                            <v-btn icon color="black">
+                                                                <v-icon>mdi-minus</v-icon>
+                                                            </v-btn>
+                                                        </v-col>
+
+                                                        <v-col md="2">
+                                                            <v-select
+                                                                    :items="items"
+                                                                    label=""
+                                                                    dense
+
+
+                                                            ></v-select>
+                                                        </v-col>
+
+                                                        <v-col
+                                                                md="2"                                                                           md="4"
+                                                        >
+                                                            <v-text-field
+                                                                    v-model="link"
+                                                                    label="Video link"
+                                                                    dense
+
+
+                                                            >
+                                                                    
+                                                            </v-text-field>
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-container>
+                                            </v-form>
+                                            <v-form v-model="valid">
+                                                <v-container>
+                                                    <v-row class="justify-md-space-around">
+                                                        <v-col
+                                                                md="3"
+                                                        >
+                                                            <v-text-field
+                                                                    v-model="ejName"
+                                                                    :rules="nameRules"
+                                                                    label="Nombre del ejercicio"
+                                                                    required
+                                                                    dense
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                        <v-col cols="12" md="1">
+                                                            <v-btn icon color="black">
+                                                                <v-icon>mdi-plus</v-icon>
+                                                            </v-btn>
+                                                        </v-col>
+                                                        <v-col  md="1">
+                                                            <v-text-field
+                                                                    placeholder=0
+                                                                    dense
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                        <v-col cols="12" md="1" class="justify-md-end">
+                                                            <v-btn icon color="black">
+                                                                <v-icon>mdi-minus</v-icon>
+                                                            </v-btn>
+                                                        </v-col>
+
+                                                        <v-col md="2">
+                                                            <v-select
+                                                                    :items="items"
+                                                                    label=""
+                                                                    dense
+
+
+                                                            ></v-select>
+                                                        </v-col>
+
+                                                        <v-col
+                                                                md="2"                                                                           md="4"
+                                                        >
+                                                            <v-text-field
+                                                                    v-model="link"
+
+                                                                    label="Video link"
+                                                                    dense
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-container>
+                                            </v-form>
+
+                                            <v-btn small class="my-5">
+                                                <v-icon left>
+                                                    add_circle_outline
+                                                </v-icon>
+                                                <span>Agregar ejercicio</span>
+
+                                            </v-btn>
+
+
+                                        </v-expansion-panel-content>
+                                    </v-expansion-panel>
+                                </v-expansion-panels>
+
+
+                </v-container>
+        </template>
     </v-app>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+
 <script>
     new Vue({
         el: '#app',
         vuetify: new Vuetify(),
+        data: () => ({
+            items: ["Repeticiones","Segundos"],
+            valid: false,
+            ejName: '',
+            qty: 0,
+            nameRules: [
+                v => !!v || 'El ejercicio tiene que tener nombre',
+
+            ],
+            qtyRules: [
+                v => isNaN(v) ||  'Tiene que ser un número'
+            ],
+            link: '',
+            linkRules: [
+                v => /.+@.+/.test(v) || 'E-mail must be valid',
+            ],
+        }),
+
     })
 </script>
 </body>
 </html>
+
+
+
+<!--v-card outlined class="text-left ma-3" >
+    <v-card-text class="black--text">Mover el qloooooooooo</v-card-text>
+</v-card>
+
+
+
+
+<v-card outlined class="text-center ma-3">
+
+    <v-card-text class="black--text">1</v-card-text>
+</v-card>
+
+
+
+ <v-card outlined class="text-center ma-3">
+    <v-card-text>Repeticiones</v-card-text>
+</v-card>
+
+
+
+<v-card outlined class="text-center ma-3">
+    <a href="https://youtu.be/YtcujjofRJM?t=22" class="ma-10">Ver demostración</a>
+</v-card!-->
