@@ -17,6 +17,51 @@
 <div id="app">
     <v-app>
         <template>
+            <div>
+                <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+            </div>
+            <div class="text-center ">
+                <p class="font-weight-bold display-2">CREAR RUTINA</p>
+            </div>
+            <template>
+                <v-form v-model="valid">
+                    <v-container class="my-5">
+                        <v-row class="justify-md-start">
+                            <v-col
+                                    md="3"
+                            >
+                                <v-text-field
+                                        v-model="rutinaName"
+                                        :rules="nameRules"
+                                        label="Nombre de la rutina"
+                                        required
+                                ></v-text-field>
+                            </v-col>
+                                <v-col sm="6" md="3">
+                                    <v-select
+                                            :items="categorias"
+
+                                            chips
+                                            label="Categoría/s"
+                                            multiple
+                                    ></v-select>
+                                </v-col>
+                            <v-col sm="6" md="2">
+                                <v-text-field
+                                        v-model="duracion"
+                                        :rules="duracionRules"
+                                        label="Duración (mins)"
+                                        required
+                                ></v-text-field>
+                            </v-col>
+
+                        </v-row>
+                    </v-container>
+                </v-form>
+            </template>
+
+
+
                 <v-container class="my-5">
 
                                 <v-expansion-panels accordion multiple >
@@ -152,7 +197,7 @@
 
 
                                                             >
-                                                                    
+
                                                             </v-text-field>
                                                         </v-col>
                                                     </v-row>
@@ -180,6 +225,8 @@
                                                         <v-col  md="1">
                                                             <v-text-field
                                                                     placeholder=0
+                                                                    :rules="duracionRules"
+
                                                                     dense
                                                             ></v-text-field>
                                                         </v-col>
@@ -225,9 +272,33 @@
                                         </v-expansion-panel-content>
                                     </v-expansion-panel>
                                 </v-expansion-panels>
+                    <v-btn small class="my-5">
+                        <v-icon left>
+                            add_circle_outline
+                        </v-icon>
+                        <span>Agregar sección</span>
+
+                    </v-btn>
+
 
 
                 </v-container>
+            <v-row class="justify-center">
+
+                <v-col md="2">
+                    <v-btn color="blue white--text" class="my-5">
+                        Cancelar
+                    </v-btn>
+
+                </v-col>
+                <v-col md="2" >
+                    <v-btn color="blue white--text" class="my-5">
+                            Finalizar
+                    </v-btn>
+
+                </v-col>
+
+            </v-row>
         </template>
     </v-app>
 </div>
@@ -241,16 +312,39 @@
         el: '#app',
         vuetify: new Vuetify(),
         data: () => ({
+            select: [],
+            categorias: [
+              'Cardio','Brazos','Piernas','Yoga','Relajación','Tren superior','Resistencia'
+            ],
+            breadcrumbs: [
+                {
+                    text: 'Inicio',
+                    disabled: false,
+                    href: 'breadcrumbs_link_1',
+                },
+                {
+                    text: 'Crear rutina',
+                    disabled: true,
+                    href: 'breadcrumbs_link_2',
+                },
+            ],
             items: ["Repeticiones","Segundos"],
             valid: false,
+            rutinaName: '',
+            duracion:45,
             ejName: '',
             qty: 0,
             nameRules: [
-                v => !!v || 'El ejercicio tiene que tener nombre',
+                v => !!v || 'Tienes que poner un nombre!',
 
             ],
             qtyRules: [
-                v => isNaN(v) ||  'Tiene que ser un número'
+                v => (!isNaN(v)) ||  'Tiene que ser un número'
+            ],
+            duracionRules: [
+                v => !!v || 'No puedes dejar este campo vacío!',
+                v => !isNaN(v) ||  'Tiene que ser un número positivo!',
+                v => v >=1 || 'Tiene que ser un número positivo!'
             ],
             link: '',
             linkRules: [
