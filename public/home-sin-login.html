@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- Esta parte esta mal ponerla aca, cuando modularicemos los archivos habría que ponerlo en uno a parte -->
+    <style>
+        @font-face {
+            font-family: "Glacial Indifference";
+            src: url('../src/fonts/GlacialIndifference-Regular.otf');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: "Glacial Indifference";
+            src: url('../src/fonts/GlacialIndifference-Bold.otf');
+            font-weight: bold;
+        }
+        * {
+            font-family: 'Glacial Indifference';
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <v-app>
+        <v-main>
+            <v-container fluid pa-0>
+                <v-app-bar color="blue darken-1" dark flat>
+                    <v-app-bar-nav-icon class="ml-4">
+                        <v-avatar tile>
+                            <v-img src="../src/assets/img/logo.png" alt="Logo de Fitty" contain></v-img>
+                        </v-avatar>
+                    </v-app-bar-nav-icon>
+                    <v-spacer></v-spacer>
+                    <v-text-field
+                            outlined
+                            prepend-inner-icon="mdi-magnify"
+                            dense
+                            placeholder="Buscar"
+                            class="pt-5"
+                    ></v-text-field>
+
+                    <v-spacer></v-spacer>
+
+
+                    <!-- En caso de que NO este logeado utiliza esta version -->
+
+                    <v-btn outlined>
+                        Ingresar
+                    </v-btn>
+
+                    <v-btn outlined class="ml-4">
+                        Registrarme
+                    </v-btn>
+
+                    <!-- Fin version usuario NO logeado -->
+
+
+                    <!-- En caso de que SI este logeado utiliza esta version -->
+                    <!--<v-btn outlined class="ml-4">
+                        Crear Rutina
+                    </v-btn>
+                    <v-menu left bottom offset-y>
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                                    class="ml-4"
+                                    v-bind="attrs"
+                                    v-on="on"
+                                    text
+                            >
+                                Hola, Pepe
+                                <v-icon>mdi-chevron-down</v-icon>
+                            </v-btn>
+                        </template>
+
+                        <v-list>
+                            <v-list-item
+                                    v-for="n in 5"
+                                    :key="n"
+                                    @click="() => {}"
+                            >
+                                <v-list-item-title>Option {{ n }}</v-list-item-title>
+                            </v-list-item>
+                        </v-list>
+                    </v-menu>-->
+                    <!-- Fin version usuario SI logeado -->
+
+                </v-app-bar>
+                <h1 class="text-center text-h1 font-weight-bold blue--text text--darken-1 mt-10">FITTY</h1>
+                <h2 class="text-center text-h4 font-weight-bold mt-8">COMPARTE TUS RUTINAS</h2>
+                <v-row no-gutters class="mb-13">
+                    <v-col
+                        md="3"
+                    ></v-col>
+
+                    <v-col
+                            md="6"
+                            class="text-center"
+                    >
+                        <h3 class="text-center text-h5 mt-8">
+                            Con FITTY podrás compartir tus rutinas de una manera sencilla para llegar a más gente!
+                            También podrás ver rutinas de otros usuarios como tu que buscan darse a conocer!
+                        </h3>
+
+                        <v-btn
+                            class="text-h6 mt-10 text-none"
+                            color="blue darken-1 white--text"
+                            depressed
+                            large
+                        >Comienza Ahora</v-btn>
+                    </v-col>
+
+                    <v-col
+                            md="3"
+                    ></v-col>
+
+
+
+                </v-row>
+
+                <v-divider></v-divider>
+
+                <h4 class="text-center text-h5 font-weight-black mt-8">RUTINAS DESTACADAS</h4>
+
+
+
+                <v-row class="justify-space-around mt-10 px-16">
+                    <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl" outlined>
+                        <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #fa5253;">
+                            <v-img src="../src/assets/img/cardio.png" width="60" height="60" class="ma-auto"></v-img>
+                        </v-responsive>
+                        <v-card-title class="justify-center">Titulo</v-card-title>
+                        <v-row class="justify-center">
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star-outline</v-icon>
+                        </v-row>
+                        <v-row class="justify-center mt-4">
+                            <span class="text-h6 mr-2">45'</span>
+                            <img src="../src/assets/img/stopwatch.png" width="28px" height="28px" />
+                        </v-row>
+                    </v-card>
+
+                    <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl" outlined>
+                        <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #F952FA;">
+                            <v-img src="../src/assets/img/strength.png" width="60" height="60" class="ma-auto"></v-img>
+                        </v-responsive>
+                        <v-card-title class="justify-center">Titulo</v-card-title>
+                        <v-row class="justify-center">
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star-outline</v-icon>
+                        </v-row>
+                        <v-row class="justify-center mt-4">
+                            <span class="text-h6 mr-2">45'</span>
+                            <img src="../src/assets/img/stopwatch.png" width="28px" height="28px" />
+                        </v-row>
+                    </v-card>
+
+                    <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl" outlined>
+                        <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #53FA52;">
+                            <v-img src="../src/assets/img/religion.png" width="50" height="50" class="ma-auto"></v-img>
+                        </v-responsive>
+                        <v-card-title class="justify-center">Titulo</v-card-title>
+                        <v-row class="justify-center">
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star-outline</v-icon>
+                        </v-row>
+                        <v-row class="justify-center mt-4">
+                            <span class="text-h6 mr-2">45'</span>
+                            <img src="../src/assets/img/stopwatch.png" width="28px" height="28px" />
+                        </v-row>
+                    </v-card>
+
+                    <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl" outlined>
+                        <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #5253FA;">
+                            <v-img src="../src/assets/img/gym.png" width="50" height="50" class="ma-auto"></v-img>
+                        </v-responsive>
+                        <v-card-title class="justify-center">Titulo</v-card-title>
+                        <v-row class="justify-center">
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star-outline</v-icon>
+                        </v-row>
+                        <v-row class="justify-center mt-4">
+                            <span class="text-h6 mr-2">45'</span>
+                            <img src="../src/assets/img/stopwatch.png" width="28px" height="28px" />
+                        </v-row>
+                    </v-card>
+
+                    <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl" outlined>
+                        <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #FAA552;">
+                            <v-img src="../src/assets/img/resistencia.png" width="50" height="50" class="ma-auto"></v-img>
+                        </v-responsive>
+                        <v-card-title class="justify-center">Titulo</v-card-title>
+                        <v-row class="justify-center">
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star-outline</v-icon>
+                        </v-row>
+                        <v-row class="justify-center mt-4">
+                            <span class="text-h6 mr-2">45'</span>
+                            <img src="../src/assets/img/stopwatch.png" width="28px" height="28px" />
+                        </v-row>
+                    </v-card>
+
+                    <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl" outlined>
+                        <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #FAA552;">
+                            <v-img src="../src/assets/img/resistencia.png" width="50" height="50" class="ma-auto"></v-img>
+                        </v-responsive>
+                        <v-card-title class="justify-center">Titulo</v-card-title>
+                        <v-row class="justify-center">
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star-outline</v-icon>
+                        </v-row>
+                        <v-row class="justify-center mt-4">
+                            <span class="text-h6 mr-2">45'</span>
+                            <img src="../src/assets/img/stopwatch.png" width="28px" height="28px" />
+                        </v-row>
+                    </v-card>
+
+                    <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl" outlined>
+                        <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70" style="background-color: #FAA552;">
+                            <v-img src="../src/assets/img/resistencia.png" width="50" height="50" class="ma-auto"></v-img>
+                        </v-responsive>
+                        <v-card-title class="justify-center">Titulo</v-card-title>
+                        <v-row class="justify-center">
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star</v-icon>
+                            <v-icon color="black">mdi-star-outline</v-icon>
+                        </v-row>
+                        <v-row class="justify-center mt-4">
+                            <span class="text-h6 mr-2">45'</span>
+                            <img src="../src/assets/img/stopwatch.png" width="28px" height="28px" />
+                        </v-row>
+                    </v-card>
+
+                    
+                </v-row>
+
+
+
+            </v-container>
+        </v-main>
+    </v-app>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+    })
+</script>
+</body>
+</html>
