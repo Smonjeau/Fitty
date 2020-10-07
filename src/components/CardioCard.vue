@@ -1,12 +1,8 @@
 <template>
   <v-card width="170" height="240" elevation="10" class="text-center pa-4 rounded-xl" outlined>
     <v-responsive class="rounded-circle align-center ma-auto" height="70" width="70"
-                  :style="{backgroundColor: getColor()}">
-      <v-img v-if="type == 'cardio'" src="../assets/cardio.png" :width="cardio.dim" :height="cardio.dim" class="ma-auto" ></v-img>
-      <v-img v-else-if="type == 'yoga'" src="../assets/religion.png" :width="yoga.dim" :height="yoga.dim" class="ma-auto" ></v-img>
-      <v-img v-else-if="type == 'strength'" src="../assets/strength.png" :width="strength.dim" :height="strength.dim" class="ma-auto" ></v-img>
-      <v-img v-else-if="type == 'elongacion'" src="../assets/gym.png" :width="elongacion.dim" :height="elongacion.dim" class="ma-auto" ></v-img>
-      <v-img v-else-if="type == 'resistencia'" src="../assets/resistencia.png" :width="resistencia.dim" :height="resistencia.dim" class="ma-auto" ></v-img>
+                  :style="{backgroundColor: selected.color}">
+      <v-img :src=selected.foto :width="selected.dim" :height="selected.dim" class="ma-auto" ></v-img>
     </v-responsive>
     <v-card-title class="justify-center">{{ titulo }}</v-card-title>
     <v-row class="justify-center">
@@ -33,27 +29,31 @@
 </template>
 
 <script>
+import cardioPhoto from '../assets/cardio.png'
+import strengthPhoto from '../assets/strength.png'
+import yogaPhoto from '../assets/religion.png'
+import elongPhoto from '../assets/gym.png'
+import resPhoto from '../assets/resistencia.png'
+
 export default {
   name: "CardioCard",
   props: ['type', 'titulo', 'rating', 'time'],
   data: function () {
     return {
-      cardio: {foto: '../assets/cardio.png', color: '#fa5253', dim: 60},
-      strength: {foto: '../assets/strength.png', color: '#F952FA', dim: 55},
-      yoga: {foto: '../assets/religion.png', color: '#53FA52', dim: 50},
-      elongacion: {foto: '../assets/gym.png', color: '#5253FA', dim: 50},
-      resistencia: {foto: '../assets/resistencia.png', color: '#FAA552', dim: 50},
-      foto: ''
+      cardio: {foto: cardioPhoto, color: '#fa5253', dim: 60},
+      strength: {foto: strengthPhoto, color: '#F952FA', dim: 55},
+      yoga: {foto: yogaPhoto, color: '#53FA52', dim: 50},
+      elongacion: {foto: elongPhoto, color: '#5253FA', dim: 50},
+      resistencia: {foto: resPhoto, color: '#FAA552', dim: 50},
+      selected: ''
     }
   },
-  methods: {
-    getColor: function() {
-      if (this.type == 'cardio') return this.cardio.color;
-      else if (this.type == 'strength') return this.strength.color;
-      else if (this.type == 'yoga') return this.yoga.color;
-      else if (this.type == 'elongacion') return this.elongacion.color;
-      else if (this.type == 'resistencia') return this.resistencia.color;
-    }
+  mounted() {
+    if (this.type == 'cardio') return this.selected = this.cardio;
+    else if (this.type == 'strength') return this.selected = this.strength;
+    else if (this.type == 'yoga') return this.selected = this.yoga;
+    else if (this.type == 'elongacion') return this.selected = this.elongacion;
+    else if (this.type == 'resistencia') return this.selected = this.resistencia;
   }
 }
 </script>
