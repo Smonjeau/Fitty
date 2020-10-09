@@ -1,11 +1,13 @@
 <template>
   <div  class="main">
     <v-container fluid>
-      <v-row>
-        <router-link to="/">
-          <img src="../../assets/logo.png" width="50px" height="50px" class="ml-14" />
-        </router-link>
-      </v-row>
+      <router-link to="/">
+        <v-app-bar-nav-icon class="ml-7">
+          <v-avatar tile size="50">
+            <v-img src="../../assets/logo.png" alt="Logo de Fitty" contain></v-img>
+          </v-avatar>
+        </v-app-bar-nav-icon>
+      </router-link>
     </v-container>
 
     <v-card color="white" width="450" class="mx-auto rounded-xl text-center pa-10">

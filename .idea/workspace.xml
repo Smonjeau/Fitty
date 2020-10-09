@@ -20,13 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ee56ba0-2f96-4ce9-9b8e-d06a545f38a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/NavBar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Slider.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CardioCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardRutina.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/registration/squeleton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/registration/squeleton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,6 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1601943695798</updated>
       <workItem from="1601943697484" duration="306000" />
+      <workItem from="1602203958123" duration="8197000" />
     </task>
     <servers />
   </component>
