@@ -46,10 +46,10 @@
 
       </template>
 
-      <routine_panel title="Calentamiento"></routine_panel>
-        <routine_panel title="Ciclo 1"></routine_panel>
+      <routine_panel title="Calentamiento" open="0"></routine_panel>
+        <routine_panel title="Ciclo 1" isModifiable="true"></routine_panel>
         <div v-for="index in extraSections" :key="index">
-          <routine_panel :title=sectionName(index+1) isDeletable="true" ></routine_panel>
+          <routine_panel :title=sectionName(index+1) isModifiable="true" ></routine_panel>
         </div>
 
         <routine_panel title="Enfriamiento"></routine_panel>

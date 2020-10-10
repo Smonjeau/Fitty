@@ -5,19 +5,23 @@
       <v-expansion-panels accordion multiple >
         <v-row class="align-content-start" >
           <v-col cols="11">
-        <v-expansion-panel class="mb-7" @click="roberto()" >
+        <v-expansion-panel class="mb-7" v-model="open" >
 
-          <v-expansion-panel-header @keyup.space.prevent inside   color="blue" class="white--text" append-icon="mdi-delete">
+          <v-expansion-panel-header  @keyup.space.prevent inside   color="blue" class="white--text" append-icon="mdi-delete">
             <v-container>
             <v-row>
               <v-col cols="3">
-                {{title}}
-
+                <v-text-field  outlined :readonly="!isModifiable"
+                              :rules="[rules.required]"
+                              v-model="name"
+                              @click.native.stop="true"
+                >
+                  <v-icon v-if="isModifiable" slot="append">mdi-pencil</v-icon>
+                </v-text-field>
               </v-col>
 
               <v-col cols="3">
               <v-text-field
-                  class="text--white"
                   @click.native.stop="true"
                   prepend-icon="mdi-minus"
                   label="Repeticiones"
@@ -133,8 +137,8 @@ methods:{
 props: {
   title: String,
   isModifiable: Boolean,
-  isDeletable: Boolean
-} ,
+  open: Number
+},
 name: "routine_panel",
   components: {/*squeleton,*/ excercise_form}
 }
