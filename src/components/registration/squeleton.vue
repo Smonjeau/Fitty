@@ -10,7 +10,7 @@
       </router-link>
     </v-container>
 
-    <v-card color="white" width="450" class="mx-auto rounded-xl text-center pa-10">
+    <v-card color="white" width="550" class="mx-auto rounded-xl text-center pa-8">
       <v-card-title class="blue--text justify-center text-h3">{{ title }}</v-card-title>
 
       <slot name="fields"></slot>

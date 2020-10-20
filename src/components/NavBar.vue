@@ -32,18 +32,18 @@
                 v-on="on"
                 text
             >
-              Hola, Pepe
+              Hola, {{ user.username }}
               <v-icon>mdi-chevron-down</v-icon>
             </v-btn>
           </template>
 
           <v-list>
             <v-list-item
-                v-for="n in 5"
-                :key="n"
-                @click="() => {}"
+                v-for="item in myDropdown"
+                :key="item.title"
+                @click="item.func"
             >
-              <v-list-item-title>Option {{ n }}</v-list-item-title>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -51,10 +51,10 @@
 
       <template v-else>
         <v-btn outlined @click="goToSignUp">
-          Ingresar
+          Registrarme
         </v-btn>
         <v-btn outlined class="ml-4" @click="goToLogIn">
-          Registrarme
+          Ingresar
         </v-btn>
       </template>
 
@@ -63,11 +63,19 @@
 </template>
 
 <script>
+import { store } from '../userStore.js';
+
 export default {
   name: "NavBar",
   data() {
     return {
-      logged: false,
+      logged: store.logged,
+      user: store.userInfo,
+      myDropdown: [
+        {title: 'Mis Rutinas', func: ()=>{this.$router.push('/mis-rutinas')}},
+        {title: 'Mi Perfil', func: ()=>{this.$router.push('/perfil')}},
+        {title: 'Cerrar Sesión', func: ()=>{this.closeSesion()}},
+      ]
     }
   },
   methods: {
@@ -76,8 +84,13 @@ export default {
     },
     goToLogIn() {
       this.$router.push('/login');
+    },
+    closeSesion() {
+      store.logged = false;
+      this.logged = false;
+      localStorage.removeItem('token');
     }
-  }
+  },
 }
 </script>
 

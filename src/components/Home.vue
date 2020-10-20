@@ -24,7 +24,7 @@
 
       <v-col md="3"></v-col>
     </v-row>
-
+    <!--
     <v-divider></v-divider>
 
     <slider class="mb-14 mt-4" title="rutinas destacadas">
@@ -42,6 +42,7 @@
                      :type="card.type" class="ma-4"></card-rutina>
       </v-slide-item>
     </slider>
+    -->
   </div>
 
 
@@ -49,15 +50,15 @@
 
 <script>
 import NavBar from "@/components/NavBar";
-import cardRutina from "@/components/CardRutina";
-import slider from "@/components/Slider";
+//import cardRutina from "@/components/CardRutina";
+//import slider from "@/components/Slider";
 
 export default {
   name: "Home",
   components: {
     NavBar,
-    cardRutina,
-    slider
+    //cardRutina,
+    //slider
   },
   data() {
     return {

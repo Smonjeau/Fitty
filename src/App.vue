@@ -5,7 +5,6 @@
 </template>
 
 <script>
-//import card from './components/CardioCard';
 
 export default {
   name: 'App',
@@ -15,7 +14,6 @@ export default {
   },
 
   data: () => ({
-    //
   }),
 };
 </script>

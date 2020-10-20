@@ -75,11 +75,11 @@ export default {
           .then((result) => {
             localStorage.token = result.data.token;
             console.log(localStorage.token);
+            this.$router.push('/');
           })
           .catch((error) => {
             console.log(error);
           });
-      this.valid = true;
     }
   }
 }
