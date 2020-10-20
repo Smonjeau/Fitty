@@ -50,7 +50,7 @@
 import squeleton from './squeleton';
 
 export default {
-  name: "signIn",
+  name: "signUp",
   components: {
     squeleton
   },

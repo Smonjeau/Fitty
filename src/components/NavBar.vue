@@ -50,7 +50,7 @@
       </template>
 
       <template v-else>
-        <v-btn outlined @click="goToSignIn">
+        <v-btn outlined @click="goToSignUp">
           Ingresar
         </v-btn>
         <v-btn outlined class="ml-4" @click="goToLogIn">
@@ -71,8 +71,8 @@ export default {
     }
   },
   methods: {
-    goToSignIn() {
-      this.$router.push('/signin');
+    goToSignUp() {
+      this.$router.push('/signup');
     },
     goToLogIn() {
       this.$router.push('/login');

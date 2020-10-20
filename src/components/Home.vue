@@ -18,7 +18,7 @@
             color="blue darken-1 white--text"
             depressed
             large
-            @click="goToSignIn"
+            @click="goToSignUp"
         >Comienza Ahora</v-btn>
       </v-col>
 
@@ -78,8 +78,8 @@ export default {
     }
   },
   methods: {
-    goToSignIn() {
-      this.$router.push('/signin');
+    goToSignUp() {
+      this.$router.push('/signup');
     }
   }
 }

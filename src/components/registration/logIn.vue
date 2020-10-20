@@ -35,7 +35,7 @@
       <v-row justify="center" class="my-4">
         <v-card-text class="align-self-center blue--text text--darken-2 text-subtitle-1">
           ¿Primera vez aquí?
-          <v-btn class="blue white--text px-4 py-3 ml-6" @click="navigateToSignIn">Registrarme</v-btn>
+          <v-btn class="blue white--text px-4 py-3 ml-6" @click="navigateToSignUp">Registrarme</v-btn>
         </v-card-text>
       </v-row>
     </v-container>
@@ -67,8 +67,8 @@ export default {
     }
   },
   methods: {
-    navigateToSignIn() {
-      this.$router.push('/signin');
+    navigateToSignUp() {
+      this.$router.push('/signup');
     },
     submit() {
       axios.post('/user/login', this.userData)
