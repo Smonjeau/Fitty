@@ -4,9 +4,8 @@
       <v-form v-model="valid">
         <v-row>
           <v-text-field
-              v-model="userData.email"
-              :rules="[rules.emailContains]"
-              label="Email"
+              v-model="userData.username"
+              label="Usuario"
               required
           ></v-text-field>
         </v-row>
@@ -45,6 +44,7 @@
 
 <script>
 import squeleton from './squeleton';
+import axios from 'axios';
 
 export default {
   name: "logIn",
@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       userData: {
-        email: '',
+        username: '',
         password: ''
       },
       show: false,
@@ -71,6 +71,14 @@ export default {
       this.$router.push('/signin');
     },
     submit() {
+      axios.post('/user/login', this.userData)
+          .then((result) => {
+            localStorage.token = result.data.token;
+            console.log(localStorage.token);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       this.valid = true;
     }
   }
