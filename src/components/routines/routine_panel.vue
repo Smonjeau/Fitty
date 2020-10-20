@@ -5,16 +5,16 @@
       <v-expansion-panels accordion multiple >
         <v-row class="align-content-start" >
           <v-col cols="11">
-        <v-expansion-panel class="mb-7" v-model="open" >
+        <v-expansion-panel class="mb-7" v-model="open" py-0>
 
-          <v-expansion-panel-header  @keyup.space.prevent inside   color="blue" class="white--text" append-icon="mdi-delete">
-            <v-container>
-            <v-row>
+          <v-expansion-panel-header  @keyup.space.prevent inside   color="blue" class="white--text pb-0" append-icon="mdi-delete">
+            <v-container pb-0>
+            <v-row class="nombreCiclo">
               <v-col cols="3">
-                <v-text-field  outlined :readonly="!isModifiable"
+                <v-text-field  :readonly="!isModifiable"
                               :rules="[rules.required]"
                               v-model="name"
-                              @click.native.stop="true"
+                              @click.native.stop="true"                               
                 >
                   <v-icon v-if="isModifiable" slot="append">mdi-pencil</v-icon>
                 </v-text-field>
@@ -24,6 +24,7 @@
               <v-text-field
                   @click.native.stop="true"
                   prepend-icon="mdi-minus"
+                  prepend-color="white"
                   label="Repeticiones"
                   :rules="[rules.required, rules.number, rules.positive]"
                   append-outer-icon="mdi-plus"
@@ -38,16 +39,12 @@
               </v-col>
 
 
-
-
-
             </v-row>
             </v-container>
 
 
             <template v-slot:actions>
-
-              <v-icon color="white">mdi-arrow-down-drop-circle-outline</v-icon>
+              <v-icon color="white" large>mdi-arrow-down-drop-circle-outline</v-icon>
             </template>
 
           </v-expansion-panel-header>
@@ -123,7 +120,7 @@ methods:{
     return {
       name : this.title,
       exercisesQty: 1,
-      qty:0,
+      qty:1,
       ex_id: 0,
       store: ExerciseStore,
       excercises: [0],
@@ -145,6 +142,19 @@ name: "routine_panel",
 </script>
 
 
-<style scoped>
+<style>
+  .nombreCiclo .theme--light.v-text-field > .v-input__control > .v-input__slot:before {
+    border-color: rgb(255 255 255 / 42%)!important;
+  
+  }
+
+  .nombreCiclo input,
+  .nombreCiclo .theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot fieldset,
+  .nombreCiclo .theme--light:not(.v-input--is-focused) .v-label,
+  .nombreCiclo .theme--light.v-icon
+  {
+    color: #ffffff!important;
+  }
+
 
 </style>

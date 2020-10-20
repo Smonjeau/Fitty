@@ -109,5 +109,7 @@ name: "create_routine",
 </script>
 
 <style scoped>
-
+  .theme--light.v-input input {
+    color: #ffffff!important;
+  }
 </style>
