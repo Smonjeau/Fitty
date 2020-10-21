@@ -48,6 +48,8 @@
               :items="items"
               v-model="excerciseData.type"
               label="Repeticiones/Segundos"
+              :menu-props="{ top: false, offsetY: true }"
+
               outlined
 
           ></v-select>

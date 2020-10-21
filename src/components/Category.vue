@@ -92,7 +92,7 @@ export default {
   },
   methods: {
     updateRoutines() {
-      axios.get('routines/', {params: {page: 0, size: 20, orderBy: this.order, direction: 'desc'}})
+      axios.get('routines/', {params: {page: 0, size:100, orderBy: this.order, direction: 'desc'}})
           .then(response => {
             this.allRoutines = response.data.results;
             this.myRoutines = this.filterCategorys(this.allRoutines, this.categoryId);

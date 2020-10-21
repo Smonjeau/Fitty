@@ -27,6 +27,7 @@
                       :items="availableCategorys"
                       outlined
                       v-model="categorys"
+                      :menu-props="{ top: false, offsetY: true }"
                       label="Categoría/s"
                       multiple
                   ></v-select>

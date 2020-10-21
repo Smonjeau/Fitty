@@ -29,7 +29,7 @@
     <div v-else>
       <div>
 
-        <slider class="mb-14 mt-4" title="Mis Rutinas" mas-info="true">
+        <slider class="mb-14 mt-4" title="Mis Rutinas" mas-info="true" go-to="/mis_rutinas">
           <v-slide-item v-for="routine in userRoutines" :key="routine.id">
             <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
                          :type="routine.category.name" class="ma-4"></card-rutina>
@@ -51,12 +51,12 @@
       </div>
 
 
-      <div v-for="categoria in categories" :key="categoria.id">
-        <slider   class="mb-14 mt-4" :title=getCategoryName(categoria.name) mas-info="true">
-          <v-slide-item v-for="routine in filterCategorys(info,categoria.name)" :key="routine">
-            <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
-                         :type="routine.category.name" class="ma-4"></card-rutina>
-          </v-slide-item>
+    <div v-for="categoria in categories" :key="categoria.id">
+      <slider   class="mb-14 mt-4" :title=getCategoryName(categoria.name) mas-info="true" :go-to="getLinkToCategory(categoria)">
+            <v-slide-item v-for="routine in filterCategorys(info,categoria.name)" :key="routine">
+              <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
+                           :type="routine.category.name" class="ma-4"></card-rutina>
+            </v-slide-item>
 
 
 
@@ -168,6 +168,9 @@ export default {
   methods: {
     getCategoryName (name){
       return 'Rutinas de ' + name;
+    },
+    getLinkToCategory(category){
+      return '/category/'+category.id;
     },
     goToSignUp() {
       this.$router.push('/signup');

@@ -43,6 +43,7 @@ import strengthPhoto from '../assets/strength.png'
 import yogaPhoto from '../assets/religion.png'
 import elongPhoto from '../assets/gym.png'
 import resPhoto from '../assets/resistencia.png'
+import legPhoto from '../assets/piernas.png'
 
 export default {
   name: "CardioCard",
@@ -54,6 +55,7 @@ export default {
       yoga: {foto: yogaPhoto, color: '#53FA52', dim: 50},
       elongacion: {foto: elongPhoto, color: '#5253FA', dim: 50},
       resistencia: {foto: resPhoto, color: '#FAA552', dim: 50},
+      piernas:{foto:legPhoto, color:'#593910', dim:50},
       selected: '',
       color: 'amber darken-1',
       ele: 5
@@ -65,6 +67,7 @@ export default {
     else if (this.type == 'yoga') return this.selected = this.yoga;
     else if (this.type == 'elongacion') return this.selected = this.elongacion;
     else if (this.type == 'resistencia') return this.selected = this.resistencia;
+    else if(this.type=='piernas') return this.selected = this.piernas;
   },
 
 }

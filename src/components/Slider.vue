@@ -5,7 +5,7 @@
         <h4 class="text-center text-h5 font-weight-black text-uppercase">{{ title }}</h4>
       </v-col>
       <v-col md="2">
-        <router-link :to="link" v-if="masInfo">Más Rutinas</router-link>
+        <router-link :to="goTo" v-if="masInfo">Más Rutinas</router-link>
       </v-col>
     </v-row>
 
@@ -20,7 +20,7 @@
 <script>
 export default {
   name: "Slider",
-  props: [ 'title', 'masInfo', 'link' ]
+  props: [ 'title', 'masInfo', 'goTo' ]
 }
 </script>
 
