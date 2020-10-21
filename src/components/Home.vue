@@ -39,7 +39,7 @@
 
     </div>
 
-    <slider  class="mb-14 mt-4" :title=categories.results[6].name mas-info="true">
+    <slider  class="mb-14 mt-4" :title=categories.results[6].name mas-info="true" :cat_id="categories.results[6].id">
            <v-slide-item v-for="routine in filterCategorys(this.info.results,categories.results[6].name)" :key="routine">
              <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
                           :type="routine.category.name" class="ma-4"></card-rutina>

@@ -115,8 +115,7 @@ export default {
             } else {
               this.myRoutines = this.allRoutines;
             }
-            console.log(response.data.results);
-            console.log(response);
+            console.log(this.myRoutines);
           })
     },
     filterCategorys (routines, categoryName){
@@ -129,12 +128,10 @@ export default {
     .then(response => {
         this.categoriesItems.push(...response.data.results);
     });
-    console.log(this.categoriesItems);
     this.updateRoutines();
   },
   watch: {
     order: function() {
-      console.log(this.order);
       this.updateRoutines();
     },
     category: function() {
@@ -142,7 +139,6 @@ export default {
         this.myRoutines = this.allRoutines;
       } else {
         this.myRoutines = this.filterCategorys(this.allRoutines, this.category);
-        console.log(this.myRoutines);
       }
     }
   }
