@@ -29,7 +29,7 @@
     <div>
 
     <slider class="mb-14 mt-4" title="rutinas destacadas">
-      <v-slide-item v-for="routine in this.info.results" :key="routine">
+      <v-slide-item v-for="routine in info" :key="routine.id">
         <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
                      :type="routine.category.name" class="ma-4"></card-rutina>
       </v-slide-item>
@@ -39,8 +39,36 @@
 
     </div>
 
-    <slider  class="mb-14 mt-4" :title=categories.results[6].name mas-info="true">
-           <v-slide-item v-for="routine in filterCategorys(this.info.results,categories.results[6].name)" :key="routine">
+
+    <div v-for="categoria in categories" :key="categoria.id">
+      <slider   class="mb-14 mt-4" :title=getCategoryName(categoria.name) mas-info="true">
+            <v-slide-item v-for="routine in filterCategorys(info,categoria.name)" :key="routine">
+              <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
+                           :type="routine.category.name" class="ma-4"></card-rutina>
+            </v-slide-item>
+
+
+
+
+          </slider>
+      <v-divider></v-divider>
+
+    </div>
+
+     <!--slider   class="mb-14 mt-4" :title=categoria.name mas-info="true">
+            <v-slide-item v-for="routine in filterCategorys(this.info,categoria.name)" :key="routine">
+              <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
+                           :type="routine.category.name" class="ma-4"></card-rutina>
+            </v-slide-item>
+
+
+
+
+          </slider>
+   </div!-->
+
+    <!--slider   class="mb-14 mt-4" :title=categories.results[2].name mas-info="true">
+           <v-slide-item v-for="routine in filterCategorys(this.info.results,categories.results[2].name)" :key="routine">
              <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
                           :type="routine.category.name" class="ma-4"></card-rutina>
            </v-slide-item>
@@ -48,7 +76,8 @@
 
 
 
-         </slider>
+         </slider!-->
+
     <!--slider v-for="category in this.categories.results" :key="category" class="mb-14 mt-4" :title=category.name mas-info="true">
         <v-slide-item v-for="routine in filterCategorys(this.info.results,'strength')" :key="routine">
           <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
@@ -89,8 +118,8 @@ export default {
     return {
       model:null,
 
-      info:null,
-      categories:null,
+      info:[],
+      categories:[],
 
       cards: [
         {type: 'strength', rating: 3.5, duration: 30, title: 'Abs Marcados'},
@@ -107,12 +136,11 @@ export default {
       ],
     }
   },
-  computed : {
+
+  methods: {
     getCategoryName (name){
       return 'Rutinas de ' + name;
-    }
-  },
-  methods: {
+    },
     goToSignUp() {
       this.$router.push('/signup');
     },
@@ -128,35 +156,21 @@ export default {
 
 
   mounted () {
-   axios
-        .get('/routines',{
-          params:{
-            orderBy: 'averageRating',
-            direction: 'desc'
 
-          }
-        })
-        .then((response) => {
-              this.info = response.data;
-              console.log(this.info);
+    axios.all([axios.get('/routines',{
+      params:{
+        orderBy: 'averageRating',
+        direction: 'desc',
+        size: 100
 
-
-            }
-
-        );
-    axios
-        .get('/categories').then(
-        (response) => {
-          this.categories = response.data;
-          console.log(this.categories);
-        }
-
-    );
-    /*
-    axios.all([axios.get('/routines'),axios.get('/categories')]).then(axios.spread((response1, response2) => {
+      }
+    }),axios.get('/categories')]).then(axios.spread((response1, response2) => {
       this.info = response1.data.results;
       this.categories = response2.data.results;
-    })) */
+      console.log(this.info);
+
+      console.log(this.categories);
+    }));
   }
 }
 </script>
