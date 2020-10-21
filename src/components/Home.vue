@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavBar></NavBar>
+   <div v-if="!logged" >
     <h1 class="text-center text-h1 font-weight-bold blue--text text--darken-1 mt-10">FITTY</h1>
     <h2 class="text-center text-h4 font-weight-bold mt-8">COMPARTE TUS RUTINAS</h2>
     <v-row no-gutters class="mb-13">
@@ -23,13 +24,23 @@
 
       <v-col md="3"></v-col>
     </v-row>
+   </div>
 
-    <v-divider></v-divider>
+    <div v-else>
+      <div>
 
+        <slider class="mb-14 mt-4" title="Mis Rutinas" mas-info="true">
+          <v-slide-item v-for="routine in userRoutines" :key="routine.id">
+            <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
+                         :type="routine.category.name" class="ma-4"></card-rutina>
+          </v-slide-item>
+        </slider >
+
+      </div>
     <div>
 
-    <slider class="mb-14 mt-4" title="rutinas destacadas">
-      <v-slide-item v-for="routine in info" :key="routine.id">
+    <slider class="mb-14 mt-4" title="Rutinas destacadas">
+      <v-slide-item v-for="routine in topRoutines" :key="routine.id">
         <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
                      :type="routine.category.name" class="ma-4"></card-rutina>
       </v-slide-item>
@@ -54,7 +65,7 @@
       <v-divider></v-divider>
 
     </div>
-
+    </div>
      <!--slider   class="mb-14 mt-4" :title=categoria.name mas-info="true">
             <v-slide-item v-for="routine in filterCategorys(this.info,categoria.name)" :key="routine">
               <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
@@ -106,6 +117,8 @@ import cardRutina from "@/components/CardRutina";
 import slider from "@/components/Slider";
 import NavBar from "@/components/NavBar";
 import axios from 'axios';
+import { store } from '../userStore.js';
+
 
 export default {
   name: "Home",
@@ -117,6 +130,8 @@ export default {
   data() {
     return {
       model:null,
+      logged: store.logged,
+      user: store.userInfo,
 
       info:[],
       categories:[],
@@ -134,6 +149,19 @@ export default {
         {type: 'elongacion', rating: 4.5, duration: 12, title: 'Estiramiento Tren Superior'},
         {type: 'resistencia', rating: 4.5, duration: 40, title: 'Intencivo Tren Inferior'},
       ],
+    }
+  },
+  computed: {
+    topRoutines(){
+      if (this.info.size < 20)
+        return this.info;
+      else
+        return this.info.slice(0,19);
+
+
+    },
+    userRoutines(){
+      return this.info.filter(routine => routine.creator.id === this.user.id);
     }
   },
 
