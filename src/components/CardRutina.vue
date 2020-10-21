@@ -1,5 +1,5 @@
 <template>
-  <v-card width="200" height="290" elevation="5"
+  <v-card elevation="5" style="width: 200px; height: 290px"
           class="text-center rounded-xl pa-4 d-flex flex-column" outlined>
     <v-layout>
       <v-responsive class="rounded-circle align-center ma-auto pa-2" max-width="80" max-height="80" min-height="80" min-width="80"

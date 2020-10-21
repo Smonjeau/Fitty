@@ -72,7 +72,7 @@ export default {
       logged: store.logged,
       user: store.userInfo,
       myDropdown: [
-        {title: 'Mis Rutinas', func: ()=>{this.$router.push('/mis-rutinas')}},
+        {title: 'Mis Rutinas', func: ()=>{this.$router.push('/mis_rutinas')}},
         {title: 'Mi Perfil', func: ()=>{this.$router.push('/perfil')}},
         {title: 'Cerrar Sesión', func: ()=>{this.closeSesion()}},
       ]

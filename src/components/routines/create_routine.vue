@@ -1,6 +1,6 @@
 <template>
   <div>
-
+      <nav-bar></nav-bar>
       <v-container class="my-5">
         <div class="text-center ">
           <p class="font-weight-bold display-2">CREAR RUTINA</p>
@@ -87,6 +87,7 @@
 
 <script>
 import routine_panel from "@/components/routines/routine_panel";
+import NavBar from "@/components/NavBar";
 
 export default {
   methods: {
@@ -95,10 +96,11 @@ export default {
     },
     sectionName(offset){
       return "Ciclo " + offset.toString();
-    }
+    },
   },
 name: "create_routine",
   components: {
+    NavBar,
     routine_panel,
 
 

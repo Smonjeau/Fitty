@@ -6,11 +6,13 @@ import Home from "@/components/Home";
 
 import create_routine from "@/components/routines/create_routine";
 import Routine from "./components/routines/Routine";
+import MisRutinas from "@/components/MisRutinas";
 
 export const routes = [
-    {path: '/login', component: logIn},
-    {path: '/signup', component: signUp},
-    {path: '/create_routine', component: create_routine},
+    { path: '/login', component: logIn },
+    { path: '/signup', component: signUp },
+    { path: '/create_routine', component: create_routine },
+    { path: '/mis_rutinas', component: MisRutinas },
     { path: '/routine/:id_routine', component: Routine },
-    {path: '/', component: Home}
+    { path: '/', component: Home }
     ];
