@@ -10,7 +10,7 @@
     </v-row>
 
     <v-sheet class="mx-auto">
-      <v-slide-group v-model="model" show-arrows>
+      <v-slide-group  show-arrows>
         <slot></slot>
       </v-slide-group>
     </v-sheet>

@@ -60,12 +60,13 @@ export default {
     }
   },
   mounted() {
-    if (this.type == 'cardio') return this.selected = this.cardio;
+    if (this.type == 'Cardio') return this.selected = this.cardio;
     else if (this.type == 'strength') return this.selected = this.strength;
     else if (this.type == 'yoga') return this.selected = this.yoga;
     else if (this.type == 'elongacion') return this.selected = this.elongacion;
     else if (this.type == 'resistencia') return this.selected = this.resistencia;
-  }
+  },
+
 }
 </script>
 

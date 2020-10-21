@@ -1,12 +1,12 @@
 <template>
   <div>
-    <NavBar></NavBar>
+
       <v-container class="my-5">
         <div class="text-center ">
           <p class="font-weight-bold display-2">CREAR RUTINA</p>
         </div>
         <template>
-          <v-form v-model="valid">
+          <v-form v-model="valid" >
             <v-container class="my-5">
               <v-row class="justify-md-start">
                 <v-col
@@ -17,6 +17,7 @@
                       :rules="[rules.required]"
                       label="Nombre de la rutina"
                       outlined
+
 
 
                   ></v-text-field>
@@ -34,6 +35,7 @@
                   <v-text-field
                       v-model="duration"
                       outlined
+                      scop
                       :rules="[rules.number, rules.required, rules.positive]"
                       label="Duración (mins)"
 
@@ -46,10 +48,10 @@
 
       </template>
 
-      <routine_panel title="Calentamiento" open="0"></routine_panel>
+      <routine_panel title="Calentamiento" panel=0></routine_panel>
         <routine_panel title="Ciclo 1" isModifiable="true"></routine_panel>
         <div v-for="index in extraSections" :key="index">
-          <routine_panel :title=sectionName(index+1) isModifiable="true" ></routine_panel>
+          <routine_panel :title=sectionName(index+1) isDeletable="true" isModifiable="true" ></routine_panel>
         </div>
 
         <routine_panel title="Enfriamiento"></routine_panel>
@@ -60,6 +62,23 @@
           <span>Agregar sección</span>
 
         </v-btn>
+        <v-row class="justify-center">
+
+          <v-col md="2">
+            <v-btn color="blue white--text" class="my-5" outlined>
+              Cancelar
+
+            </v-btn>
+
+          </v-col>
+          <v-col md="2" >
+            <v-btn color="blue white--text" class="my-5">
+              Finalizar
+            </v-btn>
+
+          </v-col>
+
+        </v-row>
 
 
     </v-container>
@@ -68,8 +87,6 @@
 
 <script>
 import routine_panel from "@/components/routines/routine_panel";
-import NavBar from "@/components/NavBar";
-//import SectionStore from "@/store/SectionStore";
 
 export default {
   methods: {
@@ -83,12 +100,14 @@ export default {
 name: "create_routine",
   components: {
     routine_panel,
-    NavBar
+
 
         },
   data() {
     return {
       name: '',
+      valid: false,
+
       duration: 0,
       availableCategorys: [
       'Cardio','Brazos','Piernas','Yoga','Relajación','Tren superior','Resistencia'

@@ -1,9 +1,8 @@
 <template>
-  <!--squeleton title="CREAR RUTINA"!-->
     <v-container class="my-5">
 
-      <v-expansion-panels accordion multiple >
-        <v-row class="align-content-start" >
+      <v-expansion-panels v-model="panel" accordion multiple >
+        <v-row no-gutters >
           <v-col cols="11">
         <v-expansion-panel class="mb-7" v-model="open" py-0>
 
@@ -31,7 +30,7 @@
                   @click:prepend="decQty()"
                   @click:append-outer="incQty()"
                   v-model="qty"
-                outlined
+                  outlined
 
               >
 
@@ -44,7 +43,7 @@
 
 
             <template v-slot:actions>
-              <v-icon color="white" large>mdi-arrow-down-drop-circle-outline</v-icon>
+              <v-icon color="white" large>mdi-chevron-down</v-icon>
             </template>
 
           </v-expansion-panel-header>
@@ -64,9 +63,13 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
           </v-col>
-          <v-icon v-if="isDeletable" @click="dec()" >mdi-delete</v-icon>
+          <v-col class="justify-center">
+          <v-icon v-if="this.isDeletable" @click="dec()" >mdi-delete</v-icon>
+          </v-col>
         </v-row>
+
       </v-expansion-panels>
+
 
     </v-container>
 
@@ -134,10 +137,11 @@ methods:{
 props: {
   title: String,
   isModifiable: Boolean,
-  open: Number
+  open_panel: Number,
+  isDeletable: Boolean
 },
 name: "routine_panel",
-  components: {/*squeleton,*/ excercise_form}
+  components: { excercise_form}
 }
 </script>
 
