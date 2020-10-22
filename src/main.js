@@ -7,12 +7,6 @@ import VueRouter from "vue-router";
 import { routes } from './routes';
 import axios from 'axios'
 import { store } from './userStore';
-import VueYouTubeEmbed from 'vue-youtube-embed'
-Vue.use(VueYouTubeEmbed)
-// if you don't want install the component globally
-Vue.use(VueYouTubeEmbed, { global: false })
-// if you want to install the component globally with a different name
-Vue.use(VueYouTubeEmbed, { global: true, componentId: "youtube-media" })
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
