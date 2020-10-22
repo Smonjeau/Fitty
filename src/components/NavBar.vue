@@ -21,7 +21,7 @@
 
       <!-- En caso de que SI este logeado utiliza esta version -->
       <template v-if="logged">
-        <v-btn outlined class="ml-4">
+        <v-btn outlined class="ml-4" @click="goToCreate()">
           Crear Rutina
         </v-btn>
         <v-menu left bottom offset-y>
@@ -89,7 +89,10 @@ export default {
       store.logged = false;
       this.logged = false;
       localStorage.removeItem('token');
-    }
+    },
+    goToCreate() {
+      this.$router.push('/create_routine');
+    },
   },
 }
 </script>

@@ -81,7 +81,7 @@ export default {
         {
           text: 'Inicio',
           disabled: false,
-          href: '',
+          href: '/',
         },
         {
           text: 'Mis Rutinas',
@@ -139,6 +139,7 @@ export default {
         this.myRoutines = this.allRoutines;
       } else {
         this.myRoutines = this.filterCategorys(this.allRoutines, this.category);
+        console.log(this.myRoutines);
       }
     }
   }

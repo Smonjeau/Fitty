@@ -7,8 +7,8 @@
         <v-img :src=selected.foto :width="selected.dim" :height="selected.dim" class="ma-auto" ></v-img>
       </v-responsive>
     </v-layout>
-    <v-layout class="justify-center fill-height">
-      <v-card-title class="text-break justify-center">{{ titulo }}</v-card-title>
+    <v-layout class="justify-center">
+      <p class="text-break justify-center align-self-center" style="font-size: 18px">{{ titulo }}</p>
     </v-layout>
     <v-layout class="justify-center align-content-end mb-auto">
       <div class="cont mb-auto">
@@ -43,7 +43,9 @@ import strengthPhoto from '../assets/strength.png'
 import yogaPhoto from '../assets/religion.png'
 import elongPhoto from '../assets/gym.png'
 import resPhoto from '../assets/resistencia.png'
-import legPhoto from '../assets/piernas.png'
+import legPhoto from '../assets/leg.png'
+import absPhoto from '../assets/abs.png'
+import relaxPhoto from '../assets/tulip.png'
 
 export default {
   name: "CardioCard",
@@ -55,19 +57,23 @@ export default {
       yoga: {foto: yogaPhoto, color: '#53FA52', dim: 50},
       elongacion: {foto: elongPhoto, color: '#5253FA', dim: 50},
       resistencia: {foto: resPhoto, color: '#FAA552', dim: 50},
-      piernas:{foto:legPhoto, color:'#593910', dim:50},
-      selected: '',
+      piernas: {foto: legPhoto, color:'#A73B3B', dim:50},
+      abs: {foto: absPhoto, color: '#52A7FA', dim: 50},
+      relax: {foto: relaxPhoto, color: '#FBEF54', dim: 50},
+      selected: {},
       color: 'amber darken-1',
       ele: 5
     }
   },
   mounted() {
-    if (this.type == 'Cardio') return this.selected = this.cardio;
+    if (this.type == 'cardio') return this.selected = this.cardio;
     else if (this.type == 'strength') return this.selected = this.strength;
     else if (this.type == 'yoga') return this.selected = this.yoga;
     else if (this.type == 'elongacion') return this.selected = this.elongacion;
     else if (this.type == 'resistencia') return this.selected = this.resistencia;
-    else if(this.type=='piernas') return this.selected = this.piernas;
+    else if (this.type == 'piernas') return this.selected = this.piernas;
+    else if (this.type == 'tren superior') return this.selected = this.abs;
+    else if (this.type == 'relajacion') return this.selected = this.relax;
   },
 
 }
