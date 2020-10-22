@@ -23,7 +23,6 @@
               <v-text-field
                   @click.native.stop="true"
                   prepend-icon="mdi-minus"
-                  prepend-color="white"
                   label="Repeticiones"
                   :rules="[rules.required, rules.number, rules.positive]"
                   append-outer-icon="mdi-plus"

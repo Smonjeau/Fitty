@@ -73,8 +73,9 @@ export default {
       user: store.userInfo,
       myDropdown: [
         {title: 'Mis Rutinas', func: ()=>{this.$router.push('/mis_rutinas')}},
+        {title: 'Mis Ejercicios', func: ()=>{this.$router.push('/mis_ejercicios')}},
         {title: 'Mi Perfil', func: ()=>{this.$router.push('/perfil')}},
-        {title: 'Cerrar Sesión', func: ()=>{this.closeSesion()}},
+        {title: 'Cerrar Sesión', func: ()=>{this.closeSesion()}}
       ]
     }
   },

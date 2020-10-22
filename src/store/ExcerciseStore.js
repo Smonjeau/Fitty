@@ -1,21 +1,20 @@
 const ExerciseStore = {
-    exercises_id: [],
-    getSize(){
+    exercises: [],
+    /*getSize(){
         return this.exercises_id +1;
-    },
-    add(id) {
-        //validar distintos nombres?
-        return this.exercises_id.push(id);
+    },*/
+    add(exercise) {
+        return this.exercises.push(exercise);
     },
     get(index) {
         if (index === undefined)
-            return this.exercises_id;
+            return this.exercises;
 
-        if (index > this.exercises_id.length)
+        /*if (index > this.exercises_id.length)
             return null;
 
-        return this.exercises_id[index];
-    },
+        return this.exercises_id[index];*/
+    }/*,
     remove(id) {
         if (!id || this.exercises_id.length === 0)
             return false;
@@ -26,7 +25,7 @@ const ExerciseStore = {
 
         this.exercises_id.splice(index, 1);
         return true;
-    }
+    }*/
 };
 
 export default ExerciseStore;
