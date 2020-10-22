@@ -1,6 +1,6 @@
 <template>
   <v-card elevation="5" style="width: 200px; height: 290px"
-          class="text-center rounded-xl pa-4 d-flex flex-column" outlined>
+          class="text-center rounded-xl pa-4 d-flex flex-column" outlined @click="goToRoutine()">
     <v-layout>
       <v-responsive class="rounded-circle align-center ma-auto pa-2" max-width="80" max-height="80" min-height="80" min-width="80"
                     :style="{backgroundColor: selected.color}">
@@ -49,7 +49,7 @@ import relaxPhoto from '../assets/tulip.png'
 
 export default {
   name: "CardioCard",
-  props: ['type', 'titulo', 'rating', 'time'],
+  props: ['type', 'titulo', 'rating', 'time', 'id_routine'],
   data: function () {
     return {
       cardio: {foto: cardioPhoto, color: '#fa5253', dim: 60},
@@ -75,6 +75,11 @@ export default {
     else if (this.type == 'tren superior') return this.selected = this.abs;
     else if (this.type == 'relajacion') return this.selected = this.relax;
   },
+  methods: {
+    goToRoutine() {
+      this.$router.push('../routine/' + this.id_routine);
+    }
+  }
 
 }
 </script>

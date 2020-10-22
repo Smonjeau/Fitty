@@ -4,7 +4,7 @@
     <v-card
         class="mt-8"
         color="#26c6da"
-        max-width="400"
+        max-width="500"
 
     >
       <v-card-title class="blue darken-1 white--text">
@@ -18,8 +18,8 @@
         <RoutineExerciseView
             v-for="exercise in exercises"
             v-bind:key="exercise"
-            :title="exercise.title"
-            :qty="exercise.qty"></RoutineExerciseView>
+            :title="exercise.name"
+            :qty="getReps(exercise)"></RoutineExerciseView>
       </v-card-text>
 
 
@@ -29,12 +29,31 @@
 
 <script>
 import RoutineExerciseView from "@/components/routines/RoutineExerciseView";
+import axios from 'axios';
 
 export default {
 name: "RoutineCycleView",
-  props: ['title', 'qty', 'exercises'],
+  props: ['title', 'qty', 'id_routine', 'id_cycle'],
   components: {
     RoutineExerciseView
+  },
+  data() {
+    return {
+      exercises: {}
+    }
+  },
+  mounted() {
+    axios.get('/routines/' + this.id_routine + '/cycles/' + this.id_cycle + '/exercises')
+    .then(response => {
+      this.exercises = response.data.results;
+      console.log(this.exercises);
+    })
+  },
+  methods: {
+    getReps(exercise) {
+      if (exercise.repetitions != 0) return 'x ' + exercise.repetitions.toString();
+      else if (exercise.duration != 0) return exercise.duration.toString() + 's';
+    }
   }
 }
 </script>

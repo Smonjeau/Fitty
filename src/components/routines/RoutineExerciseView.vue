@@ -1,8 +1,8 @@
 <template>
   <div class="text-h6">
     <v-row>
-      <v-col>{{ title }}</v-col>
-      <v-col>x {{ qty }}</v-col>
+      <v-col cols="6">{{ title }}</v-col>
+      <v-col cols="4">{{ qty }}</v-col>
       <v-col class="text-right">
 
         <v-dialog

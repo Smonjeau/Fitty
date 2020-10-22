@@ -58,6 +58,7 @@
               :titulo="routine.name"
               :rating="routine.averageRating"
               :type="routine.category.name.toLowerCase()"
+              :id_routine="routine.id"
               time="45" class="mb-10 ml-sm-4 ml-md-5"
           >
           </card-rutina>
@@ -121,12 +122,16 @@ export default {
     filterCategorys (routines, categoryName){
       return routines.filter(routine => routine.category.id === categoryName);
     },
+    capitalizeFirstLetter(string) {
+      return string.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+    }
   },
   mounted() {
     this.categoriesItems.push({name: 'Todas', id: -1})
     axios.get('categories', {params: {orderBy: 'name', direction: 'desc'}})
     .then(response => {
         this.categoriesItems.push(...response.data.results);
+        this.categoriesItems.forEach((val, index) => this.categoriesItems[index] = this.capitalizeFirstLetter(val.name));
     });
     this.updateRoutines();
   },

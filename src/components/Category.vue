@@ -10,8 +10,8 @@
           ></v-breadcrumbs>
         </v-col>
       </v-row>
-      <v-row class="mx-5 mt-4 mb-3 d-flex justify-center" no-gutters>
-        <h1>Rutinas de {{ categoryName }}</h1>
+      <v-row class="mx-5 mt-2 mb-3 d-flex justify-center" no-gutters>
+        <h1>Rutinas de {{ capitalizeFirstLetter(categoryName) }}</h1>
       </v-row>
       <v-row class="justify-end">
         <v-col cols="3" md="2">
@@ -38,13 +38,14 @@
           ></v-select>
         </v-col>
       </v-row>
-      <v-row class="d-flex flex-row" no-gutters v-on:change="updateRoutines">
+      <v-row class="d-flex flex-row mx-4" no-gutters v-on:change="updateRoutines">
         <card-rutina
             v-for="routine in myRoutines"
             :key="routine.id"
             :titulo="routine.name"
             :rating="routine.averageRating"
             :type="routine.category.name.toLowerCase()"
+            :id_routine="routine.id"
             time="45" class="mb-10 ml-sm-4 ml-md-5"
         >
         </card-rutina>
@@ -106,6 +107,9 @@ export default {
           .then(response => {
             this.categoryName = response.data.name;
           })
+    },
+    capitalizeFirstLetter(string) {
+      return string.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
     }
   },
   mounted() {
@@ -113,6 +117,7 @@ export default {
     axios.get('categories', {params: {orderBy: 'name', direction: 'desc'}})
         .then(response => {
           this.categoriesItems.push(...response.data.results);
+          this.categoriesItems.forEach((val, index) => this.categoriesItems[index].name = this.capitalizeFirstLetter(val.name));
         });
     this.updateRoutines();
   },
