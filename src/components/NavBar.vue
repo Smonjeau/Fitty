@@ -89,6 +89,8 @@ export default {
       store.logged = false;
       this.logged = false;
       localStorage.removeItem('token');
+      this.$router.push('/');
+
     },
     goToCreate() {
       this.$router.push('/create_routine');

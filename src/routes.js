@@ -8,6 +8,7 @@ import create_routine from "@/components/routines/create_routine";
 import Routine from "./components/routines/Routine";
 import MisRutinas from "@/components/MisRutinas";
 import Category from "@/components/Category";
+import Perfil from "@/components/Perfil";
 
 export const routes = [
     { path: '/login', component: logIn },
@@ -15,6 +16,7 @@ export const routes = [
     { path: '/create_routine', component: create_routine },
     { path: '/mis_rutinas', component: MisRutinas },
     { path: '/routine/:id_routine', component: Routine },
+    {path:'/perfil', component: Perfil},
     { path: '/category/:id_category', component: Category },
     { path: '/', component: Home }
     ];

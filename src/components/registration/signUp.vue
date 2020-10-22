@@ -134,6 +134,7 @@ export default {
   },
   data() {
     return {
+      menu:false,
       user: {
         firstname: '',
         lastname: '',
@@ -166,15 +167,15 @@ export default {
     processData() {
       this.userData.fullName = this.user.firstname + ' ' + this.user.lastname;
       this.userData.birthdate = parseInt(moment(this.user.birthdate).format("X"));
-      if (this.user.gender == 'Femenino') {
+      if (this.user.gender === 'Femenino') {
         this.userData.gender = 'female';
         this.userData.avatarUrl = 'https://www.flaticon.com/svg/static/icons/svg/2922/2922561.svg';
       }
-      if (this.user.gender == 'Masculino') {
+      if (this.user.gender === 'Masculino') {
         this.userData.gender = 'male';
         this.userData.avatarUrl = 'https://www.flaticon.com/svg/static/icons/svg/2922/2922510.svg';
       }
-      if (this.user.gender == 'Otro') {
+      if (this.user.gender === 'Otro') {
         this.userData.gender = 'other';
         this.userData.avatarUrl = 'https://www.flaticon.com/svg/static/icons/svg/1077/1077012.svg';
       }
