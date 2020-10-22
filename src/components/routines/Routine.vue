@@ -10,9 +10,26 @@
           ></v-breadcrumbs>
         </v-col>
       </v-row>
+
+      <v-row class="ml-2 justify-space-between d-flex">
+        <v-col cols="10">
+          <h4 class="text-h4 font-weight-bold text-left">{{ routine.name }}</h4>
+        </v-col>
+        <v-col cols="2" class="align-self-end justify-end" v-if="myRoutine">
+          <v-btn
+              class="text-h6 text-none"
+              color="blue darken-1 white--text"
+              depressed
+              large
+          >
+            Editar
+            <v-icon class="ml-4">mdi-pencil-outline</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+
       <v-row class="justify-center ml-2">
         <v-col cols="7">
-          <div class="text-h4 font-weight-bold text-left">{{ routine.name }}</div>
           <RoutineCycleView
               v-for="cycle in cycles"
               v-bind:key="cycle.id"
@@ -23,7 +40,7 @@
               ></RoutineCycleView>
         </v-col>
 
-        <v-col class="pt-16" cols="5">
+        <v-col cols="5">
           <v-row >
             <v-col>
               <div class="text-h6 font-weight-bold">Categoría: {{ capitalizeFirstLetter(routine.category.name) }}</div>
@@ -88,6 +105,7 @@
 import NavBar from "@/components/NavBar";
 import RoutineCycleView from "@/components/routines/RoutineCycleView";
 import axios from 'axios';
+import { store } from '@/userStore';
 
 export default {
 name: "Routine",
@@ -113,19 +131,9 @@ name: "Routine",
       id_routine: this.$route.params.id_routine,
       routine: {},
       color: 'amber darken-1',
-      title: 'Este es el título de la rutina',
-      categoria: 'Piernas',
-      detail: 'Con esta rutina vas a quedar nivel Hulk, no te digo que vas a sacar algo de musculito, sino que vas a quedar con TREMENDAS PIERNAS BRO. Si, así como lees. ¿Estoy escribiendo para rellenar? Quizás. Es importante? No. Los invito a suscribirse a mi canal y dejar su comentario.',
-      rating: 4.5,
-      creator: {
-        id: 3,
-        username: "johndoe7",
-        gender: "male",
-        avatarUrl: "https://www.pngarts.com/files/3/Avatar-PNG-Download-Image.png",
-        "dateCreated": 1602139940660,
-        "dateLastActive": 1602646870971
-      },
-      cycles: {}
+      cycles: [],
+      myRoutine: false,
+      user: store.userInfo,
     }
 
   },
@@ -145,12 +153,13 @@ name: "Routine",
       this.links[2].text = this.routine.name;
       this.links[1].text = this.capitalizeFirstLetter(this.routine.category.name);
       this.links[1].href += this.routine.category.id;
-      console.log(this.routine.creator.avatarUrl);
+      if (response.data.creator.id === this.user.id) {
+        this.myRoutine = true;
+      }
     })
     axios.get('routines/' + this.id_routine + '/cycles')
     .then(response => {
       this.cycles = response.data.results;
-      console.log(this.cycles);
     })
   }
 }

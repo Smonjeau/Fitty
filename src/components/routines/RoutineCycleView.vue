@@ -19,7 +19,11 @@
             v-for="exercise in exercises"
             v-bind:key="exercise"
             :title="exercise.name"
-            :qty="getReps(exercise)"></RoutineExerciseView>
+            :qty="getReps(exercise)"
+            :id_routine="id_routine"
+            :id_cycle="id_cycle"
+            :id_exercise="exercise.id"
+        ></RoutineExerciseView>
       </v-card-text>
 
 
@@ -46,7 +50,6 @@ name: "RoutineCycleView",
     axios.get('/routines/' + this.id_routine + '/cycles/' + this.id_cycle + '/exercises')
     .then(response => {
       this.exercises = response.data.results;
-      console.log(this.exercises);
     })
   },
   methods: {
