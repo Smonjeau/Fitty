@@ -53,7 +53,7 @@ name: "RoutineExerciseView",
   data() {
     return {
       url: '',
-      dialog: false,
+      dialog: false
     }
   },
   mounted() {

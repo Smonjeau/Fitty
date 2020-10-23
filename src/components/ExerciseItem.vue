@@ -36,7 +36,7 @@
         <v-col cols="4">
           <v-text-field
             v-model="exercise.videoUrl"
-            label="URL de video"
+            label="URL del video"
             :rules="[rules.link]"
             :disabled="!isEditing"
           ></v-text-field>

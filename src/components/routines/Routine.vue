@@ -91,15 +91,6 @@
     </div>
     <Footer></Footer>
   </div>
-  <!--<div>
-
-    <div v-for="section in store.get()" :key="section">
-      <button @click="removeSection(section)">X</button>
-      <span>{{ section }}</span>
-    </div>-->
-    <!--id: {{ $route.params.id_routine }}
-
-/div>-->
 </template>
 
 <script>

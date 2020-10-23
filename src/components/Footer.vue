@@ -3,6 +3,7 @@
         color="blue darken-1"
         class="pa-5"
         padless
+        absolute
     >
 
       <v-row class="justify-center">

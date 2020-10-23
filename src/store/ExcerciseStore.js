@@ -14,6 +14,9 @@ const ExerciseStore = {
             return null;
 
         return this.exercises_id[index];*/
+    },
+    empty() {
+        return this.exercises.length == 0;
     }/*,
     remove(id) {
         if (!id || this.exercises_id.length === 0)
