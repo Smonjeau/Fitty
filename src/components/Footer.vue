@@ -3,7 +3,7 @@
         color="blue darken-1"
         class="pa-5"
         padless
-        absolute
+        :absolute="!userStore.logged"
     >
 
       <v-row class="justify-center">
@@ -56,6 +56,8 @@
 <script>
 
 import axios from "axios";
+import {store} from "@/userStore";
+
 
 export default {
   name: "Footer",
@@ -67,7 +69,8 @@ export default {
         { name: 'Mis Ejercicios', to: '/mis_ejercicios' },
         { name: 'Mi Perfil', to: '/perfil' },
       ],
-      categories: []
+      categories: [],
+      userStore: store
     }
   },
   methods: {
