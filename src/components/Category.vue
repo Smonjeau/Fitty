@@ -82,7 +82,7 @@ export default {
         {
           text: 'Inicio',
           disabled: false,
-          href: 'Inicio',
+          href: '/',
         },
         {
           text: 'Categorias',

@@ -9,7 +9,7 @@
         class="pa-4"
     >
       <v-row>
-        <v-col cols="4">
+        <v-col cols="3">
           <v-text-field
               v-model="exercise.name"
               label="Nombre del ejercicio"
@@ -17,9 +17,15 @@
               :disabled="!isEditing"
           ></v-text-field>
         </v-col>
-        <!--<v-spacer></v-spacer>-->
         <v-col cols="2">
-          <!---->
+          <v-select
+              :items="qtyTypes"
+              label="Tipo"
+              v-model="exercise.type"
+              :disabled="!isEditing"
+          ></v-select>
+        </v-col>
+        <v-col cols="2">
           <v-text-field
               v-model="exercise.qty"
               :rules="[rules.required, rules.number, rules.positive]"
@@ -27,13 +33,12 @@
               append-outer-icon="mdi-plus"
               @click:prepend="decQty()"
               @click:append-outer="incQty()"
-              :disabled="!isEditing"
+              :disabled="!isEditing || exercise.type == ''"
               outlined
-              label="Repeticiones"
+              :label="exercise.type"
           ></v-text-field>
         </v-col>
-        <!--<v-spacer></v-spacer>-->
-        <v-col cols="4">
+        <v-col cols="3">
           <v-text-field
             v-model="exercise.videoUrl"
             label="URL del video"
@@ -86,7 +91,8 @@ export default {
         number: v => !isNaN(v) || 'Tiene que ser un número positivo!',
         positive: v => v>=1 || 'Tiene que ser un número positivo!',
         link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || v === '' || 'No es un link válido!'
-      }
+      },
+      qtyTypes: ['Repeticiones', 'Segundos']
     }
   },
   methods:{

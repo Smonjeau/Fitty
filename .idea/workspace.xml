@@ -22,6 +22,7 @@
     <list default="true" id="2ee56ba0-2f96-4ce9-9b8e-d06a545f38a6" name="Default Changelist" comment="">
 <<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
@@ -32,6 +33,7 @@
       <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/userStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/userStore.js" afterDir="false" />
 =======
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/components/NavBar.vue" afterDir="false" />
@@ -53,6 +55,11 @@
       <change beforePath="$PROJECT_DIR$/src/components/routines/squeleton.vue" beforeDir="false" />
 >>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/registration/logIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/registration/logIn.vue" afterDir="false" />
+>>>>>>> Stashed changes
 >>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,10 +144,16 @@
       <workItem from="1603450940988" duration="218000" />
       <workItem from="1603451402905" duration="5703000" />
 =======
+<<<<<<< Updated upstream
 =======
       <workItem from="1602171015362" duration="408000" />
       <workItem from="1602172822511" duration="695000" />
       <workItem from="1602173574271" duration="26359000" />
+>>>>>>> Stashed changes
+=======
+      <workItem from="1603236067669" duration="10043000" />
+      <workItem from="1603286844759" duration="22454000" />
+      <workItem from="1603458004747" duration="1994000" />
 >>>>>>> Stashed changes
 >>>>>>> Stashed changes
     </task>
@@ -175,6 +188,7 @@
     </state>
     <state x="446" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1603389602547" />
 =======
+<<<<<<< Updated upstream
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602173652443">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -251,6 +265,12 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1602173342405" />
+=======
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603419282947">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603419282947" />
+>>>>>>> Stashed changes
 >>>>>>> Stashed changes
   </component>
 </project>

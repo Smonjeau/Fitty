@@ -49,15 +49,20 @@ export default {
                   :rules="[rules.required]"
                   label="Nombre del ejercicio"
               ></v-text-field>
+              <v-text-field
+                  v-model="nuevoEjercicio.videoUrl"
+                  :rules="[rules.link]"
+                  label="URL del video"
+              ></v-text-field>
               <v-row>
-                <v-col cols="7">
-                  <v-text-field
-                      v-model="nuevoEjercicio.videoUrl"
-                      :rules="[rules.link]"
-                      label="URL del video"
-                  ></v-text-field>
+                <v-col>
+                  <v-select
+                      :items="qtyTypes"
+                      label="Tipo"
+                      v-model="nuevoEjercicio.type"
+                  ></v-select>
                 </v-col>
-                <v-col cols="5">
+                <v-col>
                   <v-text-field
                       v-model="nuevoEjercicio.qty"
                       :rules="[rules.required, rules.number, rules.positive]"
@@ -66,7 +71,8 @@ export default {
                       @click:prepend="decQty()"
                       @click:append-outer="incQty()"
                       outlined
-                      label="Repeticiones"
+                      :label="nuevoEjercicio.type"
+                      :disabled="nuevoEjercicio.type == ''"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -110,13 +116,14 @@ name: "MisEjercicios",
     return {
       store: ExerciseStore,
       exercises: [
-        { name: 'Flexion de brazo diamante', qty: 3, videoUrl: 'https://www.youtube.com/watch?v=UsH8K0homso'},
-        { name: 'Repiqueteo en el lugar', qty: 4, videoUrl: 'https://www.youtube.com/watch?v=UsH8K0homso'}
+        { name: 'Flexion de brazo diamante', qty: 3, type: 'Repeticiones', videoUrl: 'https://www.youtube.com/watch?v=UsH8K0homso'},
+        { name: 'Repiqueteo en el lugar', qty: 30, type: 'Segundos',  videoUrl: 'https://www.youtube.com/watch?v=UsH8K0homso'}
       ],
       dialog: false,
       nuevoEjercicio: {
         name: '',
         qty: 1,
+        type: '',
         videoUrl: ''
       },
       rules: {
@@ -125,7 +132,8 @@ name: "MisEjercicios",
         number: v => !isNaN(v) || 'Tiene que ser un número positivo!',
         positive: v => v>=1 || 'Tiene que ser un número positivo!',
         link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || v === '' || 'No es un link válido!'
-      }
+      },
+      qtyTypes: ['Repeticiones', 'Segundos']
     }
   },
   methods: {
@@ -134,6 +142,13 @@ name: "MisEjercicios",
       this.exercises.forEach( item => {
         this.store.add(item);
       });
+    },
+    incQty(){
+      this.nuevoEjercicio.qty++;
+    },
+    decQty(){
+      if(this.nuevoEjercicio.qty>=2)
+        this.nuevoEjercicio.qty--;
     },
     submit() {
       /*axios.post('/routines/1/cycles/1/exercises', {
