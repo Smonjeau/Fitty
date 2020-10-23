@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ee56ba0-2f96-4ce9-9b8e-d06a545f38a6" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.vue" afterDir="false" />
@@ -30,6 +31,29 @@
       <change beforePath="$PROJECT_DIR$/src/components/registration/logIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/registration/logIn.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/userStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/userStore.js" afterDir="false" />
+=======
+<<<<<<< Updated upstream
+      <change afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/NavBar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Slider.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CardioCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardRutina.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/registration/squeleton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/registration/squeleton.vue" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/components/routines/Routine.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/routines/create_routine.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/store/ExerciseStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/ExcerciseStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/SectionStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/routines/excercise_form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/routines/excercise_form.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/routines/routine_panel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/routines/routine_panel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/routines/squeleton.vue" beforeDir="false" />
+>>>>>>> Stashed changes
+      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +64,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Vue Single File Component" />
+<<<<<<< Updated upstream
+=======
+        <option value="JavaScript File" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -64,9 +92,33 @@
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs.protractor.protractor_package" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
+<<<<<<< Updated upstream
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+=======
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+>>>>>>> Stashed changes
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="npm.serve">
+    <configuration name="asdasdas" type="NodeJSConfigurationType" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="serve" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.asdasdas" />
+      <item itemvalue="npm.serve" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -77,11 +129,20 @@
       <option name="presentableId" value="Default" />
       <updated>1601943695798</updated>
       <workItem from="1601943697484" duration="306000" />
+<<<<<<< Updated upstream
       <workItem from="1602203958123" duration="8197000" />
+<<<<<<< Updated upstream
       <workItem from="1603321580939" duration="29618000" />
       <workItem from="1603411333196" duration="5363000" />
       <workItem from="1603450940988" duration="218000" />
       <workItem from="1603451402905" duration="5703000" />
+=======
+=======
+      <workItem from="1602171015362" duration="408000" />
+      <workItem from="1602172822511" duration="695000" />
+      <workItem from="1602173574271" duration="26359000" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
@@ -104,6 +165,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< Updated upstream
     <state x="469" y="176" key="SettingsEditor" timestamp="1603451490094">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -112,5 +174,83 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="446" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1603389602547" />
+=======
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602173652443">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1602173652443" />
+    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602185569313">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1602185569313" />
+    <state width="1259" height="143" key="GridCell.Tab.0.bottom" timestamp="1602246214340">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1602246214340" />
+    <state width="1259" height="143" key="GridCell.Tab.0.center" timestamp="1602246214340">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1602246214340" />
+    <state width="1259" height="143" key="GridCell.Tab.0.left" timestamp="1602246214339">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1602246214339" />
+    <state width="1259" height="143" key="GridCell.Tab.0.right" timestamp="1602246214340">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1602246214340" />
+    <state width="1259" height="143" key="GridCell.Tab.1.bottom" timestamp="1602246214341">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1602246214341" />
+    <state width="1259" height="143" key="GridCell.Tab.1.center" timestamp="1602246214340">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1602246214340" />
+    <state width="1259" height="143" key="GridCell.Tab.1.left" timestamp="1602246214340">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1602246214340" />
+    <state width="1259" height="143" key="GridCell.Tab.1.right" timestamp="1602246214341">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1602246214340" />
+    <state width="1259" height="143" key="GridCell.Tab.2.bottom" timestamp="1602246214342">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.2.bottom/0.0.1280.680@0.0.1280.680" timestamp="1602246214342" />
+    <state width="1259" height="143" key="GridCell.Tab.2.center" timestamp="1602246214341">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.2.center/0.0.1280.680@0.0.1280.680" timestamp="1602246214341" />
+    <state width="1259" height="143" key="GridCell.Tab.2.left" timestamp="1602246214341">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.2.left/0.0.1280.680@0.0.1280.680" timestamp="1602246214341" />
+    <state width="1259" height="143" key="GridCell.Tab.2.right" timestamp="1602246214341">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.2.right/0.0.1280.680@0.0.1280.680" timestamp="1602246214341" />
+    <state width="1259" height="143" key="GridCell.Tab.3.bottom" timestamp="1602246214342">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.3.bottom/0.0.1280.680@0.0.1280.680" timestamp="1602246214342" />
+    <state width="1259" height="143" key="GridCell.Tab.3.center" timestamp="1602246214342">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.3.center/0.0.1280.680@0.0.1280.680" timestamp="1602246214342" />
+    <state width="1259" height="143" key="GridCell.Tab.3.left" timestamp="1602246214342">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.3.left/0.0.1280.680@0.0.1280.680" timestamp="1602246214342" />
+    <state width="1259" height="143" key="GridCell.Tab.3.right" timestamp="1602246214342">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="143" key="GridCell.Tab.3.right/0.0.1280.680@0.0.1280.680" timestamp="1602246214342" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1602173342405">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1602173342405" />
+>>>>>>> Stashed changes
   </component>
 </project>

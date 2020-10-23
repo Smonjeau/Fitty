@@ -7,6 +7,7 @@
 <script>
 import { store } from '@/./userStore';
 
+
 export default {
   name: 'App',
 

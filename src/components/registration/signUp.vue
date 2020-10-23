@@ -136,6 +136,7 @@ export default {
     return {
       valid: false,
       menu:false,
+      valid:false,
       user: {
         firstname: '',
         lastname: '',
