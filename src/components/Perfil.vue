@@ -46,9 +46,7 @@
       <v-form v-model="valid">
           <v-row class="justify-space-around">
             <v-col cols="4">
-            <v-text-field outlined :rules="[rules.required,rules.nameRule]" label="Nombre de usuario"
-                          :value="user.userInfo.username"
-                          append-icon="mdi-pencil"
+
             <v-text-field outlined :rules="[rules.required,rules.userNameRule]" label="Nombre de usuario"
                           v-model="userEdited.username"
                           readonly
@@ -76,8 +74,7 @@
           <v-row class="justify-space-around">
 
             <v-col cols="10">
-              <v-text-field :rules="[rules.required,rules.nameRule]"   append-icon="mdi-pencil"
-                            outlined label="Nombre completo" :value="user.userInfo.fullName"></v-text-field>
+
               <v-text-field :rules="[rules.required,rules.fullNameRule]"
                             readonly
                             v-model="userEdited.fullName"
@@ -131,8 +128,9 @@
 
           </v-row>
       </v-form>
-    <Footer></Footer>
     </v-container>
+    <Footer></Footer>
+
   </div>
 </template>
 
@@ -144,20 +142,10 @@ import axios from "axios";
 import AvatarSelectorView from "@/components/AvatarSelectorView";
 export default {
   name: "Perfil",
-  components: {NavBar, Footer},
-  components: {AvatarSelectorView, NavBar},
+  components: {AvatarSelectorView, NavBar,Footer},
 
   data() {
     return {
-      userEdited: {
-        username: '',
-        password: '',
-        fullName: '',
-        gender: '',
-        birthdate: '',
-        email: '',
-        avatarUrl: ''
-      },
       user: store,
       valid:false,
       menu:false,
@@ -185,15 +173,10 @@ export default {
     }
   },
   mounted(){
-      this.bdate = new Date(this.userInfo.birthdate).toISOString().substr(0,10);
-  mounted: function () {
-
-    this.bdate = new Date(this.userEdited.birthdate).toISOString().substr(0, 10);
-
-  },
+      this.bdate = new Date(this.userEdited.birthdate).toISOString().substr(0,10);
+    },
   computed:{
     getGender(){
-      if(this.user.userInfo.gender === 'male')
       if(this.userEdited.gender === 'male')
         return 'Masculino';
       else if (this.userEdited.gender === 'female')

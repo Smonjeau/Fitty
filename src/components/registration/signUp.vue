@@ -134,7 +134,6 @@ export default {
   },
   data() {
     return {
-      valid: false,
       menu:false,
       valid:false,
       user: {
