@@ -63,7 +63,19 @@
           >
           </card-rutina>
       </v-row>
+      <v-row class="justify-center mb-8">
+        <v-btn
+            class="pa-4 py-5 text-h6"
+            outlined
+            color="blue darken-1"
+            @click="getMore()"
+            v-if="show"
+        >
+          Cargar Más
+        </v-btn>
+      </v-row>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -72,10 +84,11 @@ import NavBar from "@/components/NavBar";
 import { store } from "@/userStore";
 import axios from 'axios';
 import CardRutina from "@/components/CardRutina";
+import Footer from "@/components/Footer";
 
 export default {
   name: "MisRutinas",
-  components: {NavBar, CardRutina},
+  components: {NavBar, CardRutina, Footer},
   data() {
     return {
       links: [
@@ -100,7 +113,10 @@ export default {
       categoriesItems: [],
       category: -1,
       allRoutines: [],
-      myRoutines: []
+      myRoutines: [],
+      size: 11,
+      totalCount: 0,
+      show: true
     }
   },
   methods: {
@@ -108,8 +124,9 @@ export default {
       this.$router.push('/create_routine');
     },
     updateRoutines() {
-      axios.get('user/current/routines/', {params: {page: 0, size: 20, orderBy: this.order, direction: 'desc'}})
+      axios.get('user/current/routines/', {params: {page: 0, size: this.size, orderBy: this.order, direction: 'desc'}})
           .then(response => {
+            this.totalCount = response.data.totalCount;
             this.allRoutines = response.data.results;
             if (this.category != -1) {
               this.myRoutines = this.filterCategorys(this.allRoutines, this.category);
@@ -119,11 +136,18 @@ export default {
             console.log(this.myRoutines);
           })
     },
-    filterCategorys (routines, categoryName){
-      return routines.filter(routine => routine.category.id === categoryName);
-    },
     capitalizeFirstLetter(string) {
       return string.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+    },
+    filterCategorys (routines, categoryName){
+      return routines.filter(routine => routine.category.id === categoryName && routine.id != 1);
+    },
+    getMore() {
+      this.size += 12;
+      this.updateRoutines();
+      if (this.size > this.totalCount) {
+        this.show = false;
+      }
     }
   },
   mounted() {

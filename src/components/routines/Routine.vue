@@ -89,6 +89,7 @@
         </v-col>
       </v-row>
     </div>
+    <Footer></Footer>
   </div>
   <!--<div>
 
@@ -106,6 +107,7 @@ import NavBar from "@/components/NavBar";
 import RoutineCycleView from "@/components/routines/RoutineCycleView";
 import axios from 'axios';
 import { store } from '@/userStore';
+import Footer from "@/components/Footer";
 
 export default {
 name: "Routine",
@@ -139,7 +141,8 @@ name: "Routine",
   },
   components: {
     NavBar,
-    RoutineCycleView
+    RoutineCycleView,
+    Footer
   },
   methods: {
     capitalizeFirstLetter(string) {

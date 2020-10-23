@@ -78,50 +78,8 @@
 
       </div>
     </div>
-    <!--slider   class="mb-14 mt-4" :title=categoria.name mas-info="true">
-           <v-slide-item v-for="routine in filterCategorys(this.info,categoria.name)" :key="routine">
-             <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
-                          :type="routine.category.name" class="ma-4"></card-rutina>
-           </v-slide-item>
-
-
-
-
-         </slider>
-  </div!-->
-
-    <!--slider   class="mb-14 mt-4" :title=categories.results[2].name mas-info="true">
-           <v-slide-item v-for="routine in filterCategorys(this.info.results,categories.results[2].name)" :key="routine">
-             <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
-                          :type="routine.category.name" class="ma-4"></card-rutina>
-           </v-slide-item>
-
-
-
-
-         </slider!-->
-
-    <!--slider v-for="category in this.categories.results" :key="category" class="mb-14 mt-4" :title=category.name mas-info="true">
-        <v-slide-item v-for="routine in filterCategorys(this.info.results,'strength')" :key="routine">
-          <card-rutina :rating="routine.averageRating" :time="calcDuration(routine)" :titulo="routine.name"
-                       :type="routine.category.name" class="ma-4"></card-rutina>
-        </v-slide-item>
-
-
-
-
-      </slider!-->
-
-
-
-
-
-
-
-
+    <Footer></Footer>
   </div>
-
-
 </template>
 
 <script>
@@ -130,6 +88,7 @@ import slider from "@/components/Slider";
 import NavBar from "@/components/NavBar";
 import axios from 'axios';
 import { store } from '../userStore.js';
+import Footer from "@/components/Footer";
 
 
 export default {
@@ -137,7 +96,8 @@ export default {
   components: {
     NavBar,
     cardRutina,
-    slider
+    slider,
+    Footer
   },
   data() {
     return {
@@ -147,20 +107,6 @@ export default {
 
       info:[],
       categories:[],
-
-      cards: [
-        {type: 'strength', rating: 3.5, duration: 30, title: 'Abs Marcados'},
-        {type: 'strength', rating: 2.5, duration: 20, title: 'Piernas Intensivo'},
-        {type: 'cardio', rating: 2.5, duration: 15, title: 'Spinning'},
-        {type: 'yoga', rating: 4.5, duration: 10, title: 'Saludo al Sol'},
-        {type: 'elongacion', rating: 4.5, duration: 12, title: 'Estiramiento Tren Superior'},
-        {type: 'resistencia', rating: 4.5, duration: 40, title: 'Intencivo Tren Inferior'},
-        {type: 'strength', rating: 3.5, duration: 30, title: 'Abs Marcados'},
-        {type: 'strength', rating: 2.5, duration: 20, title: 'Piernas Intensivo'},
-        {type: 'cardio', rating: 2.5, duration: 15, title: 'Spinning'},
-        {type: 'elongacion', rating: 4.5, duration: 12, title: 'Estiramiento Tren Superior'},
-        {type: 'resistencia', rating: 4.5, duration: 40, title: 'Intencivo Tren Inferior'},
-      ],
     }
   },
   computed: {
@@ -188,7 +134,7 @@ export default {
       this.$router.push('/signup');
     },
     filterCategorys (routines,categoryName){
-      return routines.filter(routine => routine.category.name === categoryName);
+      return routines.filter(routine => routine.category.name === categoryName && routine.id != 1);
     },
     calcDuration (routine) {
       let aux = routine;
@@ -199,7 +145,6 @@ export default {
 
 
   mounted () {
-
     axios.all([axios.get('/routines',{
       params:{
         orderBy: 'averageRating',

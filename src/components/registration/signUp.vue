@@ -108,7 +108,7 @@
           </v-col>
         </v-row>
         <v-row justify="center">
-          <v-btn class="mt-6 blue white--text text-h5 px-5 py-7" @click="submit">Registrarme</v-btn>
+          <v-btn :disabled="!valid" class="mt-6 blue white--text text-h5 px-5 py-7" @click="submit">Registrarme</v-btn>
         </v-row>
       </v-form>
     </v-container>
@@ -134,6 +134,7 @@ export default {
   },
   data() {
     return {
+      valid: false,
       menu:false,
       user: {
         firstname: '',

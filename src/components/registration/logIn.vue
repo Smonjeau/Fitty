@@ -23,7 +23,7 @@
           ></v-text-field>
         </v-row>
         <v-row justify="center">
-          <v-btn class="mt-6 blue white--text text-h5 px-5 py-7" @click="submit">Ingresar</v-btn>
+          <v-btn :disabled="!valid" class="mt-6 blue white--text text-h5 px-5 py-7" @click="submit">Ingresar</v-btn>
         </v-row>
       </v-form>
     </v-container>
@@ -45,6 +45,7 @@
 <script>
 import squeleton from './squeleton';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   name: "logIn",
@@ -79,6 +80,13 @@ export default {
           })
           .catch((error) => {
             console.log(error);
+            Swal.fire({
+              title: 'No ha sido posible ingresar',
+              text: 'Datos invalidos',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+              timer: 3000
+            })
           });
     }
   }

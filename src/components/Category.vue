@@ -10,7 +10,7 @@
           ></v-breadcrumbs>
         </v-col>
       </v-row>
-      <v-row class="mx-5 mt-2 mb-3 d-flex justify-center" no-gutters>
+      <v-row class="mx-5 d-flex justify-center" no-gutters>
         <h1>Rutinas de {{ capitalizeFirstLetter(categoryName) }}</h1>
       </v-row>
       <v-row class="justify-end">
@@ -50,7 +50,19 @@
         >
         </card-rutina>
       </v-row>
+      <v-row class="justify-center mb-8">
+        <v-btn
+            class="pa-4 py-5 text-h6"
+            outlined
+            color="blue darken-1"
+            @click="getMore()"
+            v-if="show"
+        >
+          Cargar Más
+        </v-btn>
+      </v-row>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -59,10 +71,11 @@ import NavBar from "@/components/NavBar";
 import CardRutina from "@/components/CardRutina";
 import {store} from "@/userStore";
 import axios from "axios";
+import Footer from "@/components/Footer";
 
 export default {
   name: "Category",
-  components: {NavBar, CardRutina},
+  components: {NavBar, CardRutina, Footer},
   data() {
     return {
       links: [
@@ -89,18 +102,22 @@ export default {
       categoryName: '',
       allRoutines: [],
       myRoutines: [],
+      size: 20,
+      totalCount: 0,
+      show: true
     }
   },
   methods: {
     updateRoutines() {
-      axios.get('routines/', {params: {page: 0, size:100, orderBy: this.order, direction: 'desc'}})
+      axios.get('routines/', {params: {page: 0, size: this.size, orderBy: this.order, direction: 'desc'}})
           .then(response => {
+            this.totalCount = response.data.totalCount;
             this.allRoutines = response.data.results;
             this.myRoutines = this.filterCategorys(this.allRoutines, this.categoryId);
           })
     },
     filterCategorys (routines, categoryId){
-      return routines.filter(routine => routine.category.id === categoryId);
+      return routines.filter(routine => routine.category.id === categoryId && routine.id != 1);
     },
     updateName() {
       axios.get('/categories/' + this.categoryId)
@@ -110,6 +127,13 @@ export default {
     },
     capitalizeFirstLetter(string) {
       return string.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+    },
+    getMore() {
+      this.size += 10;
+      this.updateRoutines();
+      if (this.size > this.totalCount) {
+        this.show = false;
+      }
     }
   },
   mounted() {
@@ -128,8 +152,11 @@ export default {
     categoryId: function() {
       this.myRoutines = this.filterCategorys(this.allRoutines, this.categoryId);
       this.updateName();
+    },
+    $route: function() {
+      this.categoryId = parseInt(this.$route.params.id_category);
     }
-  }
+  },
 }
 </script>
 
