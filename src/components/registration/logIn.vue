@@ -46,6 +46,7 @@
 import squeleton from './squeleton';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { store } from '@/userStore';
 
 export default {
   name: "logIn",
@@ -64,7 +65,8 @@ export default {
         min: v => v.length >= 8 || 'Min 8 characters',
         emailContains: v => /.+@.+/.test(v) || 'El email debe ser valido'
       },
-      valid: false
+      valid: false,
+      token: ''
     }
   },
   methods: {
@@ -74,9 +76,12 @@ export default {
     submit() {
       axios.post('/user/login', this.userData)
           .then((result) => {
+            this.token = result.data.token;
             localStorage.token = result.data.token;
-            console.log(localStorage.token);
+            store.updateToken(result.data.token);
+            store.updateDataUser();
             this.$router.push('/');
+            console.log(localStorage.token);
           })
           .catch((error) => {
             console.log(error);
@@ -89,6 +94,10 @@ export default {
             })
           });
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    localStorage.token = this.token;
+    next();
   }
 }
 </script>

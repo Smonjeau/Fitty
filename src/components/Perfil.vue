@@ -5,7 +5,7 @@
       <v-col>
         <v-responsive class="rounded-circle align-center ma-auto pa-2" max-width="80" max-height="80" min-height="80" min-width="80"
                       :style="{backgroundColor: '#2196F3'}">
-          <v-img :src=userInfo.avatarUrl :width="50" :height="50" class="ma-auto" ></v-img>
+          <v-img :src=user.userInfo.avatarUrl :width="50" :height="50" class="ma-auto" ></v-img>
         </v-responsive>
       </v-col>
     </v-row>
@@ -14,7 +14,7 @@
           <v-row class="justify-space-around">
             <v-col cols="4">
             <v-text-field outlined :rules="[rules.required,rules.nameRule]" label="Nombre de usuario"
-                          :value="userInfo.username"
+                          :value="user.userInfo.username"
                           append-icon="mdi-pencil"
 
 
@@ -29,7 +29,7 @@
                   outlined
                   :rules="[rules.required,rules.emailContains]"
                   label="Email"
-                  :value="userInfo.email"
+                  :value="user.userInfo.email"
                   append-icon="mdi-pencil"
               ></v-text-field>
 
@@ -39,7 +39,7 @@
 
             <v-col cols="10">
               <v-text-field :rules="[rules.required,rules.nameRule]"   append-icon="mdi-pencil"
-                            outlined label="Nombre completo" :value="userInfo.fullName"></v-text-field>
+                            outlined label="Nombre completo" :value="user.userInfo.fullName"></v-text-field>
             </v-col>
 
 
@@ -109,16 +109,17 @@
           </v-row>
         </v-container>
       </v-form>
-
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import {store} from '@/userStore';
 import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 export default {
   name: "Perfil",
-  components: {NavBar},
+  components: {NavBar, Footer},
 
   data() {
     return {
@@ -131,7 +132,7 @@ export default {
         email: '',
         avatarUrl: ''
       },
-      userInfo:null,
+      user: store,
       menu:false,
       rules: {
         required: value => !!value || 'Obligatorio.',
@@ -145,13 +146,12 @@ export default {
     }
   },
   mounted(){
-      this.userInfo = store.userInfo;
       this.bdate = new Date(this.userInfo.birthdate).toISOString().substr(0,10);
 
   },
   computed:{
     getGender(){
-      if(this.userInfo.gender === 'male')
+      if(this.user.userInfo.gender === 'male')
         return 'Masculino';
       else if (this.userInfo.gender === 'female')
         return 'Femenino';

@@ -20,7 +20,7 @@
       <v-spacer></v-spacer>
 
       <!-- En caso de que SI este logeado utiliza esta version -->
-      <template v-if="logged">
+      <template v-if="myStore.logged">
         <v-btn outlined class="ml-4" @click="goToCreate()">
           Crear Rutina
         </v-btn>
@@ -32,7 +32,7 @@
                 v-on="on"
                 text
             >
-              Hola, {{ user.username }}
+              Hola, {{ myStore.getUsername() }}
               <v-icon>mdi-chevron-down</v-icon>
             </v-btn>
           </template>
@@ -69,8 +69,7 @@ export default {
   name: "NavBar",
   data() {
     return {
-      logged: store.logged,
-      user: store.userInfo,
+      myStore: store,
       myDropdown: [
         {title: 'Mis Rutinas', func: ()=>{this.$router.push('/mis_rutinas')}},
         {title: 'Mis Ejercicios', func: ()=>{this.$router.push('/mis_ejercicios')}},
@@ -87,16 +86,19 @@ export default {
       this.$router.push('/login');
     },
     closeSesion() {
-      store.logged = false;
-      this.logged = false;
-      localStorage.removeItem('token');
+      store.closeSesion();
       this.$router.push('/');
-
     },
     goToCreate() {
       this.$router.push('/create_routine');
     },
+    getUsername() {
+      return store.userInfo.username;
+    }
   },
+  mounted() {
+    console.log(store.userInfo.username);
+  }
 }
 </script>
 

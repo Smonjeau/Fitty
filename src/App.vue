@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { store } from '@/./userStore';
 
 export default {
   name: 'App',
@@ -15,5 +16,8 @@ export default {
 
   data: () => ({
   }),
+  mounted() {
+    store.checkIfLogged();
+  }
 };
 </script>

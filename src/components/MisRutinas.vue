@@ -12,7 +12,7 @@
       </v-row>
       <v-row class="mx-5 mt-8 d-flex" no-gutters>
         <v-col cols="6" class="mr-auto" >
-          <h1>{{ user.username }}, mira tus rutinas</h1>
+          <h1>{{ user.userInfo.username }}, mira tus rutinas</h1>
         </v-col>
         <v-col cols="3" md="2" class="ml-auto" >
           <v-select
@@ -109,7 +109,7 @@ export default {
         {title: 'Creadas Recientemente', type: 'dateCreated'}
         ],
       order: 'averageRating',
-      user: store.userInfo,
+      user: store,
       categoriesItems: [],
       category: -1,
       allRoutines: [],

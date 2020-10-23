@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <div v-if="!logged" >
+    <div v-if="!myStore.logged" >
       <h1 class="text-center text-h1 font-weight-bold blue--text text--darken-1 mt-10">FITTY</h1>
       <h2 class="text-center text-h4 font-weight-bold mt-8">COMPARTE TUS RUTINAS</h2>
       <v-row no-gutters class="mb-13">
@@ -69,13 +69,8 @@
                            :id_routine="routine.id"
                            class="ma-4"></card-rutina>
             </v-slide-item>
-
-
-
-
         </slider>
         <v-divider></v-divider>
-
       </div>
     </div>
     <Footer></Footer>
@@ -101,10 +96,8 @@ export default {
   },
   data() {
     return {
-      model:null,
-      logged: store.logged,
-      user: store.userInfo,
-
+      model: null,
+      myStore: store,
       info:[],
       categories:[],
     }
@@ -118,8 +111,8 @@ export default {
 
 
     },
-    userRoutines(){
-      return this.info.filter(routine => routine.creator.id === this.user.id);
+    userRoutines() {
+      return this.info.filter(routine => routine.creator.id === store.userInfo.id);
     }
   },
 
@@ -134,7 +127,7 @@ export default {
       this.$router.push('/signup');
     },
     filterCategorys (routines,categoryName){
-      return routines.filter(routine => routine.category.name === categoryName && routine.id != 1);
+      return routines.filter(routine => routine.category.name === categoryName && routine.id !== 1);
     },
     calcDuration (routine) {
       let aux = routine;
@@ -142,9 +135,7 @@ export default {
       return 45 + aux;
     }
   },
-
-
-  mounted () {
+  mounted() {
     axios.all([axios.get('/routines',{
       params:{
         orderBy: 'averageRating',
@@ -152,12 +143,10 @@ export default {
         size: 100
 
       }
-    }),axios.get('/categories')]).then(axios.spread((response1, response2) => {
+    }),
+      axios.get('/categories')]).then(axios.spread((response1, response2) => {
       this.info = response1.data.results;
       this.categories = response2.data.results;
-      console.log(this.info);
-
-      console.log(this.categories);
     }));
   }
 }

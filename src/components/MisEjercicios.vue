@@ -1,5 +1,9 @@
-<script
-    src="../../../Users/Bruno/OneDrive - ITBA/Escritorio/ITBA/HCI/Laboratorio 05 - Taller de Vue.js (Ejemplo CLI)/src/store/CustomerStore.js"></script>
+<script>
+import Footer from "@/components/Footer";
+export default {
+  components: {Footer}
+}
+</script>
 <template>
   <div>
     <NavBar></NavBar>
@@ -89,11 +93,7 @@
         </v-dialog>
       </v-row>
     </template>
-
-
-
-
-
+    <Footer></Footer>
   </div>
 </template>
 
@@ -101,10 +101,11 @@
 import NavBar from "@/components/NavBar";
 import ExerciseItem from "@/components/ExerciseItem";
 import ExerciseStore from "@/store/ExcerciseStore";
+import Footer from "@/components/Footer";
 import axios from "axios";
 export default {
 name: "MisEjercicios",
-  components: {ExerciseItem, NavBar},
+  components: {ExerciseItem, NavBar, Footer},
   data() {
     return {
       store: ExerciseStore,

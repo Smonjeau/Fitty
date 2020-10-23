@@ -20,14 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ee56ba0-2f96-4ce9-9b8e-d06a545f38a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/NavBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Slider.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CardioCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardRutina.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/registration/squeleton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/registration/squeleton.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MisEjercicios.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MisEjercicios.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Perfil.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Perfil.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/registration/logIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/registration/logIn.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/userStore.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +65,7 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -75,6 +78,10 @@
       <updated>1601943695798</updated>
       <workItem from="1601943697484" duration="306000" />
       <workItem from="1602203958123" duration="8197000" />
+      <workItem from="1603321580939" duration="29618000" />
+      <workItem from="1603411333196" duration="5363000" />
+      <workItem from="1603450940988" duration="218000" />
+      <workItem from="1603451402905" duration="5703000" />
     </task>
     <servers />
   </component>
@@ -95,5 +102,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="469" y="176" key="SettingsEditor" timestamp="1603451490094">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="469" y="176" key="SettingsEditor/-1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1603451490094" />
+    <state x="446" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1603389602547">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="446" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1603389602547" />
   </component>
 </project>
