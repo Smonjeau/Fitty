@@ -39,6 +39,15 @@
                          class="ma-4"></card-rutina>
           </v-slide-item>
         </slider >
+        <div class="text-center"
+             v-if="loading">
+          <v-progress-circular
+              :size="120"
+              color="blue darken-1"
+              class="mt-6"
+              indeterminate
+          ></v-progress-circular>
+        </div>
 
       </div>
       <div>
@@ -53,6 +62,15 @@
                          class="ma-4"></card-rutina>
           </v-slide-item>
         </slider >
+        <div class="text-center"
+             v-if="loading">
+          <v-progress-circular
+              :size="120"
+              color="blue darken-1"
+              class="mt-6"
+              indeterminate
+          ></v-progress-circular>
+        </div>
         <v-divider></v-divider>
       </div>
 
@@ -97,6 +115,7 @@ export default {
       myStore: store,
       info:[],
       categories:[],
+      loading: true
     }
   },
   computed: {
@@ -142,6 +161,7 @@ export default {
       }
     }),
       axios.get('/categories')]).then(axios.spread((response1, response2) => {
+        this.loading = false;
       this.info = response1.data.results;
       this.categories = response2.data.results;
     }));
