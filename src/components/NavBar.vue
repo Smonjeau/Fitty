@@ -15,6 +15,7 @@
           dense
           placeholder="Buscar"
           class="pt-5"
+          v-if="myStore.logged"
       ></v-text-field>
 
       <v-spacer></v-spacer>

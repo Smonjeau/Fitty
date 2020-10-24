@@ -67,7 +67,7 @@
           <v-progress-circular
               :size="120"
               color="blue darken-1"
-              class="mt-6"
+              class="mt-6 mb-10"
               indeterminate
           ></v-progress-circular>
         </div>

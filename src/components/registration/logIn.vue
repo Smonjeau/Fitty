@@ -84,7 +84,7 @@ export default {
             .then(result2 => {
               store.updateDataUser(result2.data);
               store.logged = true;
-              console.log(result2.data);
+              //console.log(result2.data);
               //this.userInfo = result.data;
               //console.log(store.userInfo);
               //console.log(store.token);
@@ -155,6 +155,8 @@ export default {
             .catch(error2 => {
               this.error(error2);
             });
+          } else {
+            this.$router.push('/');
           }
 
 

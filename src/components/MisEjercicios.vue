@@ -27,6 +27,7 @@ export default {
                   <v-btn
                       fab
                       dark
+                      title="Nuevo ejercicio"
                       color="blue darken-1"
                       v-bind="attrs"
                       v-on="on"
