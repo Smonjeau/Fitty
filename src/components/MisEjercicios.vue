@@ -9,8 +9,12 @@ export default {
     <NavBar></NavBar>
     <v-container>
       <p class="font-weight-bold display-2 mt-4 mb-10 text-center">Mis Ejercicios</p>
+      <v-text-field
+          v-model="query"
+          label="Filtrar por nombre"
+      ></v-text-field>
       <ExerciseItem
-          v-for="exercise in store.get()"
+          v-for="exercise in store.get(query)"
           v-bind:key="exercise"
           :exercise="exercise"></ExerciseItem>
 
@@ -33,6 +37,7 @@ export default {
                 class="mr-10 mb-10"
                 v-bind="attrs"
                 v-on="on"
+                :disabled="idRutina == -1"
             >
               <v-icon dark>
                 mdi-plus
@@ -109,16 +114,13 @@ import ExerciseItem from "@/components/ExerciseItem";
 import ExerciseStore from "@/store/ExcerciseStore";
 import Footer from "@/components/Footer";
 import axios from "axios";
+import * as Swal from "sweetalert2";
 export default {
 name: "MisEjercicios",
   components: {ExerciseItem, NavBar, Footer},
   data() {
     return {
       store: ExerciseStore,
-      exercises: [
-        { name: 'Flexion de brazo diamante', qty: 3, type: 'Repeticiones', videoUrl: 'https://www.youtube.com/watch?v=UsH8K0homso'},
-        { name: 'Repiqueteo en el lugar', qty: 30, type: 'Segundos',  videoUrl: 'https://www.youtube.com/watch?v=UsH8K0homso'}
-      ],
       dialog: false,
       nuevoEjercicio: {
         name: '',
@@ -133,15 +135,118 @@ name: "MisEjercicios",
         positive: v => v>=1 || 'Tiene que ser un número positivo!',
         link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || v === '' || 'No es un link válido!'
       },
-      qtyTypes: ['Repeticiones', 'Segundos']
+      qtyTypes: ['Repeticiones', 'Segundos'],
+      idRutina: -1,
+      query: ''
     }
   },
   methods: {
     initStore() {
-      //En vez de este foreach hay que llamar a la api
-      this.exercises.forEach( item => {
-        this.store.add(item);
-      });
+      //Buscamos la rutina de name $@&#%*
+      //Deberia estar al principio pues deberia ser la primer rutina que se crea
+      axios.get('user/current/routines/', {params: {page: 0, size: 1, orderBy: 'dateCreated', direction: 'asc'}})
+          .then(response => {
+            if(response.data.results[0].name == '$@&#%*') {
+              this.idRutina = response.data.results[0].id;
+
+              //Ahora debo recuperar el ciclo
+
+              axios.get('routines/'+this.idRutina+'/cycles', {params: {page: 0, size: 1, orderBy: 'id', direction: 'asc'}})
+                  .then(response2 => {
+                    if(response2.data.totalCount > 0) {
+
+                      //Ahora debo recuperar los ejercicios
+                      axios.get('/routines/'+this.idRutina+'/cycles/1/exercises', {params: {page: 0, size: 100, orderBy: 'id', direction: 'asc'}})
+                          .then(response3 => {
+                            response3.data.results.forEach(item => {
+                              //Dado que el response no trae la url del video, hay que hacer un get extra por cada ejercicio
+                              axios.get('/routines/'+this.idRutina+'/cycles/1/exercises/'+item.id+'/videos', {params: {page: 0, size: 1, orderBy: 'id', direction: 'asc'}})
+                              .then(response4 => {
+                                let videoUrl = '';
+                                if(response4.data.totalCount > 0) {
+                                  videoUrl = response4.data.results[0].url;
+                                }
+                                let qty = 0;
+                                let type = '';
+                                if(item.duration == 0) {
+                                  qty = item.repetitions;
+                                  type = 'Segundos';
+                                } else {
+                                  qty = item.duration;
+                                  type = 'Repeticiones';
+                                }
+                                this.store.add({
+                                  name: item.name, qty: qty, type: type, videoUrl: videoUrl
+                                });
+                              })
+                              .catch(error4 => {
+                                Swal.fire({
+                                  title: 'Oops, al parecer hubo un error.',
+                                  text: 'No te preocupes, nosotros nos ocupamos.',
+                                  icon: 'error',
+                                  confirmButtonText: 'Ok',
+                                  timer: 3000
+                                });
+                                console.log(error4);
+                              });
+                            });
+
+                          })
+                          .catch(error3 => {
+                            Swal.fire({
+                              title: 'Oops, al parecer hubo un error.',
+                              text: 'No te preocupes, nosotros nos ocupamos.',
+                              icon: 'error',
+                              confirmButtonText: 'Ok',
+                              timer: 3000
+                            });
+                            console.log(error3);
+                          });
+
+
+                    } else {
+                      //Falta crear el ciclo
+                      Swal.fire({
+                        title: 'Oops, al parecer hubo un error, no te preocupes!',
+                        text: 'Si los programadores te preguntan diles lo siguiente: falta el ciclo auxiliar que contiene los ejercicios',
+                        icon: 'error',
+                        confirmButtonText: 'Ok',
+                        timer: 3000
+                      });
+                    }
+                  })
+                  .catch(error2 => {
+                    Swal.fire({
+                      title: 'Oops, al parecer hubo un error.',
+                      text: 'No te preocupes, nosotros nos ocupamos.',
+                      icon: 'error',
+                      confirmButtonText: 'Ok',
+                      timer: 3000
+                    });
+                    console.log(error2);
+                  });
+
+            } else {
+              //Falta crear la rutina
+              Swal.fire({
+                title: 'Oops, al parecer hubo un error, no te preocupes!',
+                text: 'Si los programadores te preguntan diles lo siguiente: falta la rutina auxiliar que contiene los ejercicios',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                timer: 3000
+              });
+            }
+        })
+        .catch(error => {
+          Swal.fire({
+            title: 'Oops, al parecer hubo un error.',
+            text: 'No te preocupes, nosotros nos ocupamos.',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            timer: 3000
+          });
+          console.log(error);
+        });
     },
     incQty(){
       this.nuevoEjercicio.qty++;
@@ -151,17 +256,63 @@ name: "MisEjercicios",
         this.nuevoEjercicio.qty--;
     },
     submit() {
-      /*axios.post('/routines/1/cycles/1/exercises', {
-        params: {
+      let duration = 0;
+      let repetitions = 0;
+      if(this.nuevoEjercicio.type == 'Segundos') {
+        duration = this.nuevoEjercicio.qty;
+      } else {
+        repetitions = this.nuevoEjercicio.qty;
+      }
+      axios.post('/routines/'+this.idRutina+'/cycles/1/exercises', {
 
+          name: this.nuevoEjercicio.name,
+          detail: "",
+          type: "exercise",
+          duration: Number(duration),
+          repetitions: Number(repetitions)
+      })
+      .then(response => {
+        let idEjercicio = response.data.id;
+        //Falta agregar el video si hay
+        if(this.nuevoEjercicio.videoUrl != '') {
+          axios.post('/routines/'+this.idRutina+'/cycles/1/exercises/'+idEjercicio+'/videos', {
+            number: 1,
+            url: this.nuevoEjercicio.videoUrl
+          })
+          .then(() => {
+            this.dialog = false;
+            this.store.add({
+              name: this.nuevoEjercicio.name, qty: this.nuevoEjercicio.qty, type: this.nuevoEjercicio.type, videoUrl: this.nuevoEjercicio.videoUrl
+            });
+          })
+          .catch(error2 => {
+            Swal.fire({
+              title: 'Oops, al parecer hubo un error.',
+              text: 'No te preocupes, nosotros nos ocupamos.',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+              timer: 3000
+            });
+            console.log(error2);
+          });
+
+        } else {
+          this.dialog = false;
+          this.store.add({
+            name: this.nuevoEjercicio.name, qty: this.nuevoEjercicio.qty, type: this.nuevoEjercicio.type, videoUrl: this.nuevoEjercicio.videoUrl
+          });
         }
       })
-          .then(() => {
-            this.$router.push('/');
-          })
-          .catch((error) => {
-            console.log(error);
-          });*/
+      .catch((error) => {
+        Swal.fire({
+          title: 'Oops, al parecer hubo un error.',
+          text: 'No te preocupes, nosotros nos ocupamos.',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          timer: 3000
+        });
+        console.log(error);
+      });
     }
   },
   beforeMount() {

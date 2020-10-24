@@ -47,7 +47,7 @@
           ></v-text-field>
         </v-col>
         <v-spacer></v-spacer>
-        <v-col cols="1" class="pt-6">
+        <v-col cols="2" class="pt-6 text-right">
           <v-icon
               medium
               color="cyan darken-1"
@@ -79,6 +79,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import Swal from "sweetalert2";
+
 export default {
   name: "ExerciseItem",
   props: ['exercise'],
@@ -107,6 +110,64 @@ export default {
       this.isEditing = !this.isEditing;
     },
     savePressed() {
+      /*let duration = 0;
+      let repetitions = 0;
+      if(this.exercise.type == 'Segundos') {
+        duration = this.exercise.qty;
+      } else {
+        repetitions = this.exercise.qty;
+      }
+      axios.post('/routines/'+this.idRutina+'/cycles/1/exercises', {
+
+        name: this.nuevoEjercicio.name,
+        detail: "",
+        type: "exercise",
+        duration: Number(duration),
+        repetitions: Number(repetitions)
+      })
+          .then(response => {
+            let idEjercicio = response.data.id;
+            //Falta agregar el video si hay
+            if(this.nuevoEjercicio.videoUrl != '') {
+              axios.post('/routines/'+this.idRutina+'/cycles/1/exercises/'+idEjercicio+'/videos', {
+                number: 1,
+                url: this.nuevoEjercicio.videoUrl
+              })
+                  .then(() => {
+                    this.dialog = false;
+                    this.store.add({
+                      name: this.nuevoEjercicio.name, qty: this.nuevoEjercicio.qty, type: this.nuevoEjercicio.type, videoUrl: this.nuevoEjercicio.videoUrl
+                    });
+                  })
+                  .catch(error2 => {
+                    Swal.fire({
+                      title: 'Oops, al parecer hubo un error.',
+                      text: 'No te preocupes, nosotros nos ocupamos.',
+                      icon: 'error',
+                      confirmButtonText: 'Ok',
+                      timer: 3000
+                    });
+                    console.log(error2);
+                  });
+
+            } else {
+              this.dialog = false;
+              this.store.add({
+                name: this.nuevoEjercicio.name, qty: this.nuevoEjercicio.qty, type: this.nuevoEjercicio.type, videoUrl: this.nuevoEjercicio.videoUrl
+              });
+            }
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: 'Oops, al parecer hubo un error.',
+              text: 'No te preocupes, nosotros nos ocupamos.',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+              timer: 3000
+            });
+            console.log(error);
+          });*/
+
       this.isEditing = !this.isEditing;
     }
 

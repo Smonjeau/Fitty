@@ -1,19 +1,15 @@
 const ExerciseStore = {
     exercises: [],
-    /*getSize(){
-        return this.exercises_id +1;
-    },*/
     add(exercise) {
         return this.exercises.push(exercise);
     },
-    get(index) {
-        if (index === undefined)
+    get(query) {
+        if (query === undefined || query === '') {
             return this.exercises;
+        } else {
+            return this.exercises.filter(excercise => excercise.name.toLowerCase().includes(query.toLowerCase()));
+        }
 
-        /*if (index > this.exercises_id.length)
-            return null;
-
-        return this.exercises_id[index];*/
     },
     empty() {
         return this.exercises.length == 0;
@@ -27,7 +23,7 @@ const ExerciseStore = {
             return false;
 
         this.exercises_id.splice(index, 1);
-        return true;
+        return true;a
     }*/
 };
 
