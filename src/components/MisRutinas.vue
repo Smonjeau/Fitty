@@ -154,6 +154,10 @@ export default {
       return routine.detail.split('|')[0];
     }
   },
+  beforeMount() {
+    if(!store.logged)
+      this.$router.push('/');
+  },
   mounted() {
     this.categoriesItems.push({name: 'Todas', id: -1})
     axios.get('categories', {params: {orderBy: 'name', direction: 'desc'}})

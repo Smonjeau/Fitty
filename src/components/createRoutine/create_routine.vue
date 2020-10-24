@@ -195,6 +195,10 @@ export default {
       })
     }
   },
+  beforeMount() {
+    if(!store.logged)
+      this.$router.push('/');
+  },
   mounted() {
     store.getMyExercises();
     axios.get('categories', {params: {orderBy: 'name', direction: 'desc'}})

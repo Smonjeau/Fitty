@@ -87,7 +87,8 @@ export default {
     },
     closeSesion() {
       store.closeSesion();
-      this.$router.push('/');
+      this.$router.go();
+      //this.$router.push('/');
     },
     goToCreate() {
       this.$router.push('/create_routine');

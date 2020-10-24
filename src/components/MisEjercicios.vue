@@ -132,6 +132,7 @@ import ExerciseStore from "@/store/ExcerciseStore";
 import Footer from "@/components/Footer";
 import axios from "axios";
 import * as Swal from "sweetalert2";
+import {store} from "@/components/createRoutine/store";
 export default {
 name: "MisEjercicios",
   components: {ExerciseItem, NavBar, Footer},
@@ -249,6 +250,7 @@ name: "MisEjercicios",
                 confirmButtonText: 'Ok',
                 timer: 3000
               });
+
             }
         })
         .catch(error => {
@@ -309,14 +311,15 @@ name: "MisEjercicios",
     }
   },
   beforeMount() {
-    if(this.store.empty()) {
+    if(!store.logged)
+        this.$router.push('/');
+    else if(this.store.empty())
       this.initStore();
-    }
+
 
   }
 }
 </script>
-
 <style scoped>
 
 </style>

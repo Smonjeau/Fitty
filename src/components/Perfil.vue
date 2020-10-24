@@ -171,6 +171,10 @@ export default {
 
     }
   },
+  beforeMount() {
+    if(!store.logged)
+      this.$router.push('/');
+  },
   mounted(){
       this.bdate = new Date(this.userEdited.birthdate).toISOString().substr(0,10);
     },
