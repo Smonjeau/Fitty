@@ -16,6 +16,10 @@
         ¿Ya te has verificado?
         <v-btn class="blue white--text px-4 py-3 ml-6" @click="$router.push('/login')">USAR FITTY</v-btn>
       </v-card-text>
+      <v-card-text class="align-self-center blue--text text--darken-2 text-subtitle-1">
+        ¿No te ha llegado ningún email?
+        <v-btn class="blue white--text px-4 py-3 ml-6" @click="resend()">REENVIAR EMAIL</v-btn>
+      </v-card-text>
     </v-row>
   </squeleton>
 
@@ -40,6 +44,30 @@ export default {
     }
   },
   methods: {
+    resend(){
+      axios.post('user/resend_verification',{
+        "email" : this.email
+      }).then(()=>
+        Swal.fire({
+          title: 'Verificación reenviada',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK',
+        })
+      ).catch((error) => {
+            console.log(error);
+            Swal.fire({
+              title: 'Algo malo está sucedidendo',
+              text: 'Por favor, contacta a los desarrolladores',
+              icon: 'error',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'OK',
+            })
+          }
+      )
+    },
     submit(){
       axios.post('user/verify_email',{
         "email" : this.email,
