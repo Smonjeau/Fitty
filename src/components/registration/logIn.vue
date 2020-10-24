@@ -1,4 +1,4 @@
-<template>
+ <template>
   <squeleton title="¡Hola, Ingresa!">
     <v-container slot="fields">
       <v-form v-model="valid">
@@ -82,6 +82,39 @@ export default {
             store.updateDataUser();
             this.$router.push('/');
             console.log(localStorage.token);
+            axios.get('user/current/routines'
+            ).then((response) => {
+              console.log("HOLA MAMA");
+              if (response.data.totalCount === 0) {
+                //creamos rutina y ciclo auxiliar
+                console.log("HOLAAAAAAAAAAAAAAA");
+                axios.post('routines', {
+                  "name": "$@&#%*",
+                  "detail": "Rutina auxiliar",
+                  "isPublic": false,
+                  "difficulty": "rookie",
+                  "category": {
+                    "id": 2
+                  }
+                }).then((response) => {
+                  let id = response.data.id;
+                  axios.post('routines/' + id + '/cycles', {
+                    "name": "$@&#%*",
+                    "detail": "$@&#%*",
+                    "type": "warmup",
+                    "order": 1,
+                    "repetitions": 1
+                  })
+
+                })
+              }
+            }
+            ).catch((error) =>
+              console.log("LA QUEDO EL GET" + error)
+            )
+
+            
+
           })
           .catch((error) => {
             console.log(error);
@@ -93,6 +126,7 @@ export default {
               timer: 3000
             })
           });
+
     }
   },
   beforeRouteLeave(to, from, next) {

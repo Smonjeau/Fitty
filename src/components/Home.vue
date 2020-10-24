@@ -158,13 +158,20 @@ export default {
         direction: 'desc',
         size: 100
 
+
       }
     }),
       axios.get('/categories')]).then(axios.spread((response1, response2) => {
         this.loading = false;
       this.info = response1.data.results;
       this.categories = response2.data.results;
-    }));
+      console.log(this.info);
+      console.log(this.categories);
+    })).catch(error => {
+          console.log(error);
+    }
+
+    );
   }
 }
 </script>

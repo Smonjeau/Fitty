@@ -186,7 +186,7 @@ export default {
       console.log(this.userData);
       axios.post('/user', this.userData)
           .then(() => {
-            this.$router.push('/');
+            this.$router.push('/codigo_verificacion/' + this.userData.email);
           })
           .catch((error) => {
             console.log(error);

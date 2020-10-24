@@ -64,7 +64,6 @@
                   :rules="[rules.required,rules.emailContains]"
                   label="Email"
                   :value="user.userInfo.email"
-                  append-icon="mdi-pencil"
                   v-model="userEdited.email"
                   readonly
               ></v-text-field>
@@ -195,7 +194,7 @@ export default {
     },
     submit () {
       //Solo puede editar su nombre, mail y avatar
-      axios.put('/user/current', this.userEdited)
+      axios.put('user/current', this.userEdited)
           .then(() => {
             console.log(this.userEdited);
 

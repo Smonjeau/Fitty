@@ -10,6 +10,8 @@ import MisRutinas from "@/components/MisRutinas";
 import Category from "@/components/Category";
 import Perfil from "@/components/Perfil";
 import MisEjercicios from "@/components/MisEjercicios";
+import EmailConfirmation from "@/components/registration/EmailConfirmation";
+import EmailValidation from "@/components/registration/EmailValidation";
 
 export const routes = [
     { path: '/login', component: logIn },
@@ -21,5 +23,8 @@ export const routes = [
     {path:'/perfil', component: Perfil},
     { path: '/category/:id_category', component: Category },
     { path: '/edit_routine/:id_routine', component: editRoutine },
-    { path: '/', component: Home }
+    { path: '/', component: Home },
+    {path: '/codigo_verificacion/:email' , component: EmailValidation},
+    {path: '/confirmar_email/:code&:email', component: EmailConfirmation}
+
     ];

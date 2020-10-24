@@ -17,6 +17,7 @@ export const store = {
             });
     },
     checkIfLogged() {
+
         if (localStorage.getItem("token") !== null) {
             this.updateToken(localStorage.token);
             this.updateDataUser();
@@ -29,5 +30,6 @@ export const store = {
         this.logged = false;
         localStorage.removeItem('token');
         this.userInfo = {};
+        window.location.href = "/";
     }
 }
