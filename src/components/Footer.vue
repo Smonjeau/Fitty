@@ -1,7 +1,7 @@
 <template>
   <v-footer
       color="blue darken-1"
-      class="pa-5"
+      class="pa-5 mt-14"
       padless
       :absolute="!userStore.logged"
   >

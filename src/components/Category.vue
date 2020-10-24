@@ -46,7 +46,7 @@
             :rating="routine.averageRating"
             :type="routine.category.name.toLowerCase()"
             :id_routine="routine.id"
-            time="45" class="mb-10 ml-sm-4 ml-md-5"
+            :time="getDuration(routine)" class="mb-10 ml-sm-4 ml-md-5"
         >
         </card-rutina>
       </v-row>
@@ -117,7 +117,7 @@ export default {
           })
     },
     filterCategorys (routines, categoryId){
-      return routines.filter(routine => routine.category.id === categoryId && routine.id != 1);
+      return routines.filter(routine => routine.category.id === categoryId && routine.id !== 1 && routine.name !== '$@&#%*');
     },
     updateName() {
       axios.get('/categories/' + this.categoryId)
@@ -134,6 +134,9 @@ export default {
       if (this.size > this.totalCount) {
         this.show = false;
       }
+    },
+    getDuration(routine) {
+      return routine.detail.split('|')[0];
     }
   },
   mounted() {

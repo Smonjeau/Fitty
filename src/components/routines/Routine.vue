@@ -72,18 +72,17 @@
               <div class="text-h6 font-weight-black">{{ routine.creator.username }}</div>
             </v-col>
           </v-row>
-          <!--<v-row>
-            <v-col>
-              <span class="text-h6 mr-2">{{ time }}'</span>
-              <img src="../assets/stopwatch.png" width="28px" height="28px" />
+          <v-row justify="start">
+            <v-col cols="1">
+              <img src="@/assets/stopwatch.png" width="38px" height="38px" class="mr-4" />
             </v-col>
-            <v-col>
-
+            <v-col cols="1" align-self="center">
+              <span class="text-h5 ml-10 font-weight-black">{{ getInfo(0) }}'</span>
             </v-col>
-          </v-row>-->
+          </v-row>
           <v-row>
             <v-col>
-              <div class="text-subtitle-1 mt-5">{{ routine.detail }}</div>
+              <div class="text-subtitle-1 mt-5">{{ getInfo(1) }}</div>
             </v-col>
           </v-row>
         </v-col>
@@ -138,6 +137,9 @@ name: "Routine",
   methods: {
     capitalizeFirstLetter(string) {
       return string.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+    },
+    getInfo(index) {
+      return this.routine.detail.split('|')[index];
     }
   },
   mounted() {

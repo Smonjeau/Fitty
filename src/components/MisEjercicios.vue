@@ -15,7 +15,7 @@ export default {
       ></v-text-field>
       <ExerciseItem
           v-for="exercise in store.get(query)"
-          v-bind:key="exercise"
+          v-bind:key="exercise.id"
           :exercise="exercise"></ExerciseItem>
 
     </v-container>

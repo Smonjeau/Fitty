@@ -59,7 +59,7 @@
               :rating="routine.averageRating"
               :type="routine.category.name.toLowerCase()"
               :id_routine="routine.id"
-              time="45" class="mb-10 ml-sm-4 ml-md-5"
+              :time="getDuration(routine)" class="mb-10 ml-sm-4 ml-md-5"
           >
           </card-rutina>
       </v-row>
@@ -132,6 +132,7 @@ export default {
               this.myRoutines = this.filterCategorys(this.allRoutines, this.category);
             } else {
               this.myRoutines = this.allRoutines;
+              this.myRoutines = this.myRoutines.filter(routine => routine.name !== '$@&#%*');
             }
             console.log(this.myRoutines);
           })
@@ -140,7 +141,7 @@ export default {
       return string.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
     },
     filterCategorys (routines, categoryName){
-      return routines.filter(routine => routine.category.id === categoryName && routine.id != 1);
+      return routines.filter(routine => routine.category.id === categoryName && routine.id !== 1 && routine.name !== '$@&#%*');
     },
     getMore() {
       this.size += 12;
@@ -148,6 +149,9 @@ export default {
       if (this.size > this.totalCount) {
         this.show = false;
       }
+    },
+    getDuration(routine) {
+      return routine.detail.split('|')[0];
     }
   },
   mounted() {
@@ -164,7 +168,7 @@ export default {
       this.updateRoutines();
     },
     category: function() {
-      if (this.category == -1) {
+      if (this.category === -1) {
         this.myRoutines = this.allRoutines;
       } else {
         this.myRoutines = this.filterCategorys(this.allRoutines, this.category);
