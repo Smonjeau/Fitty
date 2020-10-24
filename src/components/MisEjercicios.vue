@@ -9,101 +9,118 @@ export default {
     <NavBar></NavBar>
     <v-container>
       <p class="font-weight-bold display-2 mt-4 mb-10 text-center">Mis Ejercicios</p>
-      <v-text-field
-          v-model="query"
-          label="Filtrar por nombre"
-      ></v-text-field>
+      <v-row>
+        <v-col cols="10" class="pr-8">
+          <v-text-field
+              v-model="query"
+              label="Filtrar por nombre"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="2">
+          <template>
+            <v-row justify="center">
+              <v-dialog
+                  v-model="dialog"
+                  max-width="450"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                      fab
+                      dark
+                      color="indigo"
+                      v-bind="attrs"
+                      v-on="on"
+                      :disabled="store.idRutina == -1"
+                  >
+                    <v-icon dark>
+                      mdi-plus
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-form ref="formNuevoEjercicio">
+                    <v-card-title class="headline">
+                      Nuevo ejercicio
+                    </v-card-title>
+                    <v-card-text>
+                      <v-text-field
+                          v-model="nuevoEjercicio.name"
+                          :rules="[rules.required]"
+                          label="Nombre del ejercicio"
+                      ></v-text-field>
+                      <v-text-field
+                          v-model="nuevoEjercicio.videoUrl"
+                          :rules="[rules.link]"
+                          label="URL del video"
+                      ></v-text-field>
+                      <v-row>
+                        <v-col>
+                          <v-select
+                              :items="qtyTypes"
+                              label="Tipo"
+                              v-model="nuevoEjercicio.type"
+                          ></v-select>
+                        </v-col>
+                        <v-col>
+                          <v-text-field
+                              v-model="nuevoEjercicio.qty"
+                              :rules="[rules.required, rules.number, rules.positive]"
+                              prepend-icon="mdi-minus"
+                              append-outer-icon="mdi-plus"
+                              @click:prepend="decQty()"
+                              @click:append-outer="incQty()"
+                              outlined
+                              :label="nuevoEjercicio.type"
+                              :disabled="nuevoEjercicio.type == ''"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                          color="green darken-1"
+                          text
+                          @click="dialog = false"
+                      >
+                        Cancelar
+                      </v-btn>
+                      <v-btn
+                          color="green darken-1"
+                          text
+                          @click="submit();"
+                          :disabled="!validNewForm()"
+                      >
+                        Crear
+                      </v-btn>
+                    </v-card-actions>
+                  </v-form>
+                </v-card>
+              </v-dialog>
+            </v-row>
+          </template>
+        </v-col>
+      </v-row>
+      <div class="text-center"
+        v-if="store.idRutina == -1">
+        <v-progress-circular
+            :size="120"
+            color="blue darken-1"
+            class="mt-6"
+            indeterminate
+        ></v-progress-circular>
+      </div>
+
+
       <ExerciseItem
           v-for="exercise in store.get(query)"
-          v-bind:key="exercise.id"
-          :exercise="exercise"></ExerciseItem>
+          v-bind:key="exercise"
+          :exercise="exercise"
+          :idRutina="store.idRutina"
+          :storeRef="store"></ExerciseItem>
 
     </v-container>
-
-    <template>
-      <v-row justify="center">
-        <v-dialog
-            v-model="dialog"
-            max-width="450"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-                fixed
-                right
-                bottom
-                fab
-                dark
-                color="indigo"
-                class="mr-10 mb-10"
-                v-bind="attrs"
-                v-on="on"
-                :disabled="idRutina == -1"
-            >
-              <v-icon dark>
-                mdi-plus
-              </v-icon>
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title class="headline">
-              Nuevo ejercicio
-            </v-card-title>
-            <v-card-text>
-              <v-text-field
-                  v-model="nuevoEjercicio.name"
-                  :rules="[rules.required]"
-                  label="Nombre del ejercicio"
-              ></v-text-field>
-              <v-text-field
-                  v-model="nuevoEjercicio.videoUrl"
-                  :rules="[rules.link]"
-                  label="URL del video"
-              ></v-text-field>
-              <v-row>
-                <v-col>
-                  <v-select
-                      :items="qtyTypes"
-                      label="Tipo"
-                      v-model="nuevoEjercicio.type"
-                  ></v-select>
-                </v-col>
-                <v-col>
-                  <v-text-field
-                      v-model="nuevoEjercicio.qty"
-                      :rules="[rules.required, rules.number, rules.positive]"
-                      prepend-icon="mdi-minus"
-                      append-outer-icon="mdi-plus"
-                      @click:prepend="decQty()"
-                      @click:append-outer="incQty()"
-                      outlined
-                      :label="nuevoEjercicio.type"
-                      :disabled="nuevoEjercicio.type == ''"
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                  color="green darken-1"
-                  text
-                  @click="dialog = false"
-              >
-                Cancelar
-              </v-btn>
-              <v-btn
-                  color="green darken-1"
-                  text
-                  @click="submit();"
-              >
-                Crear
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-row>
-    </template>
     <Footer></Footer>
   </div>
 </template>
@@ -136,71 +153,75 @@ name: "MisEjercicios",
         link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || v === '' || 'No es un link válido!'
       },
       qtyTypes: ['Repeticiones', 'Segundos'],
-      idRutina: -1,
       query: ''
     }
   },
   methods: {
+    error(msg) {
+      Swal.fire({
+        title: 'Oops, al parecer hubo un error.',
+        text: 'No te preocupes, nosotros nos ocupamos.',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        timer: 3000
+      });
+      console.log(msg);
+    },
+    validNewForm() {
+      return this.rules.name(this.nuevoEjercicio.name) === true && this.rules.required(this.nuevoEjercicio.name) === true
+      && this.rules.number(this.nuevoEjercicio.qty) === true && this.rules.positive(this.nuevoEjercicio.qty) === true && this.rules.required(this.nuevoEjercicio.qty) === true
+      && this.rules.required(this.nuevoEjercicio.type) === true
+      && this.rules.link(this.nuevoEjercicio.videoUrl) === true;
+    },
     initStore() {
       //Buscamos la rutina de name $@&#%*
       //Deberia estar al principio pues deberia ser la primer rutina que se crea
       axios.get('user/current/routines/', {params: {page: 0, size: 1, orderBy: 'dateCreated', direction: 'asc'}})
           .then(response => {
+            console.log(response);
             if(response.data.results[0].name == '$@&#%*') {
-              this.idRutina = response.data.results[0].id;
+              this.store.idRutina = response.data.results[0].id;
 
               //Ahora debo recuperar el ciclo
 
-              axios.get('routines/'+this.idRutina+'/cycles', {params: {page: 0, size: 1, orderBy: 'id', direction: 'asc'}})
+              axios.get('routines/'+this.store.idRutina+'/cycles', {params: {page: 0, size: 1, orderBy: 'id', direction: 'asc'}})
                   .then(response2 => {
                     if(response2.data.totalCount > 0) {
 
                       //Ahora debo recuperar los ejercicios
-                      axios.get('/routines/'+this.idRutina+'/cycles/1/exercises', {params: {page: 0, size: 100, orderBy: 'id', direction: 'asc'}})
+                      axios.get('/routines/'+this.store.idRutina+'/cycles/1/exercises', {params: {page: 0, size: 100, orderBy: 'id', direction: 'asc'}})
                           .then(response3 => {
                             response3.data.results.forEach(item => {
                               //Dado que el response no trae la url del video, hay que hacer un get extra por cada ejercicio
-                              axios.get('/routines/'+this.idRutina+'/cycles/1/exercises/'+item.id+'/videos', {params: {page: 0, size: 1, orderBy: 'id', direction: 'asc'}})
+                              axios.get('/routines/'+this.store.idRutina+'/cycles/1/exercises/'+item.id+'/videos', {params: {page: 0, size: 1, orderBy: 'id', direction: 'asc'}})
                               .then(response4 => {
                                 let videoUrl = '';
+                                let idVideo = -1;
                                 if(response4.data.totalCount > 0) {
                                   videoUrl = response4.data.results[0].url;
+                                  idVideo = response4.data.results[0].id;
                                 }
                                 let qty = 0;
                                 let type = '';
                                 if(item.duration == 0) {
                                   qty = item.repetitions;
-                                  type = 'Segundos';
+                                  type = 'Repeticiones';
                                 } else {
                                   qty = item.duration;
-                                  type = 'Repeticiones';
+                                  type = 'Segundos';
                                 }
                                 this.store.add({
-                                  name: item.name, qty: qty, type: type, videoUrl: videoUrl
+                                  name: item.name, qty: qty, type: type, videoUrl: videoUrl, idVideo: idVideo, idEjercicio: item.id
                                 });
                               })
                               .catch(error4 => {
-                                Swal.fire({
-                                  title: 'Oops, al parecer hubo un error.',
-                                  text: 'No te preocupes, nosotros nos ocupamos.',
-                                  icon: 'error',
-                                  confirmButtonText: 'Ok',
-                                  timer: 3000
-                                });
-                                console.log(error4);
+                                this.error(error4);
                               });
                             });
 
                           })
                           .catch(error3 => {
-                            Swal.fire({
-                              title: 'Oops, al parecer hubo un error.',
-                              text: 'No te preocupes, nosotros nos ocupamos.',
-                              icon: 'error',
-                              confirmButtonText: 'Ok',
-                              timer: 3000
-                            });
-                            console.log(error3);
+                            this.error(error3);
                           });
 
 
@@ -216,14 +237,7 @@ name: "MisEjercicios",
                     }
                   })
                   .catch(error2 => {
-                    Swal.fire({
-                      title: 'Oops, al parecer hubo un error.',
-                      text: 'No te preocupes, nosotros nos ocupamos.',
-                      icon: 'error',
-                      confirmButtonText: 'Ok',
-                      timer: 3000
-                    });
-                    console.log(error2);
+                    this.error(error2);
                   });
 
             } else {
@@ -238,14 +252,7 @@ name: "MisEjercicios",
             }
         })
         .catch(error => {
-          Swal.fire({
-            title: 'Oops, al parecer hubo un error.',
-            text: 'No te preocupes, nosotros nos ocupamos.',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-            timer: 3000
-          });
-          console.log(error);
+          this.error(error);
         });
     },
     incQty(){
@@ -263,7 +270,7 @@ name: "MisEjercicios",
       } else {
         repetitions = this.nuevoEjercicio.qty;
       }
-      axios.post('/routines/'+this.idRutina+'/cycles/1/exercises', {
+      axios.post('/routines/'+this.store.idRutina+'/cycles/1/exercises', {
 
           name: this.nuevoEjercicio.name,
           detail: "",
@@ -275,43 +282,29 @@ name: "MisEjercicios",
         let idEjercicio = response.data.id;
         //Falta agregar el video si hay
         if(this.nuevoEjercicio.videoUrl != '') {
-          axios.post('/routines/'+this.idRutina+'/cycles/1/exercises/'+idEjercicio+'/videos', {
+          axios.post('/routines/'+this.store.idRutina+'/cycles/1/exercises/'+idEjercicio+'/videos', {
             number: 1,
             url: this.nuevoEjercicio.videoUrl
           })
-          .then(() => {
+          .then(response2 => {
             this.dialog = false;
             this.store.add({
-              name: this.nuevoEjercicio.name, qty: this.nuevoEjercicio.qty, type: this.nuevoEjercicio.type, videoUrl: this.nuevoEjercicio.videoUrl
+              name: this.nuevoEjercicio.name, qty: this.nuevoEjercicio.qty, type: this.nuevoEjercicio.type, videoUrl: this.nuevoEjercicio.videoUrl, idVideo: response2.data.id, idEjercicio: idEjercicio
             });
           })
           .catch(error2 => {
-            Swal.fire({
-              title: 'Oops, al parecer hubo un error.',
-              text: 'No te preocupes, nosotros nos ocupamos.',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-              timer: 3000
-            });
-            console.log(error2);
+            this.error(error2);
           });
 
         } else {
           this.dialog = false;
           this.store.add({
-            name: this.nuevoEjercicio.name, qty: this.nuevoEjercicio.qty, type: this.nuevoEjercicio.type, videoUrl: this.nuevoEjercicio.videoUrl
+            name: this.nuevoEjercicio.name, qty: this.nuevoEjercicio.qty, type: this.nuevoEjercicio.type, videoUrl: this.nuevoEjercicio.videoUrl, idVideo: -1, idEjercicio: idEjercicio
           });
         }
       })
       .catch((error) => {
-        Swal.fire({
-          title: 'Oops, al parecer hubo un error.',
-          text: 'No te preocupes, nosotros nos ocupamos.',
-          icon: 'error',
-          confirmButtonText: 'Ok',
-          timer: 3000
-        });
-        console.log(error);
+        this.error(error);
       });
     }
   },

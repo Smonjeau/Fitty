@@ -1,5 +1,6 @@
 const ExerciseStore = {
     exercises: [],
+    idRutina: -1,
     add(exercise) {
         return this.exercises.push(exercise);
     },
@@ -13,18 +14,18 @@ const ExerciseStore = {
     },
     empty() {
         return this.exercises.length == 0;
-    }/*,
+    },
     remove(id) {
-        if (!id || this.exercises_id.length === 0)
+        if (!id || this.exercises.length === 0)
             return false;
 
-        let index = this.exercises_id.findIndex(item => (item === id));
+        let index = this.exercises.findIndex(item => (item.idEjercicio == id));
         if (index === -1)
             return false;
 
-        this.exercises_id.splice(index, 1);
-        return true;a
-    }*/
+        this.exercises.splice(index, 1);
+        return true;
+    }
 };
 
 export default ExerciseStore;

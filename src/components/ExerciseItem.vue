@@ -60,12 +60,16 @@
               color="cyan darken-1"
               title="Guardar ejercicio"
               @click="savePressed()"
+              :loading="isLoadingEdit"
+              :disabled="!validUpdateForm()"
               v-if="isEditing"
           >mdi-content-save</v-icon>
           <v-icon
               medium
               color="teal"
               class="ml-5"
+              @click="deletePressed()"
+              :loading="isLoadingDelete"
               title="Eliminar ejercicio"
           >mdi-delete</v-icon>
         </v-col>
@@ -79,15 +83,17 @@
 </template>
 
 <script>
-/*import axios from "axios";
-import Swal from "sweetalert2";*/
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "ExerciseItem",
-  props: ['exercise'],
+  props: ['exercise', 'idRutina', 'storeRef'],
   data() {
     return {
       isEditing: false,
+      isLoadingEdit: false,
+      isLoadingDelete: false,
       rules: {
         required: value => !!value || 'Obligatorio.',
         name: v => /^[A-Za-z ]+$/.test(v) || 'Solo caractéres del abecedario',
@@ -99,6 +105,22 @@ export default {
     }
   },
   methods:{
+    error(msg) {
+      Swal.fire({
+        title: 'Oops, al parecer hubo un error.',
+        text: 'No te preocupes, nosotros nos ocupamos.',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        timer: 3000
+      });
+      console.log(msg);
+    },
+    validUpdateForm() {
+      return this.rules.name(this.exercise.name) === true && this.rules.required(this.exercise.name) === true
+          && this.rules.number(this.exercise.qty) === true && this.rules.positive(this.exercise.qty) === true && this.rules.required(this.exercise.qty) === true
+          && this.rules.required(this.exercise.type) === true
+          && this.rules.link(this.exercise.videoUrl) === true;
+    },
     incQty(){
       this.exercise.qty++;
     },
@@ -109,92 +131,104 @@ export default {
     editPressed() {
       this.isEditing = !this.isEditing;
     },
+    deletePressed() {
+      this.isLoadingDelete = true;
+      axios.delete('/routines/'+this.idRutina+'/cycles/1/exercises/'+this.exercise.idEjercicio, {})
+      .then(() => {
+        this.storeRef.remove(this.exercise.idEjercicio);
+        this.isLoadingDelete = false;
+      })
+      .catch(error => {
+        this.error(error);
+      });
+    },
     savePressed() {
-      /*let duration = 0;
+      this.isLoadingEdit = true;
+      let duration = 0;
       let repetitions = 0;
       if(this.exercise.type == 'Segundos') {
         duration = this.exercise.qty;
+        repetitions = 0;
       } else {
         repetitions = this.exercise.qty;
+        duration = 0;
       }
-      axios.post('/routines/'+this.idRutina+'/cycles/1/exercises', {
+      axios.put('/routines/'+this.idRutina+'/cycles/1/exercises/'+this.exercise.idEjercicio, {
 
-        name: this.nuevoEjercicio.name,
+        name: this.exercise.name,
         detail: "",
         type: "exercise",
         duration: Number(duration),
         repetitions: Number(repetitions)
       })
-          .then(response => {
-            let idEjercicio = response.data.id;
-            //Falta agregar el video si hay
-            if(this.nuevoEjercicio.videoUrl != '') {
-              axios.post('/routines/'+this.idRutina+'/cycles/1/exercises/'+idEjercicio+'/videos', {
-                number: 1,
-                url: this.nuevoEjercicio.videoUrl
-              })
-                  .then(() => {
-                    this.dialog = false;
-                    this.store.add({
-                      name: this.nuevoEjercicio.name, qty: this.nuevoEjercicio.qty, type: this.nuevoEjercicio.type, videoUrl: this.nuevoEjercicio.videoUrl
-                    });
-                  })
-                  .catch(error2 => {
-                    Swal.fire({
-                      title: 'Oops, al parecer hubo un error.',
-                      text: 'No te preocupes, nosotros nos ocupamos.',
-                      icon: 'error',
-                      confirmButtonText: 'Ok',
-                      timer: 3000
-                    });
-                    console.log(error2);
-                  });
-
-            } else {
-              this.dialog = false;
-              this.store.add({
-                name: this.nuevoEjercicio.name, qty: this.nuevoEjercicio.qty, type: this.nuevoEjercicio.type, videoUrl: this.nuevoEjercicio.videoUrl
-              });
-            }
-          })
-          .catch((error) => {
-            Swal.fire({
-              title: 'Oops, al parecer hubo un error.',
-              text: 'No te preocupes, nosotros nos ocupamos.',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-              timer: 3000
+      .then(() => {
+        if(this.exercise.videoUrl != '') {
+          //Hay texto que corresponde a un video. Veamos si es nuevo o es update
+          if(this.exercise.idVideo == -1) {
+            //Es un video nuevo
+            axios.post('/routines/'+this.idRutina+'/cycles/1/exercises/'+this.exercise.idEjercicio+'/videos', {
+              number: 1,
+              url: this.exercise.videoUrl
+            })
+            .then(response2 => {
+              this.exercise.idVideo = response2.data.id;
+              this.isLoadingEdit = false;
+              this.isEditing = false;
+            })
+            .catch(error2 => {
+              this.error(error2);
+              this.isLoadingEdit = false;
+              this.isEditing = true;
             });
-            console.log(error);
-          });*/
+          } else {
+            //Es un update
+            axios.put('/routines/'+this.idRutina+'/cycles/1/exercises/'+this.exercise.idEjercicio+'/videos/'+this.exercise.idVideo, {
+              number: 1,
+              url: this.exercise.videoUrl
+            })
+            .then(() => {
+              this.isLoadingEdit = false;
+              this.isEditing = false;
+            })
+            .catch(error2 => {
+              this.error(error2);
+              this.isLoadingEdit = false;
+              this.isEditing = true;
+            });
 
-      this.isEditing = !this.isEditing;
+          }
+        } else if(this.exercise.idVideo == -1) {
+          //No cambió nada
+          this.isLoadingEdit = false;
+          this.isEditing = false;
+        } else {
+          //Hizo un delete
+          axios.delete('/routines/'+this.idRutina+'/cycles/1/exercises/'+this.exercise.idEjercicio+'/videos/'+this.exercise.idVideo, {})
+          .then(() => {
+            this.exercise.idVideo = -1;
+            this.isLoadingEdit = false;
+            this.isEditing = false;
+          })
+          .catch(error2 => {
+            this.error(error2);
+            this.isLoadingEdit = false;
+            this.isEditing = true;
+          });
+        }
+
+
+
+      })
+      .catch((error) => {
+        this.error(error);
+        this.isLoadingEdit = false;
+        this.isEditing = true;
+      });
+
+
     }
 
-    /*remove(exercise){
-      //this.store.remove(exercise);
-      let index = this.excercises.findIndex(item => (item === exercise));
-      if (index === -1)
-        return false;
-      this.excercises.splice(index,1);
-      return true;
-    },
-    add(){
-      this.exercisesQty++;
-      this.ex_id++;
-      this.excercises.push(this.ex_id);
 
-    },
-    ,
-    inc(){
-
-      this.exercisesQty++;
-      this.remove(this.ex_id++);
-    },
-    dec(){
-      if(this.exercisesQty >=2)
-        this.exercisesQty--;
-    }*/
   }
 }
 </script>
