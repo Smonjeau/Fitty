@@ -1,10 +1,10 @@
 <template>
-    <v-container class="my-5">
+    <v-container class="my-5" v-if="alive">
 
-      <v-expansion-panels v-model="panel" accordion multiple >
+      <v-expansion-panels accordion multiple >
         <v-row no-gutters >
           <v-col cols="11">
-        <v-expansion-panel class="mb-7" v-model="open" py-0>
+        <v-expansion-panel class="mb-7" py-0>
 
           <v-expansion-panel-header  @keyup.space.prevent inside   color="blue" class="white--text pb-0" append-icon="mdi-delete">
             <v-container pb-0>
@@ -12,7 +12,7 @@
               <v-col cols="3">
                 <v-text-field  :readonly="!isModifiable"
                               :rules="[rules.required]"
-                              v-model="name"
+                              v-model="cycle.name"
                               @click.native.stop="true"                               
                 >
                   <v-icon v-if="isModifiable" slot="append">mdi-pencil</v-icon>
@@ -28,28 +28,21 @@
                   append-outer-icon="mdi-plus"
                   @click:prepend="decQty()"
                   @click:append-outer="incQty()"
-                  v-model="qty"
+                  v-model="cycle.repetitions"
                   outlined
-
               >
-
               </v-text-field>
               </v-col>
-
-
             </v-row>
             </v-container>
-
-
             <template v-slot:actions>
               <v-icon color="white" large>mdi-chevron-down</v-icon>
             </template>
-
           </v-expansion-panel-header>
 
           <v-expansion-panel-content>
             <div v-for="index in exercisesQty" :key="index">
-              <excercise_form :id="ex_id" ></excercise_form>
+              <excercise_form :id="index" :id_routine="id_routine" :id_cycle="id_cycle"></excercise_form>
             </div>
 
             <v-btn small class="my-5 mx-3" @click="add() ">
@@ -62,85 +55,104 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
           </v-col>
-          <v-col class="justify-center">
-          <v-icon v-if="this.isDeletable" @click="dec()" >mdi-delete</v-icon>
+          <v-col class="justify-center align-self-center mb-8 ml-4">
+          <v-icon v-if="this.isDeletable" @click="killMe()" size="40" color="red">mdi-trash-can-outline</v-icon>
           </v-col>
         </v-row>
 
       </v-expansion-panels>
-
-
     </v-container>
-
-
   <!--/squeleton!-->
 </template>
 
 <script>
-import excercise_form from "@/components/routines/excercise_form";
+import excercise_form from "@/components/createRoutine/excercise_form";
 import ExerciseStore from "@/store/ExcerciseStore";
+import Swal from 'sweetalert2';
+import axios from 'axios';
 //import squeleton from "@/components/routines/squeleton";
 export default {
-methods:{
-
-  remove(exercise){
-    //this.store.remove(exercise);
-    let index = this.excercises.findIndex(item => (item === exercise));
-    if (index === -1)
-      return false;
-    this.excercises.splice(index,1);
-    return true;
+  name: "routine_panel",
+  components: {excercise_form},
+  props: {
+    title: String,
+    isModifiable: Boolean,
+    isDeletable: Boolean,
+    id_routine: Number,
+    order: Number
   },
-  add(){
-    this.exercisesQty++;
-    this.ex_id++;
-    this.excercises.push(this.ex_id);
-
-  },
-  incQty(){
-    if(isNaN(this.qty))
-      return this.qty=1;
-    this.qty++;
-  },
-  decQty(){
-    if(isNaN(this.qty))
-      return this.qty=1;
-    if(this.qty>=2)
-      this.qty--;
-  },
-  inc(){
-
-    this.exercisesQty++;
-    this.remove(this.ex_id++);
-  },
-  dec(){
-    if(this.exercisesQty >=2)
-      this.exercisesQty--;
-  }
-},
   data() {
     return {
-      name : this.title,
+      cycle: {
+        name: this.title,
+        detail: this.name,
+        type: 'exercise',
+        order: this.order,
+        repetitions: 1
+      },
       exercisesQty: 1,
-      qty:1,
       ex_id: 0,
       store: ExerciseStore,
       excercises: [0],
       rules: {
         required: value => !!value || 'Obligatorio.',
         number: v => !isNaN(v) || 'Tiene que ser un número positivo!',
-        positive: v => v>=1 || 'Tiene que ser un número positivo!'
-      }
+        positive: v => v >= 1 || 'Tiene que ser un número positivo!'
+      },
+      alive: true,
+      id_cycle: 0
     }
   },
-props: {
-  title: String,
-  isModifiable: Boolean,
-  open_panel: Number,
-  isDeletable: Boolean
-},
-name: "routine_panel",
-  components: { excercise_form}
+  methods: {
+    add() {
+      this.exercisesQty++;
+      this.ex_id++;
+      this.excercises.push(this.ex_id);
+    },
+    incQty() {
+      if (isNaN(this.cycle.repetitions))
+        return this.cycle.repetitions = 1;
+      this.cycle.repetitions++;
+    },
+    decQty() {
+      if (isNaN(this.cycle.repetitions))
+        return this.cycle.repetitions = 1;
+      if (this.cycle.repetitions >= 2)
+        this.cycle.repetitions--;
+    },
+    killMe() {
+      Swal.fire({
+        title: 'Seguro que quieres borrarlo?',
+        text: "Esta acción es irreversible",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, borrar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.alive = false;
+        }
+      })
+    },
+  },
+  watch: {
+    id_routine: function() {
+      this.cycle.detail = this.cycle.name;
+      this.cycle.order = this.order;
+      if (this.title === 'Enfriamiento') {
+        this.cycle.order = this.order + 5;
+      }
+      axios.post('routines/' + this.id_routine + '/cycles', {name: this.cycle.name, detail: this.cycle.detail, type: this.cycle.type, order: this.cycle.order, repetitions: this.cycle.repetitions})
+      .then(response => {
+        this.id_cycle = response.data.id;
+      }).catch(error => {
+        console.log(this.cycle.order);
+        console.log('cycle' + error);
+      })
+    }
+  }
 }
 </script>
 

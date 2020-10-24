@@ -20,47 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ee56ba0-2f96-4ce9-9b8e-d06a545f38a6" name="Default Changelist" comment="">
-<<<<<<< Updated upstream
+      <change afterPath="$PROJECT_DIR$/src/components/createRoutine/store.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< Updated upstream
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MisEjercicios.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MisEjercicios.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Category.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MisRutinas.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MisRutinas.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/NavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Perfil.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Perfil.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/registration/logIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/registration/logIn.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/userStore.js" afterDir="false" />
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      <change afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/NavBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Slider.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CardioCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardRutina.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/registration/squeleton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/registration/squeleton.vue" afterDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/src/components/routines/Routine.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/routines/create_routine.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/store/ExerciseStore.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/ExcerciseStore.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/SectionStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/routines/excercise_form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/routines/excercise_form.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/routines/routine_panel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/routines/routine_panel.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/routines/squeleton.vue" beforeDir="false" />
->>>>>>> Stashed changes
+      <change beforePath="$PROJECT_DIR$/src/components/registration/signUp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/registration/signUp.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/routines/create_routine.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/createRoutine/create_routine.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/routines/excercise_form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/createRoutine/excercise_form.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/routines/routine_panel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/createRoutine/routine_panel.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/registration/logIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/registration/logIn.vue" afterDir="false" />
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,10 +40,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Vue Single File Component" />
-<<<<<<< Updated upstream
-=======
         <option value="JavaScript File" />
->>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -108,24 +74,10 @@
 >>>>>>> Stashed changes
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="npm.serve">
-    <configuration name="asdasdas" type="NodeJSConfigurationType" working-dir="$PROJECT_DIR$">
-      <method v="2" />
-    </configuration>
-    <configuration name="serve" type="js.build_tools.npm" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="serve" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Node.js.asdasdas" />
-      <item itemvalue="npm.serve" />
-    </list>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/createRoutine" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -142,20 +94,9 @@
       <workItem from="1603321580939" duration="29618000" />
       <workItem from="1603411333196" duration="5363000" />
       <workItem from="1603450940988" duration="218000" />
-      <workItem from="1603451402905" duration="5703000" />
-=======
-<<<<<<< Updated upstream
-=======
-      <workItem from="1602171015362" duration="408000" />
-      <workItem from="1602172822511" duration="695000" />
-      <workItem from="1602173574271" duration="26359000" />
->>>>>>> Stashed changes
-=======
-      <workItem from="1603236067669" duration="10043000" />
-      <workItem from="1603286844759" duration="22454000" />
-      <workItem from="1603458004747" duration="1994000" />
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+      <workItem from="1603451402905" duration="10547000" />
+      <workItem from="1603467850510" duration="12144000" />
+      <workItem from="1603485920863" duration="9163000" />
     </task>
     <servers />
   </component>
@@ -183,6 +124,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="469" y="176" key="SettingsEditor/-1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1603451490094" />
+    <state x="624" y="247" key="run.anything.popup" timestamp="1603467037343">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="624" y="247" key="run.anything.popup/-1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1603467037343" />
     <state x="446" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1603389602547">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

@@ -4,7 +4,7 @@ import signUp from "./components/registration/signUp";
 //import excercise_form from "@/components/routines/excercise_form";
 import Home from "@/components/Home";
 
-import create_routine from "@/components/routines/create_routine";
+import create_routine from "@/components/createRoutine/create_routine";
 import Routine from "./components/routines/Routine";
 import MisRutinas from "@/components/MisRutinas";
 import Category from "@/components/Category";

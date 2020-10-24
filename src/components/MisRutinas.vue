@@ -155,7 +155,7 @@ export default {
     axios.get('categories', {params: {orderBy: 'name', direction: 'desc'}})
     .then(response => {
         this.categoriesItems.push(...response.data.results);
-        this.categoriesItems.forEach((val, index) => this.categoriesItems[index] = this.capitalizeFirstLetter(val.name));
+        this.categoriesItems.forEach((val, index) => this.categoriesItems[index].name = this.capitalizeFirstLetter(val.name));
     });
     this.updateRoutines();
   },

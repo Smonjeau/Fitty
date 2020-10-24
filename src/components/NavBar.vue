@@ -96,9 +96,6 @@ export default {
       return store.userInfo.username;
     }
   },
-  mounted() {
-    console.log(store.userInfo.username);
-  }
 }
 </script>
 
