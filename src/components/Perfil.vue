@@ -112,7 +112,7 @@
           <v-row class="justify-center">
 
             <v-col md="2">
-              <v-btn color="blue white--text" class="my-5" outlined @click="navigateToLogin()">
+              <v-btn color="blue white--text" class="my-5" outlined @click="leave()">
                 Cancelar
 
               </v-btn>
@@ -135,6 +135,8 @@
 
 <script>
 import {store} from '@/userStore';
+import Swal from "sweetalert2";
+
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import axios from "axios";
@@ -147,6 +149,7 @@ export default {
     return {
       user: store,
       valid:false,
+      changes:false,
       menu:false,
       avatarSelector : false,
       rules: {
@@ -190,11 +193,29 @@ export default {
   },
 
   methods:{
-    navigateToLogin(){
-      this.$router.push('/');
+    leave(){
+      if(this.changes){
+        Swal.fire({
+          title: '¡Tienes cambios sin guardar!',
+          text: "¿Quieres salir sin guardarlos?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#1E88E5',
+          confirmButtonText: 'SÍ, SALIR',
+          cancelButtonText: 'QUIERO QUEDARME',
+          cancelButtonColor: '#d33',
+      }).then((result) =>{
+        if(result.isConfirmed)
+          this.$router.push('/');
+        })
+      }
+      else{
+        this.$router.push('/');
+      }
     },
     selectAvatar(avatar){
       this.userEdited.avatarUrl = avatar;
+      this.changes = true;
     },
     submit () {
       //Solo puede editar su nombre, mail y avatar

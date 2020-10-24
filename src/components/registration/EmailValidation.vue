@@ -1,6 +1,6 @@
 
 <template>
-  <squeleton v-if="!validado"  title="Inserta el código que te enviamos">
+  <squeleton   title="Inserta el código que te enviamos">
     <v-container  slot="fields">
       <v-form v-model="valid">
         <v-row>
@@ -32,7 +32,6 @@ export default {
   data() {
     return {
       valid:false,
-      validado:false,
       email: this.$route.params.email,
       rules : {
         codeRule: v=> /^[0-9A-Z]{6}$/.test(v) || "6 números o letras en mayúscula"

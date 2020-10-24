@@ -118,7 +118,7 @@ export default {
   },*/
   beforeMount() {
     if(localStorage.getItem('token') != null) {
-      if(store.loginRefreshed == true) {
+      if(store.loginRefreshed === true) {
         axios.get('user/current/routines/', {params: {page: 0, size: 1, orderBy: 'dateCreated', direction: 'asc'}})
         .then(result => {
           if (result.data.totalCount === 0) {
@@ -158,9 +158,6 @@ export default {
           } else {
             this.$router.push('/');
           }
-
-
-
 
 
 

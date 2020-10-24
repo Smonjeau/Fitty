@@ -11,6 +11,7 @@
               label="Ejercicio"
               v-model="exercise"
               return-object
+              outlined
               @change="getExerciseInfo()"
               :rules="[rules.required]"
               required

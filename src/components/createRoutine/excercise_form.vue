@@ -9,6 +9,7 @@
               :items="myStore.myExercises"
               item-text="name"
               label="Ejercicio"
+              outlined
               v-model="exercise"
               return-object
           ></v-select>
