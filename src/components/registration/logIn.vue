@@ -87,42 +87,13 @@ export default {
               console.log(result2.data);
               //this.userInfo = result.data;
               //console.log(store.userInfo);
-              console.log(store.token);
-              console.log(localStorage.token);
+              //console.log(store.token);
+              //console.log(localStorage.token);
               this.$router.go();
-              /*
-              axios.get('user/current/routines'
-              ).then((response) => {
-                console.log("HOLA MAMA");
-                if (response.data.totalCount === 0) {
-                  //creamos rutina y ciclo auxiliar
-                  console.log("HOLAAAAAAAAAAAAAAA");
-                  axios.post('routines', {
-                    "name": "$@&#%*",
-                    "detail": "Rutina auxiliar",
-                    "isPublic": false,
-                    "difficulty": "rookie",
-                    "category": {
-                      "id": 2
-                    }
-                  }).then((response) => {
-                    let id = response.data.id;
-                    axios.post('routines/' + id + '/cycles', {
-                      "name": "$@&#%*",
-                      "detail": "$@&#%*",
-                      "type": "warmup",
-                      "order": 1,
-                      "repetitions": 1
-                    })
 
-                  })
-                }
-              }
-              ).catch((error) =>
-                console.log("LA QUEDO EL GET" + error)
-              )*/
-            }).catch(error => {
-              console.log(error);
+
+            }).catch(error2 => {
+              console.log(error2);
             });
             
 
@@ -140,14 +111,71 @@ export default {
 
     }
   },
-  beforeRouteLeave(to, from, next) {
-    if(this.token != '')
-      localStorage.token = this.token;
+  /*beforeRouteLeave(to, from, next) {
+    //if(this.token != '')
+    //  localStorage.token = this.token;
     next();
-  },
+  },*/
   beforeMount() {
-    if(localStorage.getItem('token') != null)
-      this.$router.push('/');
+    if(localStorage.getItem('token') != null) {
+      if(store.loginRefreshed == true) {
+        axios.get('user/current/routines/', {params: {page: 0, size: 1, orderBy: 'dateCreated', direction: 'asc'}})
+        .then(result => {
+          if (result.data.totalCount === 0) {
+            //Es un usuario nuevo, no tiene rutinas, mucho menos va a tener la rutina fake que necesitamos
+            //creamos rutina y ciclo auxiliar
+
+            axios.post('routines', {
+              name: '$@&#%*',
+              detail: 'Rutina auxiliar',
+              isPublic: false,
+              difficulty: 'rookie',
+              category: {
+                id: 2
+              }
+            })
+            .then((result2) => {
+              let id = result2.data.id;
+              axios.post('routines/' + id + '/cycles', {
+                name: '$@&#%*',
+                detail: '',
+                type: 'warmup',
+                order: 1,
+                repetitions: 1
+              })
+              .then(() => {
+                //Perfectoo
+                this.$router.push('/');
+              })
+              .catch(error3 => {
+                this.error(error3);
+              });
+
+            })
+            .catch(error2 => {
+              this.error(error2);
+            });
+          }
+
+
+
+
+
+
+
+
+        })
+        .catch(error => {
+          this.error(error);
+        });
+      } else {
+        this.$router.push('/');
+      }
+    }
+
+  },
+  mounted() {
+    store.loginRefreshed = false;
   }
 }
 </script>

@@ -1,6 +1,7 @@
 const ExerciseStore = {
     exercises: [],
     idRutina: -1,
+    idCiclo: -1,
     add(exercise) {
         return this.exercises.push(exercise);
     },

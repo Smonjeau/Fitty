@@ -188,13 +188,14 @@ name: "MisEjercicios",
               axios.get('routines/'+this.store.idRutina+'/cycles', {params: {page: 0, size: 1, orderBy: 'id', direction: 'asc'}})
                   .then(response2 => {
                     if(response2.data.totalCount > 0) {
+                      this.store.idCiclo = response2.data.results[0].id;
 
                       //Ahora debo recuperar los ejercicios
-                      axios.get('/routines/'+this.store.idRutina+'/cycles/1/exercises', {params: {page: 0, size: 100, orderBy: 'id', direction: 'asc'}})
+                      axios.get('/routines/'+this.store.idRutina+'/cycles/'+this.store.idCiclo+'/exercises', {params: {page: 0, size: 100, orderBy: 'id', direction: 'asc'}})
                           .then(response3 => {
                             response3.data.results.forEach(item => {
                               //Dado que el response no trae la url del video, hay que hacer un get extra por cada ejercicio
-                              axios.get('/routines/'+this.store.idRutina+'/cycles/1/exercises/'+item.id+'/videos', {params: {page: 0, size: 1, orderBy: 'id', direction: 'asc'}})
+                              axios.get('/routines/'+this.store.idRutina+'/cycles/'+this.store.idCiclo+'/exercises/'+item.id+'/videos', {params: {page: 0, size: 1, orderBy: 'id', direction: 'asc'}})
                               .then(response4 => {
                                 let videoUrl = '';
                                 let idVideo = -1;
@@ -272,7 +273,7 @@ name: "MisEjercicios",
       } else {
         repetitions = this.nuevoEjercicio.qty;
       }
-      axios.post('/routines/'+this.store.idRutina+'/cycles/1/exercises', {
+      axios.post('/routines/'+this.store.idRutina+'/cycles/'+this.store.idCiclo+'/exercises', {
 
           name: this.nuevoEjercicio.name,
           detail: "",
@@ -284,7 +285,7 @@ name: "MisEjercicios",
         let idEjercicio = response.data.id;
         //Falta agregar el video si hay
         if(this.nuevoEjercicio.videoUrl != '') {
-          axios.post('/routines/'+this.store.idRutina+'/cycles/1/exercises/'+idEjercicio+'/videos', {
+          axios.post('/routines/'+this.store.idRutina+'/cycles/'+this.store.idCiclo+'/exercises/'+idEjercicio+'/videos', {
             number: 1,
             url: this.nuevoEjercicio.videoUrl
           })

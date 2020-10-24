@@ -25,5 +25,6 @@ export const store = {
         localStorage.removeItem('token');
         this.userInfo = {};
         window.location.href = "/";
-    }
+    },
+    loginRefreshed: true
 }
