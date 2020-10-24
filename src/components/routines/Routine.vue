@@ -21,6 +21,7 @@
               color="blue darken-1 white--text"
               depressed
               large
+              @click="goToEdit()"
           >
             Editar
             <v-icon class="ml-4">mdi-pencil-outline</v-icon>
@@ -140,6 +141,9 @@ name: "Routine",
     },
     getInfo(index) {
       return this.routine.detail.split('|')[index];
+    },
+    goToEdit() {
+      this.$router.push('/edit_routine/' + this.id_routine);
     }
   },
   mounted() {
@@ -153,7 +157,7 @@ name: "Routine",
         this.myRoutine = true;
       }
     })
-    axios.get('routines/' + this.id_routine + '/cycles')
+    axios.get('routines/' + this.id_routine + '/cycles', {params: {size: 100, orderBy: 'order'}})
     .then(response => {
       this.cycles = response.data.results;
     })
