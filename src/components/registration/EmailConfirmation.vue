@@ -13,6 +13,7 @@
 import Squeleton from "@/components/registration/squeleton";
 import axios from "axios";
 
+
 export default {
 name: "EmailConfirmation",
   components: {Squeleton},

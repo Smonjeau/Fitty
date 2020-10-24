@@ -78,6 +78,8 @@
                     v-model="user.birthdate"
                     label="Fecha de nacimiento"
                     prepend-icon="mdi-calendar"
+                    hint="Formato AAAA-MM-DD"
+                    persistent-hint
                     readonly
                     v-bind="attrs"
                     v-on="on"
