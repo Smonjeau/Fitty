@@ -104,13 +104,6 @@ export default {
       updatingItems: false
     }
   },
-  watch: {
-    query(value) {
-      alert("cambio");
-      this.query = value;
-      this.updateItems(value);
-    }
-  },
   methods: {
     error(msg) {
       Swal.fire({
@@ -183,7 +176,7 @@ export default {
       this.items.forEach(item => {
         if(item.name == this.query) {
           var BreakException = {};
-          this.$router.push('/routine/' + item.id).catch((error)=>{alert(error)});
+          this.$router.push('/routine/' + item.id).catch(()=>{});
           throw BreakException;
         }
       });
