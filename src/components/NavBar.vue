@@ -143,15 +143,9 @@ export default {
       return store.userInfo.username;
     },
     handleQuery(event) {
-      /////////////////////////SAAR ESTO
-      //e.keyCode = 13;
-      /*var classobj = Array.prototype;
-      console.log(el.getOwnPropertyNames(classobj).filter(function (x) {
-        return typeof classobj[x] === 'function'
-      }));*/
-      /*if (event) {
-        alert(event.target.tagName)
-      }*/
+      if (event) {
+        this.updateItems(event.target.value);
+      }
     },
     updateItems(value) {
       let paramsObj;
