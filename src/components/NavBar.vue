@@ -17,9 +17,11 @@
             placeholder="Buscar"
             class="pt-5"
             v-model="query"
+            search-input.sync="query"
             :items="labels"
             clearable
-            @keyup="updateItems()"
+            @keyup="handleQuery"
+            :loading="updatingItems"
             @change="updateItemsAndGo()"
         >
           <template v-slot:no-data>
@@ -102,6 +104,13 @@ export default {
       updatingItems: false
     }
   },
+  watch: {
+    query(value) {
+      alert("cambio");
+      this.query = value;
+      this.updateItems(value);
+    }
+  },
   methods: {
     error(msg) {
       Swal.fire({
@@ -133,19 +142,47 @@ export default {
     getUsername() {
       return store.userInfo.username;
     },
-    updateItems() {
-      axios.get('/routines',{
-          search: this.query,
-          orderBy: 'averageRating',
+    handleQuery(event) {
+      /////////////////////////SAAR ESTO
+      //e.keyCode = 13;
+      /*var classobj = Array.prototype;
+      console.log(el.getOwnPropertyNames(classobj).filter(function (x) {
+        return typeof classobj[x] === 'function'
+      }));*/
+      /*if (event) {
+        alert(event.target.tagName)
+      }*/
+    },
+    updateItems(value) {
+      let paramsObj;
+      if(/*this.query*/value.length >= 3) {
+        paramsObj = {
+          search: value,//this.query,
+          page: 0,
+          orderBy: 'dateCreated',
           direction: 'desc',
           size: 10
+        }
+      } else {
+        paramsObj = {
+          page: 0,
+          orderBy: 'dateCreated',
+          direction: 'desc',
+          size: 10
+        }
+      }
+      axios.get('/routines', {
+        params: paramsObj
       })
       .then(result => {
+        console.log(result);
         this.items = result.data.results;
         this.labels = this.items.map(item => item.name);
+        this.updatingItems = false;
       })
       .catch(error => {
         this.error(error);
+        this.updatingItems = true;
       });
     },
     updateItemsAndGo() {
@@ -159,8 +196,11 @@ export default {
     }
   },
   beforeMount() {
-    this.updatingItems = true;
-    this.updateItems();
+    if(localStorage.getItem('token') != null) {
+      this.updatingItems = true;
+      this.updateItems('');
+    }
+
   }
 }
 </script>
