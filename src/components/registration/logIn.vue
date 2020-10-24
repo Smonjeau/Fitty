@@ -74,45 +74,56 @@ export default {
       this.$router.push('/signup');
     },
     submit() {
-      axios.post('/user/login', this.userData)
+      axios.post('user/login', this.userData)
           .then((result) => {
             this.token = result.data.token;
             localStorage.token = result.data.token;
-            store.updateToken(result.data.token);
-            store.updateDataUser();
-            this.$router.push('/');
-            console.log(localStorage.token);
-            axios.get('user/current/routines'
-            ).then((response) => {
-              console.log("HOLA MAMA");
-              if (response.data.totalCount === 0) {
-                //creamos rutina y ciclo auxiliar
-                console.log("HOLAAAAAAAAAAAAAAA");
-                axios.post('routines', {
-                  "name": "$@&#%*",
-                  "detail": "Rutina auxiliar",
-                  "isPublic": false,
-                  "difficulty": "rookie",
-                  "category": {
-                    "id": 2
-                  }
-                }).then((response) => {
-                  let id = response.data.id;
-                  axios.post('routines/' + id + '/cycles', {
+
+            //Traemos los datos del usuario
+            axios.get('user/current', {headers: {'Authorization': 'Bearer ' + localStorage.token}})
+            .then(result2 => {
+              store.updateDataUser(result2.data);
+              store.logged = true;
+              console.log(result2.data);
+              //this.userInfo = result.data;
+              //console.log(store.userInfo);
+              console.log(store.token);
+              console.log(localStorage.token);
+              this.$router.go();
+              /*
+              axios.get('user/current/routines'
+              ).then((response) => {
+                console.log("HOLA MAMA");
+                if (response.data.totalCount === 0) {
+                  //creamos rutina y ciclo auxiliar
+                  console.log("HOLAAAAAAAAAAAAAAA");
+                  axios.post('routines', {
                     "name": "$@&#%*",
-                    "detail": "$@&#%*",
-                    "type": "warmup",
-                    "order": 1,
-                    "repetitions": 1
+                    "detail": "Rutina auxiliar",
+                    "isPublic": false,
+                    "difficulty": "rookie",
+                    "category": {
+                      "id": 2
+                    }
+                  }).then((response) => {
+                    let id = response.data.id;
+                    axios.post('routines/' + id + '/cycles', {
+                      "name": "$@&#%*",
+                      "detail": "$@&#%*",
+                      "type": "warmup",
+                      "order": 1,
+                      "repetitions": 1
+                    })
+
                   })
-
-                })
+                }
               }
-            }
-            ).catch((error) =>
-              console.log("LA QUEDO EL GET" + error)
-            )
-
+              ).catch((error) =>
+                console.log("LA QUEDO EL GET" + error)
+              )*/
+            }).catch(error => {
+              console.log(error);
+            });
             
 
           })
@@ -124,14 +135,19 @@ export default {
               icon: 'error',
               confirmButtonText: 'Ok',
               timer: 3000
-            })
+            });
           });
 
     }
   },
   beforeRouteLeave(to, from, next) {
-    localStorage.token = this.token;
+    if(this.token != '')
+      localStorage.token = this.token;
     next();
+  },
+  beforeMount() {
+    if(localStorage.getItem('token') != null)
+      this.$router.push('/');
   }
 }
 </script>

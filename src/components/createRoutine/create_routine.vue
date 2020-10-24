@@ -196,7 +196,7 @@ export default {
     }
   },
   beforeMount() {
-    if(!store.logged)
+    if(localStorage.getItem('token') == null)
       this.$router.push('/');
   },
   mounted() {

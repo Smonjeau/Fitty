@@ -27,7 +27,7 @@ export default {
                   <v-btn
                       fab
                       dark
-                      color="indigo"
+                      color="blue darken-1"
                       v-bind="attrs"
                       v-on="on"
                       :disabled="store.idRutina == -1"
@@ -311,9 +311,9 @@ name: "MisEjercicios",
     }
   },
   beforeMount() {
-    if(!store.logged)
+    if(localStorage.getItem('token') == null)
         this.$router.push('/');
-    else if(this.store.empty())
+    if(this.store.empty())
       this.initStore();
 
 
