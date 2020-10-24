@@ -9,14 +9,31 @@
         </v-app-bar-nav-icon>
       </router-link>
       <v-spacer></v-spacer>
-      <v-text-field
-          outlined
-          prepend-inner-icon="mdi-magnify"
-          dense
-          placeholder="Buscar"
-          class="pt-5"
-          v-if="myStore.logged"
-      ></v-text-field>
+        <v-autocomplete
+            outlined
+            prepend-inner-icon="mdi-magnify"
+            dense
+            v-if="myStore.logged"
+            placeholder="Buscar"
+            class="pt-5"
+            v-model="query"
+            :items="labels"
+            clearable
+            @keyup="updateItems()"
+            @change="updateItemsAndGo()"
+        >
+          <template v-slot:no-data>
+            <v-list-item>
+              <v-list-item-title>
+                Búsqueda por nombre de la rutina
+              </v-list-item-title>
+            </v-list-item>
+          </template>
+
+        </v-autocomplete>
+
+
+
 
       <v-spacer></v-spacer>
 
@@ -65,6 +82,8 @@
 
 <script>
 import { store } from '../userStore.js';
+import Swal from "sweetalert2";
+import axios from "axios";
 
 export default {
   name: "NavBar",
@@ -76,10 +95,27 @@ export default {
         {title: 'Mis Ejercicios', func: ()=>{this.$router.push('/mis_ejercicios')}},
         {title: 'Mi Perfil', func: ()=>{this.$router.push('/perfil')}},
         {title: 'Cerrar Sesión', func: ()=>{this.closeSesion()}}
-      ]
+      ],
+      query: '',
+      items: [],
+      labels: [],
+      updatingItems: false
     }
   },
   methods: {
+    error(msg) {
+      Swal.fire({
+        title: 'Oops, al parecer hubo un error.',
+        text: 'No te preocupes, nosotros nos ocupamos.',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        timer: 3000
+      });
+      console.log(msg);
+    },
+    openRoutine(id) {
+      alert(id);
+    },
     goToSignUp() {
       this.$router.push('/signup');
     },
@@ -96,11 +132,36 @@ export default {
     },
     getUsername() {
       return store.userInfo.username;
+    },
+    updateItems() {
+      axios.get('/routines',{
+          search: this.query,
+          orderBy: 'averageRating',
+          direction: 'desc',
+          size: 10
+      })
+      .then(result => {
+        this.items = result.data.results;
+        this.labels = this.items.map(item => item.name);
+      })
+      .catch(error => {
+        this.error(error);
+      });
+    },
+    updateItemsAndGo() {
+      this.items.forEach(item => {
+        if(item.name == this.query) {
+          var BreakException = {};
+          this.$router.push('/routine/' + item.id).catch((error)=>{alert(error)});
+          throw BreakException;
+        }
+      });
     }
   },
+  beforeMount() {
+    this.updatingItems = true;
+    this.updateItems();
+  }
 }
 </script>
 
-<style scoped>
-
-</style>

@@ -130,6 +130,11 @@ name: "Routine",
     }
 
   },
+  beforeRouteUpdate (to, from, next) {
+    this.id_routine = to.params.id_routine;
+    this.getRoutineInfo();
+    next();
+  },
   components: {
     NavBar,
     RoutineCycleView,
@@ -144,23 +149,26 @@ name: "Routine",
     },
     goToEdit() {
       this.$router.push('/edit_routine/' + this.id_routine);
+    },
+    getRoutineInfo() {
+      axios.get('routines/' + this.id_routine)
+          .then(response => {
+            this.routine = response.data;
+            this.links[2].text = this.routine.name;
+            this.links[1].text = this.capitalizeFirstLetter(this.routine.category.name);
+            this.links[1].href += this.routine.category.id;
+            if (response.data.creator.id === this.user.id) {
+              this.myRoutine = true;
+            }
+          })
+      axios.get('routines/' + this.id_routine + '/cycles', {params: {size: 100, orderBy: 'order'}})
+          .then(response => {
+            this.cycles = response.data.results;
+          })
     }
   },
   mounted() {
-    axios.get('routines/' + this.id_routine)
-    .then(response => {
-      this.routine = response.data;
-      this.links[2].text = this.routine.name;
-      this.links[1].text = this.capitalizeFirstLetter(this.routine.category.name);
-      this.links[1].href += this.routine.category.id;
-      if (response.data.creator.id === this.user.id) {
-        this.myRoutine = true;
-      }
-    })
-    axios.get('routines/' + this.id_routine + '/cycles', {params: {size: 100, orderBy: 'order'}})
-    .then(response => {
-      this.cycles = response.data.results;
-    })
+    this.getRoutineInfo();
   }
 }
 </script>
