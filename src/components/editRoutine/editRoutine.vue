@@ -101,19 +101,19 @@
 
         <v-row class="justify-center">
 
-          <v-col md="2">
+          <v-col md="2 text-center">
             <v-btn color="blue white--text" class="my-5" outlined @click="cancel()">
               Cancelar
             </v-btn>
           </v-col>
 
-          <v-col md="2" >
-            <v-btn color="blue white--text" class="my-5" type="submit" :disabled="errors">
+          <v-col md="2 text-center">
+            <v-btn color="blue white--text" class="my-5" type="submit"><!--:disabled="errors"-->
               Finalizar
             </v-btn>
           </v-col>
 
-          <v-col md="2">
+          <v-col md="2 text-center">
             <v-btn color="red red--text" class="my-5" outlined @click="eliminate()">
               Eliminar
             </v-btn>
