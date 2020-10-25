@@ -6,7 +6,7 @@
       <v-col class="text-right">
 
         <v-dialog
-            v-if="url != ''"
+            v-if="url !== ''"
             v-model="dialog"
             max-width="700"
         >

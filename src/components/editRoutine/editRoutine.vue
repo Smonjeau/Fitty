@@ -89,8 +89,8 @@
         <routine_panel :id_routine="id" :done="done" :order="99" :old-cycle="cycles[cant_cycles - 1]" :isNew="false"></routine_panel>
 
       <v-row justify="center">
-        <v-col cols="9">
-          <v-btn small @click="inc()" class="my-5">
+        <v-col class="text-center">
+          <v-btn large @click="inc()" class="mb-5 white--text" rounded color="blue darken-1">
             <v-icon left >
               mdi-plus-circle-outline
             </v-icon>
@@ -194,8 +194,7 @@ export default {
         text: "Esta acción es irreversible",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#1E88E5',
         confirmButtonText: 'Si, borrar',
         cancelButtonText: 'Cancelar',
       }).then((result) => {
@@ -216,10 +215,13 @@ export default {
         console.log(response.data);
         Swal.fire({
           title: "Se ha actualizado correctamente",
+          text: "Aguarde y será redirigido automaticamente",
           icon: "success",
-          timer: "50000"
+          timer: "9000",
+          showConfirmButton:false
         })
-        this.$router.back();
+        setTimeout(() => this.$router.back(), 9000);
+        //this.$router.back();
       }).catch(error => {
         console.log(error);
       })
@@ -230,8 +232,7 @@ export default {
         text: "Esta acción es irreversible",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#1E88E5',
         confirmButtonText: 'Si, borrar',
         cancelButtonText: 'Cancelar',
       }).then((result) => {

@@ -156,7 +156,7 @@ export default {
         this.duration = this.excerciseData.qty;
       }
 
-      if(this.alive) {
+      if(this.alive == true) {
         axios.post('routines/' + this.id_routine + '/cycles/' + this.id_cycle + '/exercises',
             {name: this.excerciseData.name, detail: this.excerciseData.detail, type: this.type, duration: this.duration, repetitions: this.repetitions, order: this.id })
             .then(response => {

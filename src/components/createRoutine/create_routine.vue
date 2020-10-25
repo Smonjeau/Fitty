@@ -105,7 +105,7 @@
           </v-col>
 
           <v-col md="2" class="text-center">
-            <v-btn color="blue white--text" class="my-5" @click="submit()" :disabled="errors">
+            <v-btn color="blue white--text" class="my-5" @click="submit()"><!-- :disabled="errors"-->
               Finalizar
             </v-btn>
           </v-col>
@@ -215,11 +215,13 @@ export default {
         this.id = response.data.id;
         Swal.fire({
           title: "¡La rutina fue creado con éxito!",
+          text: "Aguarde y será redirigido automaticamente",
           icon: "success",
-          timer: 2000,
+          timer: 9000,
           showConfirmButton:false
         });
-        this.$router.push('/');
+        setTimeout(() => this.$router.push('/mis_rutinas'), 9000);
+        //this.$router.push('/');
       }).catch(error => {
         const Toast = Swal.mixin({
           toast: true,
