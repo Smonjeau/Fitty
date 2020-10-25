@@ -67,7 +67,7 @@
                       name="input-7-4"
                       label="Descripción"
                       v-model="routine.detail"
-                      :rules="[rules.required]"
+                      :rules="[rules.required, rules.details]"
                   ></v-textarea>
                 </v-col>
               </v-row>
@@ -159,6 +159,7 @@ export default {
         number: v => !isNaN(v) || 'Tiene que ser un número positivo!',
         positive: v => v>=1 || 'Tiene que ser un número positivo!',
         link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || 'No es un link válido!',
+        details: v => v.length <= 200 || 'Máximo 200 caracteres'
       },
       id: -1,
       disabled: false,
@@ -216,8 +217,25 @@ export default {
           title: "¡La rutina fue creado con éxito!",
           icon: "success",
           timer: 2000,
-        })
+          showConfirmButton:false
+        });
+        this.$router.push('/');
       }).catch(error => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        });
+        Toast.fire({
+          icon: 'error',
+          title: error
+        });
         console.log(error);
       })
     }

@@ -6,6 +6,7 @@
       <v-col class="text-right">
 
         <v-dialog
+            v-if="url != ''"
             v-model="dialog"
             max-width="700"
         >
@@ -59,7 +60,9 @@ name: "RoutineExerciseView",
   mounted() {
     axios.get('/routines/' + this.id_routine + '/cycles/' + this.id_cycle + '/exercises/' + this.id_exercise + '/videos')
     .then(response => {
-      this.url = response.data.results[0].url;
+
+      if(response.data.totalCount > 0)
+        this.url = response.data.results[0].url;
     })
   }
 }

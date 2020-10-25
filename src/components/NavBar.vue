@@ -27,7 +27,7 @@
           <template v-slot:no-data>
             <v-list-item>
               <v-list-item-title>
-                Búsqueda por nombre de la rutina
+                Búsqueda por nombre de la rutina. Mínimo 3 caracteres.
               </v-list-item-title>
             </v-list-item>
           </template>

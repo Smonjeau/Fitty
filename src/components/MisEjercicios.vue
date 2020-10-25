@@ -189,7 +189,7 @@ name: "MisEjercicios",
       console.log(msg);
     },
     validNewForm() {
-      return this.rules.name(this.nuevoEjercicio.name) === true && this.rules.required(this.nuevoEjercicio.name) === true
+      return this.rules.required(this.nuevoEjercicio.name) === true
       && this.rules.number(this.nuevoEjercicio.qty) === true && this.rules.positive(this.nuevoEjercicio.qty) === true && this.rules.required(this.nuevoEjercicio.qty) === true
       && this.rules.required(this.nuevoEjercicio.type) === true
       && this.rules.link(this.nuevoEjercicio.videoUrl) === true;

@@ -135,6 +135,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.myStore.errors--;
+
           this.alive = false;
         }
       })
@@ -144,13 +145,15 @@ export default {
     id_routine: function() {
       this.cycle.detail = this.cycle.name;
       this.cycle.order = this.order;
-      axios.post('routines/' + this.id_routine + '/cycles', {name: this.cycle.name, detail: this.cycle.detail, type: this.cycle.type, order: this.cycle.order, repetitions: this.cycle.repetitions})
-      .then(response => {
-        this.id_cycle = response.data.id;
-      }).catch(error => {
+      if(this.alive) {
+        axios.post('routines/' + this.id_routine + '/cycles', {name: this.cycle.name, detail: this.cycle.detail, type: this.cycle.type, order: this.cycle.order, repetitions: this.cycle.repetitions})
+          .then(response => {
+            this.id_cycle = response.data.id;
+          }).catch(error => {
         console.log(this.cycle.order);
         console.log('cycle' + error);
       })
+      }
     },
     cycle: function() {
       console.log(this.checkValidation());

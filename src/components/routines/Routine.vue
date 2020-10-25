@@ -45,6 +45,7 @@
           <v-row >
             <v-col>
               <div class="text-h6 font-weight-bold">Categoría: {{ capitalizeFirstLetter(routine.category.name) }}</div>
+              <div class="text-h6 font-weight-bold">Dificultad: {{ routine.dificultad }}</div>
             </v-col>
             <v-col>
               <v-rating
@@ -154,6 +155,24 @@ name: "Routine",
       axios.get('routines/' + this.id_routine)
           .then(response => {
             this.routine = response.data;
+            switch (this.routine.difficulty) {
+              case 'rookie':
+                this.routine.dificultad = 'Aficionado';
+                break;
+              case 'beginner':
+                this.routine.dificultad = 'Principiante';
+                break;
+              case 'intermediate':
+                  this.routine.dificultad = 'Intermedio';
+                break;
+              case 'advanced':
+                this.routine.dificultad = 'Avanzado';
+                break;
+              case 'expert':
+                this.routine.dificultad = 'Experto';
+                break;
+
+            }
             this.links[2].text = this.routine.name;
             this.links[1].text = this.capitalizeFirstLetter(this.routine.category.name);
             this.links[1].href += this.routine.category.id;
@@ -162,9 +181,9 @@ name: "Routine",
             }
           })
       axios.get('routines/' + this.id_routine + '/cycles', {params: {size: 100, orderBy: 'order'}})
-          .then(response => {
-            this.cycles = response.data.results;
-          })
+      .then(response => {
+        this.cycles = response.data.results;
+      });
     }
   },
   mounted() {

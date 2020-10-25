@@ -29,9 +29,9 @@
     </v-container>
 
     <v-container slot="other">
-      <v-row justify="center" class="my-4">
+      <!--<v-row justify="center" class="my-4">
         <router-link to="/olvidado" class="text-decoration-underline">¿Has olvidado tu contraseña?</router-link>
-      </v-row>
+      </v-row>-->
       <v-row justify="center" class="my-4">
         <v-card-text class="align-self-center blue--text text--darken-2 text-subtitle-1">
           ¿Primera vez aquí?

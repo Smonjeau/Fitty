@@ -156,20 +156,24 @@ export default {
         this.duration = this.excerciseData.qty;
       }
 
-      axios.post('routines/' + this.id_routine + '/cycles/' + this.id_cycle + '/exercises',
-          {name: this.excerciseData.name, detail: this.excerciseData.detail, type: this.type, duration: this.duration, repetitions: this.repetitions, order: this.id })
-      .then(response => {
-        if (this.excerciseData.link !== '') {
-          axios.post('routines/' + this.id_routine + '/cycles/' + this.id_cycle + '/exercises/' + response.data.id + '/videos',
-              {number: this.number, url: this.excerciseData.link})
-          .then(response1 => {
-            console.log(response1.data);
-          })
-        }
-      }).catch(error => {
-        console.log(this.excerciseData.name);
-        console.log('exercise' + error);
-      })
+      if(this.alive) {
+        axios.post('routines/' + this.id_routine + '/cycles/' + this.id_cycle + '/exercises',
+            {name: this.excerciseData.name, detail: this.excerciseData.detail, type: this.type, duration: this.duration, repetitions: this.repetitions, order: this.id })
+            .then(response => {
+              if (this.excerciseData.link != '') {
+                axios.post('routines/' + this.id_routine + '/cycles/' + this.id_cycle + '/exercises/' + response.data.id + '/videos',
+                    {number: this.number, url: this.excerciseData.link})
+                    .then(response1 => {
+                      console.log(response1.data);
+                    })
+              }
+            }).catch(error => {
+          console.log(this.excerciseData.name);
+          console.log('exercise' + error);
+        })
+      }
+
+
     },
     valid() {
       if (this.id === 1) {
