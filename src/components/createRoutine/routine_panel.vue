@@ -56,7 +56,7 @@
         </v-expansion-panel>
           </v-col>
           <v-col class="justify-center align-self-center mb-8 ml-4">
-            <v-icon v-if="this.isDeletable" @click="killMe()" size="40" color="red">mdi-trash-can-outline</v-icon>
+            <v-icon v-if="this.isDeletable" @click="killMe()" size="40" color="blue">mdi-trash-can-outline</v-icon>
           </v-col>
         </v-row>
       </v-expansion-panels>
@@ -129,8 +129,7 @@ export default {
         text: "Esta acción es irreversible",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#1E88E5',
         confirmButtonText: 'Si, borrar',
         cancelButtonText: 'Cancelar',
       }).then((result) => {

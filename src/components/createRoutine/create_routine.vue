@@ -177,8 +177,7 @@ export default {
         text: "Esta acción es irreversible",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#1E88E5',
         confirmButtonText: 'Si, borrar',
         cancelButtonText: 'Cancelar',
       }).then((result) => {
