@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid" v-if="alive">
+  <v-form v-model="valid" ref="form" v-if="alive">
     <v-container>
       <v-row class="justify-space-around">
         <v-col
@@ -12,6 +12,8 @@
               outlined
               v-model="exercise"
               return-object
+              :rules="[v => !!v || 'Item is required']"
+              required
           ></v-select>
         </v-col>
         <v-col cols="2">
@@ -36,9 +38,8 @@
               v-model="excerciseData.type"
               label="Repeticiones/Segundos"
               :menu-props="{ top: false, offsetY: true }"
-
+              :rules="[rules.required]"
               outlined
-
           ></v-select>
         </v-col>
 
@@ -49,7 +50,7 @@
 
             v-model="excerciseData.link"
             label="Video link"
-            :rules="[rules.required, rules.link]"
+            :rules="[rules.link]"
             outlined
 
           ></v-text-field>
@@ -94,15 +95,17 @@ export default {
 
     },
     killMe() {
-      if (this.id !== 1) this.alive = !this.alive;
+      if (this.id !== 1) {
+        this.alive = !this.alive;
+        this.myStore.errors--;
+      }
     }
   },
   data() {
     return {
-      valid: false,
       items: ["Repeticiones","Segundos"],
       excerciseData: {
-        name: '',
+        name: String,
         detail: '',
         qty: 1,
         type: "Repeticiones",
@@ -116,16 +119,17 @@ export default {
         name: v => /^[A-Za-z ]+$/.test(v) || 'Solo caractéres del abecedario',
         number: v => !isNaN(v) || 'Tiene que ser un número positivo!',
         positive: v => v>=1 || 'Tiene que ser un número positivo!',
-        link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || 'No es un link válido!',
+        link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || v === '' || 'No es un link válido!',
 
       },
       myStore: store,
-      exercise: {},
+      exercise: null,
       alive: true,
       duration: 0,
       repetitions: 0,
       type: 'exercise',
-      number: 1
+      number: 1,
+      valid: true,
     }
 
   },
@@ -166,7 +170,19 @@ export default {
         console.log(this.excerciseData.name);
         console.log('exercise' + error);
       })
+    },
+    valid() {
+      if (this.id === 1) {
+        if (this.valid) {
+          this.myStore.errors--;
+        } else {
+          this.myStore.errors++;
+        }
+      }
     }
+  },
+  mounted() {
+    this.myStore.errors--;
   }
 }
 

@@ -3,11 +3,10 @@
       color="blue darken-1"
       class="pa-5 mt-14"
       padless
-      :absolute="!userStore.logged"
+      :absolute="!logged()"
   >
-
     <v-row class="justify-space-around">
-      <v-col cols="3" md="4" sm="4" lg="3" class="mr-md-8">
+      <v-col cols="3" md="4" sm="4" lg="3" class="mr-md-8" v-if="logged()">
         <p class="text-left text-uppercase text-h6 white--text font-weight-regular">Categorias</p>
         <v-row class="justify-space-between" no-gutters>
           <v-col v-for="category in categories"
@@ -77,6 +76,9 @@ export default {
     goToPage(link) {
       this.$router.push(link);
     },
+    logged() {
+      return localStorage.getItem('token') !== null;
+    }
   },
   mounted() {
     axios.get('categories', {params: {orderBy: 'name', direction: 'desc'}})

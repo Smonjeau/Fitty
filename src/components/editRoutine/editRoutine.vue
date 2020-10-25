@@ -108,7 +108,7 @@
           </v-col>
 
           <v-col md="2" >
-            <v-btn color="blue white--text" class="my-5" type="submit">
+            <v-btn color="blue white--text" class="my-5" type="submit" :disabled="errors">
               Finalizar
             </v-btn>
           </v-col>
@@ -136,7 +136,7 @@ import axios from "axios";
 import Footer from "@/components/Footer";
 
 export default {
-  name: "create_routine",
+  name: "edit_routine",
   components: {
     NavBar,
     routine_panel,
@@ -174,7 +174,8 @@ export default {
       cycles: [],
       cant_cycles: 0,
       added_cycles: 0,
-      detail: ''
+      detail: '',
+      store: store
     }
   },
   methods: {
@@ -213,7 +214,12 @@ export default {
       .then( response => {
         console.log("Updated Succesfully");
         console.log(response.data);
-        this.done = true;
+        Swal.fire({
+          title: "Se ha actualizado correctamente",
+          icon: "success",
+          timer: "50000"
+        })
+        this.$router.back();
       }).catch(error => {
         console.log(error);
       })
@@ -270,6 +276,11 @@ export default {
           this.categoriesItems.forEach((val, index) => this.categoriesItems[index].name = this.capitalizeFirstLetter(val.name));
         });
   },
+  computed: {
+    errors: function() {
+      return store.errors > 0;
+    }
+  }
 }
 </script>
 

@@ -5,6 +5,8 @@ export const store = {
     routineId: 0,
     cycleId: 0,
     video: '',
+    valid: true,
+    errors: 0,
     getMyExercises() {
         axios.get('user/current/routines/')
             .then(response1 => {
@@ -24,5 +26,5 @@ export const store = {
             .then(response => {
                 this.video =  response.data.results[0].url;
         })
-    }
+    },
 }

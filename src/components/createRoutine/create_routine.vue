@@ -5,8 +5,8 @@
         <div class="text-center ">
           <p class="font-weight-bold display-2">CREAR RUTINA</p>
         </div>
-        <template>
-          <v-form v-model="valid" >
+        <v-form v-model="valid" ref="form">
+          <template>
             <v-container class="my-5">
               <v-row class="justify-md-start">
                 <v-col
@@ -26,6 +26,7 @@
                       item-value="id"
                       label="Categoría"
                       v-model="routine.category.id"
+                      :rules="[rules.required]"
                       outlined
                   >
                   </v-select>
@@ -39,6 +40,7 @@
                       v-model="routine.difficulty"
                       :menu-props="{ top: false, offsetY: true }"
                       label="Dificultad"
+                      :rules="[rules.required]"
                   ></v-select>
                 </v-col>
                 <v-col cols="2">
@@ -59,51 +61,52 @@
                       name="input-7-4"
                       label="Descripción"
                       v-model="routine.detail"
+                      :rules="[rules.required]"
                   ></v-textarea>
                 </v-col>
               </v-row>
             </v-container>
-          </v-form>
 
       </template>
 
-        <routine_panel title="Calentamiento" :id_routine="id" :order="1"></routine_panel>
+          <routine_panel title="Calentamiento" :id_routine="id" :order="1"></routine_panel>
 
-        <routine_panel title="Ciclo 1" :isModifiable="true" :id_routine="id" :order="2"></routine_panel>
+          <routine_panel title="Ciclo 1" :isModifiable="true" :id_routine="id" :order="2"></routine_panel>
 
-        <div v-for="index in extraSections" :key="index">
-          <routine_panel :title="sectionName(index+1)" :isDeletable="true" :isModifiable="true" :id_routine="id" :order="index + 2"></routine_panel>
-        </div>
+          <div v-for="index in extraSections" :key="index">
+            <routine_panel :title="sectionName(index+1)" :isDeletable="true" :isModifiable="true" :id_routine="id" :order="index + 2"></routine_panel>
+          </div>
 
-        <routine_panel title="Enfriamiento" :id_routine="id" :order="99"></routine_panel>
+          <routine_panel title="Enfriamiento" :id_routine="id" :order="99"></routine_panel>
 
-      <v-row justify="center">
-        <v-col cols="9">
-          <v-btn small @click="inc()" class="my-5">
-            <v-icon left >
-              mdi-plus-circle-outline
-            </v-icon>
-            <span>Agregar sección</span>
-          </v-btn>
-        </v-col>
-      </v-row>
+          <v-row justify="center">
+            <v-col cols="9">
+              <v-btn small @click="inc()" class="my-5">
+                <v-icon left >
+                  mdi-plus-circle-outline
+                </v-icon>
+                <span>Agregar sección</span>
+              </v-btn>
+            </v-col>
+          </v-row>
 
-        <v-row class="justify-center">
+          <v-row class="justify-center">
 
-          <v-col md="2">
-            <v-btn color="blue white--text" class="my-5" outlined @click="cancel()">
-              Cancelar
-            </v-btn>
-          </v-col>
+            <v-col md="2">
+              <v-btn color="blue white--text" class="my-5" outlined @click="cancel()">
+                Cancelar
+              </v-btn>
+            </v-col>
 
-          <v-col md="2" >
-            <v-btn color="blue white--text" class="my-5" @click="submit()">
-              Finalizar
-            </v-btn>
-          </v-col>
+            <v-col md="2" >
+              <v-btn color="blue white--text" class="my-5" @click="submit()" :disabled="errors">
+                Finalizar
+              </v-btn>
+            </v-col>
 
-        </v-row>
-    </div>
+          </v-row>
+        </v-form>
+      </div>
     <Footer></Footer>
   </div>
 </template>
@@ -132,9 +135,8 @@ export default {
         averageRating: 0,
         isPublic: true,
         category: { id: 0 },
-        difficulty: ''
+        difficulty: '',
       },
-      valid: false,
       duration: '',
       categoriesItems: [],
       availableDificulty: [
@@ -153,7 +155,10 @@ export default {
         link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || 'No es un link válido!',
       },
       id: -1,
-      panel: [0]
+      disabled: false,
+      countChildren: 0,
+      valid: true,
+      myStore: store
     }
   },
   methods: {
@@ -190,6 +195,11 @@ export default {
       axios.post('routines', this.routine)
       .then( response => {
         this.id = response.data.id;
+        Swal.fire({
+          title: "¡La rutina fue creado con éxito!",
+          icon: "success",
+          timer: 2000,
+        })
       }).catch(error => {
         console.log(error);
       })
@@ -210,6 +220,18 @@ export default {
   watch: {
     extraSections: function() {
       console.log(this.extraSections);
+    },
+    valid() {
+      if (this.valid) {
+        this.myStore.errors--;
+      } else {
+        this.myStore.errors++;
+      }
+    }
+  },
+  computed: {
+    errors: function() {
+      return store.errors > 0;
     }
   }
 }
