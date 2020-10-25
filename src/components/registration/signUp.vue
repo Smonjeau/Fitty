@@ -128,6 +128,7 @@
 import squeleton from './squeleton';
 import axios from "axios";
 import moment from 'moment';
+import * as Swal from "sweetalert2";
 
 export default {
   name: "signUp",
@@ -188,10 +189,18 @@ export default {
       console.log(this.userData);
       axios.post('/user', this.userData)
           .then(() => {
-            this.$router.push('/codigo_verificacion/' + this.userData.email);
+            this.$router.push('codigo_verificacion/' + this.userData.email);
           })
           .catch((error) => {
-            console.log(error);
+            console.log(error)
+            Swal.fire({
+              title: 'No se ha podido crear el usuario',
+              text: 'Es posible que el nombre de usario o el email estén tomados, prueba con otros!',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+              timer: 3000
+
+            })
           });
     }
   }

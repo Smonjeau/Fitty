@@ -23,7 +23,7 @@
                   </v-col>
                   <v-col class="text-right">
                     <v-btn
-                        color="green darken-1"
+                        color="blue darken-1"
                         text
                         @click="dialog = false"
                     >
