@@ -1,6 +1,12 @@
 <template>
   <div>
       <nav-bar></nav-bar>
+      <v-container>
+        <v-breadcrumbs
+            :items="links"
+            large
+        ></v-breadcrumbs>
+      </v-container>
       <div class="px-14 mt-8">
         <div class="text-center ">
           <p class="font-weight-bold display-2">CREAR RUTINA</p>
@@ -158,7 +164,19 @@ export default {
       disabled: false,
       countChildren: 0,
       valid: true,
-      myStore: store
+      myStore: store,
+      links: [
+        {
+          text: 'Inicio',
+          disabled: false,
+          href: '/',
+        },
+        {
+          text: 'Crear rutina',
+          disabled: true,
+          href: 'create_routine',
+        },
+      ]
     }
   },
   methods: {

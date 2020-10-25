@@ -2,6 +2,10 @@
   <div>
     <NavBar></NavBar>
     <v-container class="my-5">
+      <v-breadcrumbs
+          :items="links"
+          large
+      ></v-breadcrumbs>
     <v-row justify="center">
         <v-hover v-slot="{ hover }">
         <v-btn class="mx-2 blue"
@@ -169,7 +173,19 @@ export default {
         "phone": store.userInfo.phone,
         "avatarUrl" : store.userInfo.avatarUrl
 
-      }
+      },
+      links: [
+        {
+          text: 'Inicio',
+          disabled: false,
+          href: '/',
+        },
+        {
+          text: 'Mi perfil',
+          disabled: true,
+          href: 'perfil',
+        },
+      ]
 
 
     }

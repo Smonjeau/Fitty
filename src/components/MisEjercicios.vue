@@ -7,7 +7,13 @@ export default {
 <template>
   <div>
     <NavBar></NavBar>
+
     <v-container>
+      <v-breadcrumbs
+          :items="links"
+          large
+      ></v-breadcrumbs>
+
       <p class="font-weight-bold display-2 mt-4 mb-10 text-center">Mis Ejercicios</p>
       <v-row>
         <v-col cols="10" class="pr-8">
@@ -156,7 +162,19 @@ name: "MisEjercicios",
         link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || v === '' || 'No es un link válido!'
       },
       qtyTypes: ['Repeticiones', 'Segundos'],
-      query: ''
+      query: '',
+      links: [
+        {
+          text: 'Inicio',
+          disabled: false,
+          href: '/',
+        },
+        {
+          text: 'Mis ejercicios',
+          disabled: true,
+          href: 'mis_ejercicios',
+        },
+      ]
     }
   },
   methods: {
