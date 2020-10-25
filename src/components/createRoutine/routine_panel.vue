@@ -1,5 +1,7 @@
 <template>
-    <v-container class="my-5" v-if="alive">
+  <v-form ref="form" v-if="alive"
+          v-model="valid">
+    <v-container class="my-5" v-if="alive" >
       <v-expansion-panels accordion multiple>
         <v-row no-gutters >
           <v-col cols="11">
@@ -59,7 +61,7 @@
         </v-row>
       </v-expansion-panels>
     </v-container>
-  <!--/squeleton!-->
+  </v-form>
 </template>
 
 <script>
@@ -67,7 +69,9 @@ import excercise_form from "@/components/createRoutine/excercise_form";
 import ExerciseStore from "@/store/ExcerciseStore";
 import Swal from 'sweetalert2';
 import axios from 'axios';
-//import squeleton from "@/components/routines/squeleton";
+import {eventBus} from "@/main";
+import {store} from "./store";
+
 export default {
   name: "routine_panel",
   components: {excercise_form},
@@ -98,6 +102,8 @@ export default {
       },
       alive: true,
       id_cycle: 0,
+      valid: true,
+      myStore: store
     }
   },
   methods: {
@@ -129,6 +135,7 @@ export default {
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
+          this.myStore.errors--;
           this.alive = false;
         }
       })
@@ -138,9 +145,6 @@ export default {
     id_routine: function() {
       this.cycle.detail = this.cycle.name;
       this.cycle.order = this.order;
-      if (this.title === 'Enfriamiento') {
-        this.cycle.order = this.order + 5;
-      }
       axios.post('routines/' + this.id_routine + '/cycles', {name: this.cycle.name, detail: this.cycle.detail, type: this.cycle.type, order: this.cycle.order, repetitions: this.cycle.repetitions})
       .then(response => {
         this.id_cycle = response.data.id;
@@ -148,7 +152,25 @@ export default {
         console.log(this.cycle.order);
         console.log('cycle' + error);
       })
+    },
+    cycle: function() {
+      console.log(this.checkValidation());
+      if (this.checkValidation()) {
+        eventBus.$emit('getError');
+      } else {
+        eventBus.$emit('getFixed');
+      }
+    },
+    valid() {
+      if (this.valid) {
+        this.myStore.errors--;
+      } else {
+        this.myStore.errors++;
+      }
     }
+  },
+  mounted() {
+    this.myStore.errors++;
   }
 }
 </script>

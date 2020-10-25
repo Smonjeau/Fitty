@@ -1,6 +1,6 @@
 <template>
+  <v-form v-model="valid">
     <v-container class="my-5" v-if="alive">
-
       <v-expansion-panels accordion multiple>
         <v-row no-gutters >
           <v-col cols="11">
@@ -49,7 +49,7 @@
             </div>
 
             <div v-for="index in added_exercise" :key="index">
-              <excercise_form :id="index + cant_exercises" :id_routine="id_routine" :id_cycle="cycle.id" :isNew="true" :done="imDone"></excercise_form>
+              <excercise_form :id="index + cant_exercises" :id_routine="id_routine" :id_cycle="id_cycle" :isNew="true" :done="imDone"></excercise_form>
             </div>
 
             <v-btn small class="my-5 mx-3" @click="add() ">
@@ -69,12 +69,13 @@
 
       </v-expansion-panels>
     </v-container>
-  <!--/squeleton!-->
+  </v-form>
 </template>
 
 <script>
 import excercise_form from "@/components/editRoutine/excercise_form";
 import ExerciseStore from "@/store/ExcerciseStore";
+import {store} from './store';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss'
 import axios from 'axios';
@@ -116,7 +117,9 @@ export default {
       imDone: false,
       listExcercises: [],
       cant_exercises: 0,
-      added_exercise: 0
+      added_exercise: 0,
+      myStore: store,
+      valid: true
     }
   },
   methods: {
@@ -148,20 +151,24 @@ export default {
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
+          this.myStore.errors--;
           this.alive = false;
         }
       })
     },
   },
   watch: {
+    valid() {
+      if (this.valid) {
+        this.myStore.errors--;
+      } else {
+        this.myStore.errors++;
+      }
+    },
     done: function() {
       if (!this.alive && !this.isNew) {
         console.log("Entered");
         this.listExcercises.forEach(exercise => {
-          console.log("Entered");
-          console.log(this.id_routine);
-          console.log(this.cycle.id);
-          console.log(exercise.id);
           axios.delete('routines/' + this.id_routine + '/cycles/' + this.cycle.id + '/exercises/' + exercise.id)
           .then(response => {
             console.log(response.data);
@@ -177,9 +184,6 @@ export default {
 
       this.cycle.detail = this.cycle.name;
       this.cycle.order = this.order;
-      if (this.title === 'Enfriamiento') {
-        this.cycle.order = this.order + 5;
-      }
       if (!this.isNew) {
         axios.put('routines/' + this.id_routine + '/cycles/' + this.cycle.id, {name: this.cycle.name, detail: this.cycle.detail, type: this.cycle.type, order: this.cycle.order, repetitions: this.cycle.repetitions})
             .then(response => {
@@ -203,6 +207,8 @@ export default {
   mounted() {
     if (this.isNew === true) {
       this.cycle.name = this.title;
+      this.added_exercise = 1;
+      this.myStore.errors++;
     } else {
       this.cycle = this.oldCycle;
       axios.get('routines/' + this.id_routine + '/cycles/' + this.cycle.id + '/exercises', {params: {size: 100}})

@@ -11,7 +11,6 @@
               label="Ejercicio"
               v-model="exercise"
               return-object
-              outlined
               @change="getExerciseInfo()"
               :rules="[rules.required]"
               required
@@ -81,7 +80,7 @@ export default {
     done: Boolean
   },data() {
     return {
-      valid: false,
+      valid: true,
       items: ["Repeticiones","Segundos"],
       excerciseData: {
         name: '',
@@ -98,17 +97,16 @@ export default {
         name: v => /^[A-Za-z ]+$/.test(v) || 'Solo caractéres del abecedario',
         number: v => !isNaN(v) || 'Tiene que ser un número positivo!',
         positive: v => v>=1 || 'Tiene que ser un número positivo!',
-        link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || 'No es un link válido!',
-
+        link: v => /^[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/.test(v) || v === ''  || 'No es un link válido!',
       },
       myStore: store,
-      exercise: {},
+      exercise: null,
       alive: true,
       duration: 0,
       repetitions: 0,
       type: 'exercise',
       number: 1,
-      myId: 0
+      myId: 0,
     }
   },
   methods:{
@@ -128,6 +126,9 @@ export default {
       this.panel.dec();
     },
     killMe() {
+      if (this.isNew) {
+        this.myStore.errors--;
+      }
       this.alive = !this.alive;
     },
     getExerciseInfo() {
@@ -164,6 +165,13 @@ export default {
     }
   },
   watch: {
+    valid() {
+      if (this.id === 1 && this.isNew) {
+        if (this.valid) {
+          this.myStore.errors--;
+        }
+      }
+    },
     done: function () {
       if (!this.alive && !this.isNew) {
         axios.delete('routines/' + this.id_routine + '/cycles/' + this.id_cycle + '/exercises/' + this.oldExercise.id)

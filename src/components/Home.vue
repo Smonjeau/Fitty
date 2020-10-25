@@ -115,7 +115,7 @@ export default {
       myStore: store,
       info:[],
       categories:[],
-      loading: true
+      loading: true,
     }
   },
   computed: {
@@ -124,8 +124,6 @@ export default {
         return this.info;
       else
         return this.info.slice(0,19);
-
-
     },
     userRoutines() {
       return this.info.filter(routine => routine.creator.id === store.userInfo.id && routine.name !== '$@&#%*');
@@ -157,16 +155,12 @@ export default {
         orderBy: 'averageRating',
         direction: 'desc',
         size: 100
-
-
       }
     }),
       axios.get('/categories')]).then(axios.spread((response1, response2) => {
         this.loading = false;
       this.info = response1.data.results;
       this.categories = response2.data.results;
-      console.log(this.info);
-      console.log(this.categories);
     })).catch(error => {
           console.log(error);
     }
