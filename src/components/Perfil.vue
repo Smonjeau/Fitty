@@ -63,7 +63,7 @@
                   outlined
                   :rules="[rules.required,rules.emailContains]"
                   label="Email"
-                  :value="user.userInfo.email"
+                  :value="userEdited.email"
                   v-model="userEdited.email"
                   readonly
               ></v-text-field>
@@ -74,10 +74,11 @@
 
             <v-col cols="10">
 
-              <v-text-field :rules="[rules.required,rules.fullNameRule]"
-                            readonly
-                            v-model="userEdited.fullName"
-                            outlined label="Nombre completo"></v-text-field>
+              <v-text-field
+                  :rules="[rules.required,rules.fullNameRule]"
+                  readonly
+                  v-model="userEdited.fullName"
+                  outlined label="Nombre completo"></v-text-field>
             </v-col>
 
 
@@ -88,7 +89,6 @@
                 readonly
                 label="Género"
                 :value="getGender"
-
 
                 outlined
             ></v-text-field>
@@ -113,7 +113,7 @@
 
             <v-col md="2">
               <v-btn color="blue white--text" class="my-5" outlined @click="leave()">
-                Cancelar
+                Volver
 
               </v-btn>
 
@@ -214,22 +214,32 @@ export default {
       }
     },
     selectAvatar(avatar){
+      //store.user.userInfo.avatarUrl = avatar;
       this.userEdited.avatarUrl = avatar;
       this.changes = true;
     },
     submit () {
       //Solo puede editar su nombre, mail y avatar
-      axios.put('user/current', this.userEdited)
-          .then(() => {
-            console.log(this.userEdited);
+      axios.put('user/current', {
+        gender: this.userEdited.gender,
+        birthdate: parseInt(this.bdate),
+        phone: '',
+        email: this.userEdited.email,
+        fullName: this.userEdited.fullName,
+        username: this.userEdited.username,
+        avatarUrl: this.userEdited.avatarUrl
+      })
+      .then(() => {
+        //console.log(this.userEdited);
+        this.user.userInfo.avatarUrl = this.userEdited.avatarUrl;
+        this.valid = true;
+        if(this.changes)
+          Swal.fire('Genial!', 'Guardado con éxito', 'success');
 
-            this.valid = true;
-            this.$router.push('/');
-
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     },
     showAvatarSelector (){
       this.avatarSelector = true;

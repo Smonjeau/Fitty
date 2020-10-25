@@ -145,7 +145,7 @@ export default {
           .then(() => {
             this.storeRef.remove(this.exercise.idEjercicio);
             this.isLoadingDelete = false;
-            Swal.fire('Eliminado!', '', 'success')
+            Swal.fire('Eliminado!', '', 'success');
           })
           .catch(error => {
             this.error(error);

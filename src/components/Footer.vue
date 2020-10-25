@@ -3,7 +3,6 @@
       color="blue darken-1"
       class="pa-5 mt-14"
       padless
-      :absolute="!userStore.logged"
   >
 
     <v-row class="justify-space-around">

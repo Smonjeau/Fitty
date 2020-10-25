@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <div v-if="!myStore.logged" >
+    <div v-if="!myStore.logged" class="mb-16" >
       <h1 class="text-center text-h1 font-weight-bold blue--text text--darken-1 mt-10">FITTY</h1>
       <h2 class="text-center text-h4 font-weight-bold mt-8">COMPARTE TUS RUTINAS</h2>
       <v-row no-gutters class="mb-13">

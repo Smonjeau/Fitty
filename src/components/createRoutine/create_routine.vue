@@ -78,8 +78,8 @@
         <routine_panel title="Enfriamiento" :id_routine="id" :order="99"></routine_panel>
 
       <v-row justify="center">
-        <v-col cols="9">
-          <v-btn small @click="inc()" class="my-5">
+        <v-col class="text-center">
+          <v-btn large @click="inc()" class="mb-5 white--text" rounded color="blue darken-1">
             <v-icon left >
               mdi-plus-circle-outline
             </v-icon>
@@ -90,13 +90,13 @@
 
         <v-row class="justify-center">
 
-          <v-col md="2">
+          <v-col md="2" class="text-center">
             <v-btn color="blue white--text" class="my-5" outlined @click="cancel()">
               Cancelar
             </v-btn>
           </v-col>
 
-          <v-col md="2" >
+          <v-col md="2" class="text-center">
             <v-btn color="blue white--text" class="my-5" @click="submit()">
               Finalizar
             </v-btn>
