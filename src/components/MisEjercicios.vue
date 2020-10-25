@@ -119,6 +119,7 @@ export default {
           v-bind:key="exercise"
           :exercise="exercise"
           :idRutina="store.idRutina"
+          :idCiclo="store.idCiclo"
           :storeRef="store"></ExerciseItem>
 
     </v-container>

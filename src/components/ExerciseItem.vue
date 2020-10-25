@@ -88,7 +88,7 @@ import Swal from "sweetalert2";
 
 export default {
   name: "ExerciseItem",
-  props: ['exercise', 'idRutina', 'storeRef'],
+  props: ['exercise', 'idRutina', 'idCiclo', 'storeRef'],
   data() {
     return {
       isEditing: false,
@@ -132,15 +132,29 @@ export default {
       this.isEditing = !this.isEditing;
     },
     deletePressed() {
-      this.isLoadingDelete = true;
-      axios.delete('/routines/'+this.idRutina+'/cycles/1/exercises/'+this.exercise.idEjercicio, {})
-      .then(() => {
-        this.storeRef.remove(this.exercise.idEjercicio);
-        this.isLoadingDelete = false;
-      })
-      .catch(error => {
-        this.error(error);
+      Swal.fire({
+        title: 'Seguro desea borrar el ejercicio?',
+        showDenyButton: true,
+        confirmButtonText: 'Si',
+        denyButtonText: 'No',
+        denyButtonColor: '#c49b27'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.isLoadingDelete = true;
+          axios.delete('/routines/'+this.idRutina+'/cycles/'+this.idCiclo+'/exercises/'+this.exercise.idEjercicio, {})
+          .then(() => {
+            this.storeRef.remove(this.exercise.idEjercicio);
+            this.isLoadingDelete = false;
+            Swal.fire('Eliminado!', '', 'success')
+          })
+          .catch(error => {
+            this.error(error);
+          });
+
+        }
       });
+
+
     },
     savePressed() {
       this.isLoadingEdit = true;
@@ -153,7 +167,7 @@ export default {
         repetitions = this.exercise.qty;
         duration = 0;
       }
-      axios.put('/routines/'+this.idRutina+'/cycles/1/exercises/'+this.exercise.idEjercicio, {
+      axios.put('/routines/'+this.idRutina+'/cycles/'+this.idCiclo+'/exercises/'+this.exercise.idEjercicio, {
 
         name: this.exercise.name,
         detail: "",
@@ -166,7 +180,7 @@ export default {
           //Hay texto que corresponde a un video. Veamos si es nuevo o es update
           if(this.exercise.idVideo == -1) {
             //Es un video nuevo
-            axios.post('/routines/'+this.idRutina+'/cycles/1/exercises/'+this.exercise.idEjercicio+'/videos', {
+            axios.post('/routines/'+this.idRutina+'/cycles/'+this.idCiclo+'/exercises/'+this.exercise.idEjercicio+'/videos', {
               number: 1,
               url: this.exercise.videoUrl
             })
@@ -182,7 +196,7 @@ export default {
             });
           } else {
             //Es un update
-            axios.put('/routines/'+this.idRutina+'/cycles/1/exercises/'+this.exercise.idEjercicio+'/videos/'+this.exercise.idVideo, {
+            axios.put('/routines/'+this.idRutina+'/cycles/'+this.idCiclo+'/exercises/'+this.exercise.idEjercicio+'/videos/'+this.exercise.idVideo, {
               number: 1,
               url: this.exercise.videoUrl
             })
@@ -203,7 +217,7 @@ export default {
           this.isEditing = false;
         } else {
           //Hizo un delete
-          axios.delete('/routines/'+this.idRutina+'/cycles/1/exercises/'+this.exercise.idEjercicio+'/videos/'+this.exercise.idVideo, {})
+          axios.delete('/routines/'+this.idRutina+'/cycles/'+this.idCiclo+'/exercises/'+this.exercise.idEjercicio+'/videos/'+this.exercise.idVideo, {})
           .then(() => {
             this.exercise.idVideo = -1;
             this.isLoadingEdit = false;
